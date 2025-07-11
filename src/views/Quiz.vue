@@ -149,8 +149,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useQuizKeyboard } from '../composables/useKeyboardNavigation.js'
 
 const route = useRoute()
 const moduleId = computed(() => route.params.id)
@@ -303,8 +304,39 @@ const saveProgress = () => {
   localStorage.setItem(`quiz_${moduleId.value}_progress`, JSON.stringify(progress))
 }
 
+// Initialize quiz keyboard navigation
+useQuizKeyboard()
+
+// Handle keyboard events for quiz
+const handleQuizSelect = (event) => {
+  const index = event.detail
+  if (selectedAnswer.value === null && index < currentQuestion.value.options.length) {
+    selectAnswer(index)
+  }
+}
+
+const handleQuizContinue = () => {
+  if (selectedAnswer.value !== null) {
+    if (currentQuestionIndex.value === quiz.value.questions.length - 1) {
+      finishQuiz()
+    } else {
+      nextQuestion()
+    }
+  }
+}
+
 onMounted(() => {
   loadQuiz()
+  
+  // Listen for quiz keyboard events
+  window.addEventListener('quiz-select-answer', handleQuizSelect)
+  window.addEventListener('quiz-continue', handleQuizContinue)
+})
+
+// Clean up event listeners
+onUnmounted(() => {
+  window.removeEventListener('quiz-select-answer', handleQuizSelect)
+  window.removeEventListener('quiz-continue', handleQuizContinue)
 })
 </script>
 

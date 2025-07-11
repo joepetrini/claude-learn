@@ -100,8 +100,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useModuleKeyboard } from '../composables/useKeyboardNavigation.js'
 
 const route = useRoute()
 const moduleId = computed(() => route.params.id)
@@ -157,6 +158,9 @@ watch(currentSectionIndex, (newIndex) => {
   localStorage.setItem(`module_${moduleId.value}_section`, newIndex.toString())
 })
 
+// Initialize module keyboard navigation
+useModuleKeyboard()
+
 // Mark module as started
 onMounted(() => {
   loadModule()
@@ -169,6 +173,16 @@ onMounted(() => {
   progress.lastAccessed = new Date().toISOString()
   progress.currentModule = moduleId.value
   localStorage.setItem('claudeLearnProgress', JSON.stringify(progress))
+  
+  // Listen for keyboard navigation events
+  window.addEventListener('keyboard-next', nextSection)
+  window.addEventListener('keyboard-previous', previousSection)
+})
+
+// Clean up event listeners
+onUnmounted(() => {
+  window.removeEventListener('keyboard-next', nextSection)
+  window.removeEventListener('keyboard-previous', previousSection)
 })
 </script>
 

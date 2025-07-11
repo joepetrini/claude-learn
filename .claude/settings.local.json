@@ -29,7 +29,8 @@
       "Bash(gh issue edit:*)",
       "Bash(gh api graphql:*)",
       "Bash(gh project item-edit:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(gh issue view:*)"
     ],
     "deny": []
   }

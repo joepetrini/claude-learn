@@ -32,19 +32,35 @@
       :modules="modules"
       @close="toggleSearch"
     />
+    
+    <!-- Help Modal -->
+    <HelpModal
+      :is-open="helpOpen"
+      @close="toggleHelp"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import SearchModal from './components/SearchModal.vue'
+import HelpModal from './components/HelpModal.vue'
+import { useKeyboardNavigation } from './composables/useKeyboardNavigation.js'
 
 const searchOpen = ref(false)
+const helpOpen = ref(false)
 const modules = ref([])
 
 const toggleSearch = () => {
   searchOpen.value = !searchOpen.value
 }
+
+const toggleHelp = () => {
+  helpOpen.value = !helpOpen.value
+}
+
+// Initialize keyboard navigation
+useKeyboardNavigation()
 
 // Load modules for search
 onMounted(async () => {
@@ -55,9 +71,17 @@ onMounted(async () => {
   } catch (error) {
     console.error('Failed to load modules for search:', error)
   }
+  
+  // Listen for keyboard navigation events
+  window.addEventListener('toggle-search', toggleSearch)
+  window.addEventListener('show-help', toggleHelp)
 })
 
-// Removed keyboard shortcut - using click only
+// Clean up event listeners
+onUnmounted(() => {
+  window.removeEventListener('toggle-search', toggleSearch)
+  window.removeEventListener('show-help', toggleHelp)
+})
 </script>
 
 <style>
