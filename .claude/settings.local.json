@@ -21,7 +21,8 @@
       "Bash(ls:*)",
       "Bash(npm install:*)",
       "Bash(git add:*)",
-      "Bash(./create-all-issues.sh:*)"
+      "Bash(./create-all-issues.sh:*)",
+      "Bash(gh issue close:*)"
     ],
     "deny": []
   }
