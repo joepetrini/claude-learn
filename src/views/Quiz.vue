@@ -10,9 +10,16 @@
     </nav>
 
     <div class="container mx-auto px-4 py-8">
-      <div v-if="loading" class="text-center py-12">
-        <p class="text-gray-500">Loading quiz...</p>
+      <div v-if="loading">
+        <SkeletonLoader type="quiz" />
       </div>
+      
+      <ErrorState
+        v-else-if="error"
+        :title="error.title"
+        :message="error.message"
+        @retry="loadQuiz"
+      />
       
       <div v-else-if="quiz && !quizCompleted" class="max-w-3xl mx-auto">
         <!-- Quiz Header -->
@@ -84,7 +91,7 @@
             
             <button
               v-else-if="selectedAnswer !== null && currentQuestionIndex === quiz.questions.length - 1"
-              @click="completeQuiz"
+              @click="finishQuiz"
               class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
             >
               Complete Quiz →
@@ -145,6 +152,9 @@
         <p class="text-red-600">Quiz not found</p>
       </div>
     </div>
+    
+    <!-- Success Animation -->
+    <SuccessAnimation :show="showSuccess" />
   </div>
 </template>
 
@@ -152,12 +162,17 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuizKeyboard } from '../composables/useKeyboardNavigation.js'
+import SkeletonLoader from '../components/SkeletonLoader.vue'
+import ErrorState from '../components/ErrorState.vue'
+import SuccessAnimation from '../components/SuccessAnimation.vue'
 
 const route = useRoute()
 const moduleId = computed(() => route.params.id)
 
 const quiz = ref(null)
 const loading = ref(true)
+const error = ref(null)
+const showSuccess = ref(false)
 const currentQuestionIndex = ref(0)
 const selectedAnswer = ref(null)
 const showExplanation = ref(false)
@@ -206,10 +221,34 @@ const getOptionClass = (index) => {
 
 const loadQuiz = async () => {
   loading.value = true
+  error.value = null
+  
   try {
+    const startTime = Date.now()
     const response = await fetch(import.meta.env.BASE_URL + 'data/quizzes.json')
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch quiz')
+    }
+    
     const data = await response.json()
-    quiz.value = data.quizzes[moduleId.value]
+    const foundQuiz = data.quizzes[moduleId.value]
+    
+    if (!foundQuiz) {
+      error.value = {
+        title: 'Quiz Not Found',
+        message: `Quiz for ${moduleId.value} doesn't exist yet. Please check back later.`
+      }
+      return
+    }
+    
+    // Ensure minimum loading time for smooth transition
+    const loadTime = Date.now() - startTime
+    if (loadTime < 300) {
+      await new Promise(resolve => setTimeout(resolve, 300 - loadTime))
+    }
+    
+    quiz.value = foundQuiz
     
     // Load any saved progress
     const savedProgress = localStorage.getItem(`quiz_${moduleId.value}_progress`)
@@ -218,8 +257,12 @@ const loadQuiz = async () => {
       currentQuestionIndex.value = progress.currentIndex || 0
       userAnswers.value = progress.answers || []
     }
-  } catch (error) {
-    console.error('Failed to load quiz:', error)
+  } catch (err) {
+    console.error('Failed to load quiz:', err)
+    error.value = {
+      title: 'Loading Error',
+      message: 'Unable to load the quiz. Please check your connection and try again.'
+    }
   } finally {
     loading.value = false
   }
@@ -270,8 +313,16 @@ const previousQuestion = () => {
   }
 }
 
-const completeQuiz = () => {
+const finishQuiz = () => {
   quizCompleted.value = true
+  
+  // Show success animation if passed
+  if ((score.value / quiz.value.questions.length) >= 0.6) {
+    showSuccess.value = true
+    setTimeout(() => {
+      showSuccess.value = false
+    }, 3000)
+  }
   
   // Save quiz completion
   const progress = JSON.parse(localStorage.getItem('claudeLearnProgress') || '{}')

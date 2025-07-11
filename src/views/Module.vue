@@ -10,9 +10,16 @@
     </nav>
 
     <div class="container mx-auto px-4 py-8">
-      <div v-if="loading" class="text-center py-12">
-        <p class="text-gray-500">Loading module...</p>
+      <div v-if="loading">
+        <SkeletonLoader type="module-content" />
       </div>
+      
+      <ErrorState
+        v-else-if="error"
+        :title="error.title"
+        :message="error.message"
+        @retry="loadModule"
+      />
       
       <div v-else-if="module" class="max-w-4xl mx-auto">
         <!-- Module Header -->
@@ -103,12 +110,15 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useModuleKeyboard } from '../composables/useKeyboardNavigation.js'
+import SkeletonLoader from '../components/SkeletonLoader.vue'
+import ErrorState from '../components/ErrorState.vue'
 
 const route = useRoute()
 const moduleId = computed(() => route.params.id)
 
 const module = ref(null)
 const loading = ref(true)
+const error = ref(null)
 const currentSectionIndex = ref(0)
 
 const currentSection = computed(() => {
@@ -122,18 +132,46 @@ const progressPercentage = computed(() => {
 
 const loadModule = async () => {
   loading.value = true
+  error.value = null
+  
   try {
+    const startTime = Date.now()
     const response = await fetch(import.meta.env.BASE_URL + 'data/modules.json')
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch modules')
+    }
+    
     const data = await response.json()
-    module.value = data.modules.find(m => m.id === moduleId.value)
+    const foundModule = data.modules.find(m => m.id === moduleId.value)
+    
+    if (!foundModule) {
+      error.value = {
+        title: 'Module Not Found',
+        message: `Module ${moduleId.value} doesn't exist. Please check the URL and try again.`
+      }
+      return
+    }
+    
+    // Ensure minimum loading time for smooth transition
+    const loadTime = Date.now() - startTime
+    if (loadTime < 300) {
+      await new Promise(resolve => setTimeout(resolve, 300 - loadTime))
+    }
+    
+    module.value = foundModule
     
     // Load saved progress
     const savedProgress = localStorage.getItem(`module_${moduleId.value}_section`)
     if (savedProgress) {
       currentSectionIndex.value = parseInt(savedProgress)
     }
-  } catch (error) {
-    console.error('Failed to load module:', error)
+  } catch (err) {
+    console.error('Failed to load module:', err)
+    error.value = {
+      title: 'Loading Error',
+      message: 'Unable to load the module content. Please check your connection and try again.'
+    }
   } finally {
     loading.value = false
   }

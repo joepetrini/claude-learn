@@ -12,8 +12,8 @@
 
       <div class="max-w-6xl mx-auto">
         <h2 class="text-2xl font-semibold mb-6">Core Learning Path</h2>
-        <div v-if="loading" class="text-center py-12">
-          <p class="text-gray-500">Loading modules...</p>
+        <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <SkeletonLoader v-for="i in 6" :key="i" type="module-card" />
         </div>
         <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <router-link
@@ -60,6 +60,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import SkeletonLoader from '../components/SkeletonLoader.vue'
 
 const modules = ref([])
 const loading = ref(true)
@@ -78,8 +79,16 @@ onMounted(async () => {
   progress.value = JSON.parse(localStorage.getItem('claudeLearnProgress') || '{}')
   
   try {
+    const startTime = Date.now()
     const response = await fetch(import.meta.env.BASE_URL + 'data/modules.json')
     const data = await response.json()
+    
+    // Ensure minimum loading time of 500ms for better UX
+    const loadTime = Date.now() - startTime
+    if (loadTime < 500) {
+      await new Promise(resolve => setTimeout(resolve, 500 - loadTime))
+    }
+    
     modules.value = data.modules
   } catch (error) {
     console.error('Failed to load modules:', error)
