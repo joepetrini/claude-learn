@@ -20,7 +20,8 @@
       "Bash(rm:*)",
       "Bash(ls:*)",
       "Bash(npm install:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(./create-all-issues.sh:*)"
     ],
     "deny": []
   }
