@@ -174,6 +174,46 @@
           "example": "# Shared CLAUDE.md template\n## Team Conventions\n- PR descriptions must include Claude's impact summary\n- Use claude /review before pushing\n- Share useful prompts in team chat\n\n## Useful Prompts\n- \"Generate API tests following our patterns\"\n- \"Add logging using our custom logger\"\n- \"Create migration with rollback plan\""
         }
       ]
+    },
+    {
+      "id": "module_9",
+      "title": "Advanced Integrations",
+      "description": "Master VS Code integration, CI/CD pipelines, and team collaboration features",
+      "estimatedTime": "35 minutes",
+      "type": "advanced",
+      "icon": "🔧",
+      "sections": [
+        {
+          "title": "VS Code Integration Guide",
+          "content": "<p>While Claude Code is CLI-based, it integrates beautifully with VS Code for a hybrid workflow:</p><ul class='list-disc list-inside mt-2'><li>Use VS Code's integrated terminal for Claude sessions</li><li>Claude respects your VS Code settings and extensions</li><li>Real-time file updates appear in VS Code</li><li>Combine VS Code's debugging with Claude's intelligence</li></ul><p class='mt-4'>Pro tip: Use VS Code's split terminal to run Claude alongside your Django development server.</p>",
+          "example": "# In VS Code integrated terminal\n# Split terminal: Cmd+\\\n\n# Terminal 1: Django server\npython manage.py runserver\n\n# Terminal 2: Claude session\nclaude\n# Now changes appear instantly in VS Code"
+        },
+        {
+          "title": "CI/CD Pipeline Integration",
+          "content": "<p>Claude Code can generate and maintain CI/CD pipelines that follow your team's deployment patterns:</p><ul class='list-disc list-inside mt-2'><li>GitHub Actions workflows</li><li>GitLab CI/CD pipelines</li><li>Pre-commit hooks</li><li>Automated testing strategies</li></ul>",
+          "example": "claude \"Create a GitHub Actions workflow that:\n- Runs our Django tests with PostgreSQL\n- Checks code coverage (minimum 80%)\n- Runs linting with black and flake8\n- Deploys to staging on main branch\""
+        },
+        {
+          "title": "GitHub Actions Workflows",
+          "content": "<p>Claude can create sophisticated GitHub Actions workflows tailored to Django projects:</p>",
+          "example": "# .github/workflows/django.yml\nname: Django CI/CD\n\non:\n  push:\n    branches: [ main, develop ]\n  pull_request:\n    branches: [ main ]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    services:\n      postgres:\n        image: postgres:15\n        env:\n          POSTGRES_PASSWORD: postgres\n        options: >-\n          --health-cmd pg_isready\n          --health-interval 10s\n          --health-timeout 5s\n          --health-retries 5\n    \n    steps:\n    - uses: actions/checkout@v3\n    - name: Set up Python\n      uses: actions/setup-python@v4\n      with:\n        python-version: '3.11'\n    - name: Install dependencies\n      run: |\n        pip install -r requirements.txt\n    - name: Run tests\n      env:\n        DATABASE_URL: postgres://postgres:postgres@localhost/test_db\n      run: |\n        python manage.py test --parallel"
+        },
+        {
+          "title": "Team Collaboration Features",
+          "content": "<p>Advanced features for team productivity:</p><ul class='list-disc list-inside mt-2'><li><strong>Shared prompts library:</strong> Store common prompts in CLAUDE.md</li><li><strong>Code review automation:</strong> Integrate Claude into PR workflows</li><li><strong>Knowledge sharing:</strong> Export Claude conversations for team learning</li><li><strong>Onboarding acceleration:</strong> Use Claude to explain codebase to new developers</li></ul>",
+          "example": "# Team CLAUDE.md additions\n## Shared Prompts\n\n### API Endpoint Generator\n\"Create a DRF ViewSet for [Model] with:\n- Filtering by [fields]\n- Custom permissions for [roles]\n- Optimized queries with select_related\n- Comprehensive tests\"\n\n### Performance Analyzer\n\"Analyze this view for N+1 queries and suggest optimizations\"\n\n## PR Review Checklist\n- Run: claude /review --scope=security,performance\n- Check migrations: claude \"Review this migration for safety\"\n- Verify tests: claude \"Are these tests comprehensive?\""
+        },
+        {
+          "title": "Real Django Project Examples",
+          "content": "<p>Let's look at real-world Django patterns Claude excels at:</p>",
+          "example": "# E-commerce checkout flow\nclaude \"Create a checkout flow with:\n- Cart serialization with product variants\n- Payment processing with Stripe\n- Order status state machine\n- Email notifications with Celery\n- Inventory management with DB locks\"\n\n# Multi-tenant SaaS\nclaude \"Implement tenant isolation using:\n- Django-tenants for schema separation\n- Middleware for tenant routing\n- Shared vs tenant-specific models\n- Tenant-aware caching strategy\"\n\n# Real-time features\nclaude \"Add real-time notifications using:\n- Django Channels for WebSocket\n- Redis for message broker\n- Async consumers for chat\n- Frontend integration with reconnection\""
+        },
+        {
+          "title": "Advanced Deployment Patterns",
+          "content": "<p>Claude understands complex deployment scenarios and can help implement:</p><ul class='list-disc list-inside mt-2'><li>Blue-green deployments</li><li>Database migration strategies</li><li>Zero-downtime deployments</li><li>Rollback procedures</li></ul>",
+          "example": "claude \"Create a deployment script that:\n- Builds Docker image with build args\n- Runs migrations in separate container\n- Performs health checks before switching\n- Includes rollback strategy\n- Notifies Slack on success/failure\"\n\n# Generated deployment script handles:\n# - Environment-specific settings\n# - Secret management\n# - Database backup before migrations\n# - Graceful container switching\n# - Monitoring integration"
+        }
+      ]
     }
   ]
 }

@@ -18,7 +18,7 @@ export function useKeyboardNavigation() {
       window.dispatchEvent(new CustomEvent('show-help'))
     },
     
-    // Module navigation (1-8 for quick access)
+    // Module navigation (1-9 for quick access)
     '1': () => navigateToModule('module_1'),
     '2': () => navigateToModule('module_2'),
     '3': () => navigateToModule('module_3'),
@@ -27,6 +27,7 @@ export function useKeyboardNavigation() {
     '6': () => navigateToModule('module_6'),
     '7': () => navigateToModule('module_7'),
     '8': () => navigateToModule('module_8'),
+    '9': () => navigateToModule('module_9'),
     
     // Navigation within pages
     'n': () => navigateNext(),
