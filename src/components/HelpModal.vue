@@ -41,7 +41,7 @@
           <div class="mb-6">
             <h3 class="text-lg font-semibold text-gray-900 mb-3">Quick Module Access</h3>
             <div class="grid grid-cols-2 gap-2">
-              <div v-for="n in 8" :key="n" class="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50">
+              <div v-for="n in 9" :key="n" class="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50">
                 <span class="text-gray-700">Module {{ n }}</span>
                 <kbd class="px-2 py-1 text-sm bg-gray-100 rounded">{{ n }}</kbd>
               </div>
