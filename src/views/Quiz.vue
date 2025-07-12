@@ -47,11 +47,11 @@
               @click="selectAnswer(index)"
               :disabled="selectedAnswer !== null"
               :class="getOptionClass(index)"
-              class="w-full text-left p-4 rounded-lg border-2 transition-all duration-200"
+              class="w-full text-left p-4 rounded-lg border-2 transition-all duration-200 min-h-[60px] md:min-h-0"
             >
-              <span class="flex items-center">
-                <span class="mr-3 font-semibold">{{ String.fromCharCode(65 + index) }}.</span>
-                {{ option }}
+              <span class="flex items-start md:items-center">
+                <span class="mr-3 font-semibold flex-shrink-0">{{ String.fromCharCode(65 + index) }}.</span>
+                <span class="text-sm md:text-base">{{ option }}</span>
               </span>
             </button>
           </div>

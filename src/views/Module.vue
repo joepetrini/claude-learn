@@ -9,7 +9,7 @@
       </div>
     </nav>
 
-    <div class="container mx-auto px-4 py-8">
+    <div ref="moduleContent" class="container mx-auto px-4 py-8">
       <div v-if="loading" class="text-center py-12">
         <p class="text-gray-500">Loading module...</p>
       </div>
@@ -56,11 +56,16 @@
           <!-- Code Example -->
           <div v-if="currentSection.example" class="mt-6">
             <h3 class="text-lg font-semibold mb-3 text-gray-800">Example:</h3>
-            <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code>{{ currentSection.example }}</code></pre>
+            <pre class="bg-gray-900 text-gray-100 p-3 md:p-4 rounded-lg overflow-x-auto text-xs md:text-sm"><code>{{ currentSection.example }}</code></pre>
+          </div>
+          
+          <!-- Mobile Swipe Indicator -->
+          <div class="md:hidden mt-8 text-center text-sm text-gray-500">
+            <p>Swipe left/right to navigate sections</p>
           </div>
           
           <!-- Navigation Buttons -->
-          <div class="flex justify-between items-center mt-12 pt-6 border-t">
+          <div class="flex justify-between items-center mt-8 md:mt-12 pt-6 border-t">
             <button
               @click="previousSection"
               :disabled="currentSectionIndex === 0"
@@ -103,9 +108,11 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useModuleKeyboard } from '../composables/useKeyboardNavigation.js'
+import { useSwipeGesture } from '../composables/useSwipeGesture.js'
 
 const route = useRoute()
 const moduleId = computed(() => route.params.id)
+const moduleContent = ref(null)
 
 const module = ref(null)
 const loading = ref(true)
@@ -160,6 +167,12 @@ watch(currentSectionIndex, (newIndex) => {
 
 // Initialize module keyboard navigation
 useModuleKeyboard()
+
+// Initialize swipe gestures for mobile
+useSwipeGesture(moduleContent, {
+  onSwipeLeft: nextSection,
+  onSwipeRight: previousSection
+})
 
 // Mark module as started
 onMounted(() => {
