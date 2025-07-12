@@ -1,0 +1,40 @@
+{
+  "categories": [
+    {
+      "slug": "software-dev",
+      "name": "Software Development",
+      "description": "Technical training for developers and engineers",
+      "icon": "💻",
+      "color": "#8B5CF6",
+      "sortOrder": 1,
+      "isActive": true
+    },
+    {
+      "slug": "hr-onboarding",
+      "name": "HR & Onboarding",
+      "description": "New employee orientation and company culture",
+      "icon": "👥",
+      "color": "#10B981",
+      "sortOrder": 2,
+      "isActive": true
+    },
+    {
+      "slug": "customer-support",
+      "name": "Customer Support",
+      "description": "Customer service excellence and support training",
+      "icon": "🎧",
+      "color": "#F59E0B",
+      "sortOrder": 3,
+      "isActive": true
+    },
+    {
+      "slug": "product-training",
+      "name": "Product Training",
+      "description": "Product knowledge and feature training",
+      "icon": "📦",
+      "color": "#EC4899",
+      "sortOrder": 4,
+      "isActive": true
+    }
+  ]
+}

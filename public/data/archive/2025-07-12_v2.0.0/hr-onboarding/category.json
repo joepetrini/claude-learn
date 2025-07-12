@@ -1,0 +1,12 @@
+{
+  "slug": "hr-onboarding",
+  "name": "HR Onboarding",
+  "description": "New employee orientation and company culture",
+  "icon": "👥",
+  "color": "#10B981",
+  "metadata": {
+    "targetAudience": "new employees",
+    "estimatedDuration": "2 hours",
+    "version": "1.0"
+  }
+}

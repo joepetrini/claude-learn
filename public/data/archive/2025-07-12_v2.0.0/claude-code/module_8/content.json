@@ -1,0 +1,25 @@
+{
+  "module": {
+    "slug": "module_8",
+    "title": "Advanced Features & Tips",
+    "version": "1.0",
+    "lastUpdated": "2025-07-12",
+    "sections": [
+      {
+        "title": "Parallel Development with Git Worktrees",
+        "content": "<p>Claude Code works seamlessly with Git worktrees for parallel development:</p>",
+        "example": "# Create worktree for feature\ngit worktree add ../feature-branch feature-branch\n\n# Work in parallel\ncd ../feature-branch\nclaude \"Implement the new authentication feature\"\n\n# Claude maintains separate context per worktree"
+      },
+      {
+        "title": "Performance Optimization",
+        "content": "<p>Tips for optimal Claude Code performance:</p><ul class='list-disc list-inside mt-2'><li>Use <code>/compact</code> regularly for long sessions</li><li>Be specific in requests to reduce token usage</li><li>Use <code>--no-cache</code> for fresh analysis</li><li>Batch related changes in single requests</li></ul>",
+        "example": "# Efficient request\nclaude \"Update all UserProfile model methods to use select_related for user field\"\n\n# Instead of multiple requests\n# claude \"Update get_full_name method\"\n# claude \"Update get_avatar_url method\"\n# etc."
+      },
+      {
+        "title": "Team Collaboration Patterns",
+        "content": "<p>Best practices for teams using Claude Code:</p>",
+        "example": "# Shared CLAUDE.md template\n## Team Conventions\n- PR descriptions must include Claude's impact summary\n- Use claude /review before pushing\n- Share useful prompts in team chat\n\n## Useful Prompts\n- \"Generate API tests following our patterns\"\n- \"Add logging using our custom logger\"\n- \"Create migration with rollback plan\""
+      }
+    ]
+  }
+}

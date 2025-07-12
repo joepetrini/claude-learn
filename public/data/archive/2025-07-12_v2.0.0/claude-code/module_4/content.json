@@ -1,0 +1,25 @@
+{
+  "module": {
+    "slug": "module_4",
+    "title": "History and Slash Commands",
+    "version": "1.0",
+    "lastUpdated": "2025-07-12",
+    "sections": [
+      {
+        "title": "Managing Conversation History",
+        "content": "<p>Claude Code maintains conversation history with intelligent context management:</p><ul class='list-disc list-inside mt-2'><li><code>/clear</code> - Start fresh (clears context)</li><li><code>/compact</code> - Compress conversation (keeps context)</li><li>History persists between sessions</li></ul>",
+        "example": "# When context gets too large\nclaude /compact\n\n# Starting a new unrelated task\nclaude /clear\nclaude \"New task: Create a payment integration\""
+      },
+      {
+        "title": "Essential Slash Commands",
+        "content": "<p>Master these commands for efficient workflow:</p><ul class='list-disc list-inside mt-2'><li><code>/init</code> - Initialize CLAUDE.md for your project</li><li><code>/cost</code> - Check token usage and costs</li><li><code>/doctor</code> - Diagnose installation issues</li><li><code>/pr_comments</code> - View GitHub PR feedback</li></ul>",
+        "example": "# Set up project memory\nclaude /init\n\n# Check usage\nclaude /cost\n\n# View PR comments\nclaude /pr_comments https://github.com/org/repo/pull/123"
+      },
+      {
+        "title": "Custom Slash Commands",
+        "content": "<p>Create project-specific commands to automate repetitive tasks. Define them in your settings.json.</p>",
+        "example": "// In settings.json\n{\n  \"commands\": {\n    \"migrate\": \"python manage.py makemigrations && python manage.py migrate\",\n    \"test-quick\": \"python manage.py test --parallel --keepdb\"\n  }\n}\n\n// Usage\nclaude /migrate\nclaude /test-quick"
+      }
+    ]
+  }
+}

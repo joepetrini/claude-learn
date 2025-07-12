@@ -5,9 +5,27 @@
     <!-- Breadcrumb Bar -->
     <div class="bg-white shadow-sm border-b">
       <div class="container mx-auto px-4 py-4">
-        <router-link to="/" class="text-blue-600 hover:text-blue-800 font-medium">
-          ← Back to Modules
-        </router-link>
+        <div class="text-sm">
+          <router-link to="/" class="text-blue-600 hover:text-blue-800">
+            Categories
+          </router-link>
+          <span class="mx-2 text-gray-500">/</span>
+          <router-link 
+            :to="`/category/${categorySlug}`" 
+            class="text-blue-600 hover:text-blue-800"
+          >
+            {{ categoryName }}
+          </router-link>
+          <span class="mx-2 text-gray-500">/</span>
+          <router-link 
+            :to="`/category/${categorySlug}/course/${courseSlug}`" 
+            class="text-blue-600 hover:text-blue-800"
+          >
+            {{ courseName }}
+          </router-link>
+          <span class="mx-2 text-gray-500">/</span>
+          <span class="text-gray-700">{{ module?.title || 'Module' }}</span>
+        </div>
       </div>
     </div>
 
@@ -83,7 +101,7 @@
             
             <router-link
               v-else
-              :to="`/quiz/${moduleId}`"
+              :to="`/category/${categorySlug}/course/${courseSlug}/quiz/${moduleId}`"
               class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors inline-block"
             >
               Take Quiz →
@@ -104,18 +122,26 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useModuleKeyboard } from '../composables/useKeyboardNavigation.js'
 import { useSupabaseProgress } from '../composables/useSupabaseProgress.js'
+import { useModules } from '../composables/useModules.js'
+import { useCategories } from '../composables/useCategories.js'
 import Navigation from '../components/Navigation.vue'
 import LoadingSkeletons from '../components/LoadingSkeletons.vue'
 
 const route = useRoute()
-const moduleId = computed(() => route.params.id)
+const categorySlug = computed(() => route.params.categorySlug)
+const courseSlug = computed(() => route.params.courseSlug)
+const moduleId = computed(() => route.params.moduleId)
 
 const module = ref(null)
 const loading = ref(true)
 const currentSectionIndex = ref(0)
+const categoryName = ref('')
+const courseName = ref('')
 
-// Initialize Supabase progress composable
+// Initialize composables
 const { markModuleStarted, getModuleProgress, updateModuleProgress, loadProgress } = useSupabaseProgress()
+const { loadModule } = useModules()
+const { getCategoryBySlug, loadCategoryCourses } = useCategories()
 
 const currentSection = computed(() => {
   return module.value?.sections[currentSectionIndex.value] || {}
@@ -126,15 +152,27 @@ const progressPercentage = computed(() => {
   return Math.round(((currentSectionIndex.value + 1) / module.value.sections.length) * 100)
 })
 
-const loadModule = async () => {
+const loadModuleData = async () => {
   loading.value = true
   try {
     // Load progress first to ensure we have latest data
     await loadProgress()
     
-    const response = await fetch(import.meta.env.BASE_URL + 'data/modules.json')
-    const data = await response.json()
-    module.value = data.modules.find(m => m.id === moduleId.value)
+    // Get category and course info
+    const category = getCategoryBySlug(categorySlug.value)
+    if (category) {
+      categoryName.value = category.name
+      const courses = await loadCategoryCourses(categorySlug.value)
+      const course = courses.find(c => c.slug === courseSlug.value)
+      if (course) {
+        courseName.value = course.title
+      }
+    }
+    
+    // Load module with new path structure
+    const coursePath = `${categorySlug.value}/${courseSlug.value}`
+    const moduleData = await loadModule(coursePath, moduleId.value)
+    module.value = moduleData
     
     // Load saved progress from Supabase composable
     const savedProgress = getModuleProgress(moduleId.value)
@@ -172,7 +210,7 @@ useModuleKeyboard()
 
 // Mark module as started
 onMounted(async () => {
-  await loadModule()
+  await loadModuleData()
   
   // Use Supabase progress composable to mark module as started
   await markModuleStarted(moduleId.value)

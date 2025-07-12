@@ -1,0 +1,12 @@
+{
+  "slug": "software-dev",
+  "name": "Software Development",
+  "description": "Best practices and coding standards",
+  "icon": "💻",
+  "color": "#8B5CF6",
+  "metadata": {
+    "targetAudience": "developers",
+    "estimatedDuration": "6 hours",
+    "version": "1.0"
+  }
+}

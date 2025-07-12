@@ -1,0 +1,17 @@
+{
+  "courses": [
+    {
+      "slug": "claude-code-training",
+      "title": "Claude Code Training",
+      "description": "Master Claude Code for efficient development",
+      "icon": "🤖",
+      "estimatedDuration": "4 hours",
+      "moduleCount": 9,
+      "difficultyLevel": "beginner",
+      "sortOrder": 1,
+      "isActive": true,
+      "isFeatured": true,
+      "tags": ["ai", "productivity", "development", "claude"]
+    }
+  ]
+}

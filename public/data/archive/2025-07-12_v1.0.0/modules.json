@@ -214,6 +214,33 @@
           "example": "claude \"Create a deployment script that:\n- Builds Docker image with build args\n- Runs migrations in separate container\n- Performs health checks before switching\n- Includes rollback strategy\n- Notifies Slack on success/failure\"\n\n# Generated deployment script handles:\n# - Environment-specific settings\n# - Secret management\n# - Database backup before migrations\n# - Graceful container switching\n# - Monitoring integration"
         }
       ]
+    },
+    {
+      "id": "updates-2025-01",
+      "title": "January 2025 Updates",
+      "icon": "🆕",
+      "type": "update",
+      "releaseDate": "2025-01-12",
+      "description": "Learn about the latest Claude Code features",
+      "estimatedTime": "10 minutes",
+      "features": [
+        "MCP Tool Integration",
+        "Enhanced /review command",
+        "WebSearch capability",
+        "Improved error handling"
+      ],
+      "sections": [
+        {
+          "title": "MCP Tool Integration",
+          "content": "<p>Claude Code now supports Model Context Protocol (MCP) tools, allowing integration with external services.</p><p>You can connect tools like Puppeteer for browser automation, Slack for team communication, and more.</p>",
+          "example": "claude --mcp puppeteer\n# Now you can use browser automation commands"
+        },
+        {
+          "title": "Enhanced Code Review",
+          "content": "<p>The /review command has been enhanced with new options for security and performance analysis.</p>",
+          "example": "claude /review --scope=security --files=\"**/*.py\""
+        }
+      ]
     }
   ]
 }

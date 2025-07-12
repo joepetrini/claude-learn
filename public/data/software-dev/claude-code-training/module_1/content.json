@@ -1,0 +1,20 @@
+{
+  "module": {
+    "slug": "module_1",
+    "title": "Introduction to Claude Code",
+    "version": "1.0",
+    "lastUpdated": "2025-07-12",
+    "sections": [
+      {
+        "title": "What is Claude Code?",
+        "content": "<p>Claude Code is Anthropic's official CLI tool for AI-assisted coding. Unlike web-based ChatGPT or IDE extensions like GitHub Copilot, Claude Code operates directly in your terminal with full file system access.</p><p class='mt-4'>Key differences:</p><ul class='list-disc list-inside mt-2'><li>CLI-based with direct file system access</li><li>Permission-based editing (always asks before changes)</li><li>Integrated development workflow</li><li>Built for professional developers</li></ul>",
+        "example": "# Install Claude Code\nbrew install claude\n\n# Start a session\nclaude\n\n# Or jump straight to a task\nclaude \"Help me refactor this Django view\""
+      },
+      {
+        "title": "Why Claude Code for Python/Django Teams?",
+        "content": "<p>Claude Code excels at Python and Django development with deep understanding of:</p><ul class='list-disc list-inside mt-2'><li>Django's MVT architecture</li><li>Python best practices and PEP standards</li><li>Common Django patterns (CBVs, serializers, migrations)</li><li>Testing with pytest and Django's test framework</li></ul>",
+        "example": "# Example Django workflow\nclaude \"Create a new Django app for user profiles with models, views, and tests\""
+      }
+    ]
+  }
+}

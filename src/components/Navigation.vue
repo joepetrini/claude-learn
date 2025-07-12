@@ -11,14 +11,6 @@
         <div class="flex items-center space-x-4">
           <router-link
             v-if="isAuthenticated"
-            to="/dashboard"
-            class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-          >
-            Dashboard
-          </router-link>
-          
-          <router-link
-            v-if="isAuthenticated"
             to="/cheatsheet"
             class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
           >

@@ -1,0 +1,15 @@
+{
+  "archivedDate": "2025-07-12",
+  "contentVersion": "2.0.0",
+  "reason": "Pre-reorganization backup",
+  "timestamp": "2025-07-12T21:37:09Z",
+  "structureType": "category-based",
+  "filesIncluded": [
+  "version.json",
+  "categories.json",
+  "claude-code/",
+  "customer-support/",
+  "hr-onboarding/",
+  "software-dev/"
+]
+}

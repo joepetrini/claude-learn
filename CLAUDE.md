@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an e-learning application designed to teach team members how to effectively use Claude Code. The app focuses on Python/Django developers and includes interactive modules, quizzes, and practical examples.
+This is a multi-department e-learning platform designed to deliver training content across various teams. Initially focused on Claude Code training for developers, it now supports categories for HR onboarding, software development, customer support, and more. The platform includes interactive modules, quizzes, progress tracking, and admin tools.
 
 ## Tech Stack
 
@@ -12,9 +12,11 @@ This is an e-learning application designed to teach team members how to effectiv
 - **Framework**: Vue 3 with Composition API
 - **Styling**: Tailwind CSS via PostCSS
 - **Routing**: Vue Router for navigation
-- **Data Storage**: Browser localStorage for progress tracking
-- **Content**: Static JSON files for modules and quizzes
-- **Hosting**: Static site hosting (GitHub Pages, Netlify, etc.)
+- **Backend**: Supabase (PostgreSQL, Auth, Storage)
+- **Data Storage**: Supabase database with real-time sync
+- **Content**: Organized JSON files by category/module
+- **Authentication**: Google OAuth via Supabase
+- **Hosting**: Static site hosting (GitHub Pages)
 
 ## Project Structure
 
@@ -28,30 +30,41 @@ claude-learn/
 │   ├── main.js            # Vue app initialization
 │   ├── App.vue            # Root component
 │   ├── router/            # Vue Router setup
+│   ├── lib/               # External libraries (Supabase client)
 │   ├── components/        # Reusable Vue components
+│   │   ├── Navigation.vue
 │   │   ├── ModuleCard.vue
 │   │   ├── QuizQuestion.vue
-│   │   ├── ProgressBar.vue
-│   │   └── Navigation.vue
+│   │   ├── LoadingSkeletons.vue
+│   │   └── NotificationCenter.vue
 │   ├── views/             # Page components
-│   │   ├── Home.vue
-│   │   ├── Module.vue
-│   │   ├── Quiz.vue
-│   │   └── Results.vue
+│   │   ├── Home.vue       # Category listing
+│   │   ├── Login.vue      # OAuth login
+│   │   ├── Module.vue     # Module content
+│   │   ├── Quiz.vue       # Quiz interface
+│   │   ├── Profile.vue    # User profile
+│   │   └── admin/         # Admin pages
 │   ├── composables/       # Reusable composition functions
-│   │   ├── useStorage.js
-│   │   ├── useQuiz.js
-│   │   └── useProgress.js
+│   │   ├── useAuth.js
+│   │   ├── useSupabaseProgress.js
+│   │   ├── useAdmin.js
+│   │   └── useProfile.js
 │   └── assets/
 │       └── styles/        # Global styles
 ├── public/
-│   ├── data/
-│   │   ├── modules.json   # Module content
-│   │   └── quizzes.json   # Quiz questions
-│   └── images/            # Static images
+│   └── data/              # Content organization (future)
+│       ├── categories.json
+│       ├── claude-code/   # Category folder
+│       │   ├── category.json
+│       │   ├── modules.json
+│       │   └── [modules]/
+│       └── [other-categories]/
 ├── docs/                  # Project documentation
-│   ├── overview.md        # Detailed project specification
-│   └── github-pages-deployment.md
+│   ├── database-schema.sql
+│   ├── content-structure.md
+│   ├── category-migration-plan.md
+│   ├── deployment-guide.md
+│   └── security-audit.md
 └── CLAUDE.md             # This file
 ```
 
@@ -70,22 +83,32 @@ npm run deploy            # Deploy to GitHub Pages
 This app is designed to be hosted on GitHub Pages. See `docs/github-pages-deployment.md` for detailed deployment instructions. The site will be available at:
 - `https://YOUR_USERNAME.github.io/claude-learn/`
 
-## Key Features to Implement
+## Key Features
 
-1. **Learning Modules** - 8 interactive modules covering Claude Code features
-2. **Quiz System** - Multiple choice quizzes with score tracking
-3. **Progress Tracking** - User progress persistence
-4. **Interactive Examples** - Python/Django specific code examples
-5. **Cheat Sheet** - Quick reference for commands and features
+### Implemented ✅
+1. **Category System** - Organize content by department (Claude Code, HR, Dev, Support)
+2. **Learning Modules** - Interactive modules with sections and examples
+3. **Quiz System** - Multiple choice quizzes with score tracking
+4. **Progress Tracking** - Database-backed progress persistence
+5. **User Authentication** - Google OAuth with profile management
+6. **Admin Dashboard** - User management and analytics
+7. **Favorites System** - Users can favorite categories for quick access
+
+### In Development 🚧
+1. **Content Sync** - Admin tool to sync JSON content to database
+2. **New Module Notifications** - Alert users to new content in favorites
+3. **Category Navigation** - Browse modules by category
+4. **Migration Tools** - Move from single-file to category structure
 
 ## Development Guidelines
 
-- Follow React best practices with functional components and hooks
-- Use TypeScript for type safety
+- Follow Vue 3 Composition API best practices
+- Use Supabase for all data persistence
 - Implement responsive design with Tailwind CSS
-- Keep modules self-contained and easy to update
+- Keep content in version-controlled JSON files
+- Database serves runtime queries, not content storage
 - Include comprehensive error handling
-- Write tests for critical functionality
+- Maintain backward compatibility during migrations
 
 ## GitHub Project Management
 
@@ -185,10 +208,26 @@ mutation {
 }'
 ```
 
-## Module Content
+## Content Management
 
-When working on module content:
-- Focus on practical, Python/Django-specific examples
-- Keep explanations concise and actionable
-- Include real-world scenarios team members will encounter
+### Content Structure
+Content is organized in a hierarchical folder structure:
+- **Categories**: Top-level organization (Claude Code, HR, etc.)
+- **Modules**: Learning units within categories
+- **Sections**: Individual lessons within modules
+- **Quizzes**: Assessment for each module
+
+See `docs/content-structure.md` for detailed file organization.
+
+### Adding Content
+1. Create appropriate folder structure under `public/data/`
+2. Add JSON files following the schema in documentation
+3. Run admin sync to update database
+4. Content is version controlled in git
+
+### Content Guidelines
+- Keep modules focused on specific topics
+- Use clear, actionable language
+- Include practical examples relevant to the audience
 - Ensure quiz questions test understanding, not memorization
+- Tag new modules appropriately for notifications

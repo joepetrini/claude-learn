@@ -1,0 +1,20 @@
+{
+  "module": {
+    "slug": "module_6",
+    "title": "Claude Hooks",
+    "version": "1.0",
+    "lastUpdated": "2025-07-12",
+    "sections": [
+      {
+        "title": "Understanding Hooks",
+        "content": "<p>Hooks allow you to run commands before or after Claude performs actions. Perfect for enforcing standards or automating workflows.</p><p class='mt-4'>Hook types:</p><ul class='list-disc list-inside mt-2'><li>Pre-edit hooks (before file changes)</li><li>Post-edit hooks (after file changes)</li><li>Pre-commit hooks</li></ul>",
+        "example": "// In settings.json\n{\n  \"hooks\": {\n    \"post-edit\": \"python manage.py check\",\n    \"pre-commit\": \"black . && isort .\"\n  }\n}"
+      },
+      {
+        "title": "Django-Specific Hooks",
+        "content": "<p>Useful hooks for Django projects:</p>",
+        "example": "{\n  \"hooks\": {\n    // Check for migration conflicts\n    \"post-edit\": \"python manage.py makemigrations --check --dry-run\",\n    \n    // Format and lint before commits\n    \"pre-commit\": \"black . && flake8 && python manage.py test --failfast\",\n    \n    // Security check on model changes\n    \"post-edit-pattern\": {\n      \"**/models.py\": \"python manage.py check --deploy\"\n    }\n  }\n}"
+      }
+    ]
+  }
+}

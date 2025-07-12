@@ -1,20 +1,6 @@
 {
-  "contentVersion": "1.0.0",
-  "claudeCodeVersion": "1.4.0",
-  "lastUpdated": "2025-01-12",
-  "moduleUpdates": {
-    "getting-started": {
-      "version": "1.0",
-      "lastUpdated": "2025-01-12",
-      "changes": ["Initial release"]
-    }
-  },
-  "monthlyUpdates": [
-    {
-      "id": "updates-2025-01",
-      "month": "January 2025",
-      "features": ["MCP Tools", "Enhanced /review command", "WebSearch", "Error handling"],
-      "claudeCodeVersion": "1.5.0"
-    }
-  ]
+  "contentVersion": "2.0.0",
+  "structureVersion": "category-course-module",
+  "lastUpdated": "2025-07-12T21:37:09Z",
+  "reorganizationDate": "2025-07-12"
 }

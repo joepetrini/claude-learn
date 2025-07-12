@@ -1,0 +1,20 @@
+{
+  "module": {
+    "slug": "module_3",
+    "title": "Modes and Context Management",
+    "version": "1.0",
+    "lastUpdated": "2025-07-12",
+    "sections": [
+      {
+        "title": "Default vs Plan Mode",
+        "content": "<p>Claude Code operates in two main modes:</p><ul class='list-disc list-inside mt-2'><li><strong>Default Mode:</strong> Immediate action on requests</li><li><strong>Plan Mode:</strong> Creates a detailed plan before implementation</li></ul><p class='mt-4'>Use Plan Mode for complex features requiring multiple steps.</p>",
+        "example": "# Default mode\nclaude \"Fix the failing test in test_models.py\"\n\n# Plan mode (when Claude detects complexity)\nclaude \"Refactor our authentication system to use JWT\""
+      },
+      {
+        "title": "Image Analysis for UI Debugging",
+        "content": "<p>Claude can analyze screenshots to help debug UI issues. This is perfect for Django template problems or frontend integration.</p><p class='mt-4'><strong>macOS Screenshot:</strong> Ctrl+Shift+Cmd+4</p><p><strong>Paste in iTerm2:</strong> Ctrl+V (not Cmd+V!)</p>",
+        "example": "# Take screenshot of UI issue\n# Ctrl+Shift+Cmd+4, select area\n# In Claude session:\n# Ctrl+V to paste\nclaude \"This button isn't aligning properly in my Django template\""
+      }
+    ]
+  }
+}
