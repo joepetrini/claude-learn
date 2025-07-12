@@ -31,7 +31,9 @@
       "Bash(gh project item-edit:*)",
       "Bash(npm run dev:*)",
       "Bash(gh issue view:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh api:*)"
     ],
     "deny": []
   }
