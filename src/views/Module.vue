@@ -1,18 +1,18 @@
 <template>
   <div class="min-h-screen bg-gray-50">
-    <!-- Navigation Bar -->
-    <nav class="bg-white shadow-sm border-b">
+    <Navigation />
+    
+    <!-- Breadcrumb Bar -->
+    <div class="bg-white shadow-sm border-b">
       <div class="container mx-auto px-4 py-4">
         <router-link to="/" class="text-blue-600 hover:text-blue-800 font-medium">
           ← Back to Modules
         </router-link>
       </div>
-    </nav>
+    </div>
 
     <div class="container mx-auto px-4 py-8">
-      <div v-if="loading" class="text-center py-12">
-        <p class="text-gray-500">Loading module...</p>
-      </div>
+      <LoadingSkeletons v-if="loading" type="module-content" />
       
       <div v-else-if="module" class="max-w-4xl mx-auto">
         <!-- Module Header -->
@@ -103,7 +103,9 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useModuleKeyboard } from '../composables/useKeyboardNavigation.js'
-import { useProgress } from '../composables/useProgress.js'
+import { useSupabaseProgress } from '../composables/useSupabaseProgress.js'
+import Navigation from '../components/Navigation.vue'
+import LoadingSkeletons from '../components/LoadingSkeletons.vue'
 
 const route = useRoute()
 const moduleId = computed(() => route.params.id)
@@ -112,8 +114,8 @@ const module = ref(null)
 const loading = ref(true)
 const currentSectionIndex = ref(0)
 
-// Initialize progress composable
-const { markModuleStarted, getModuleProgress, updateModuleProgress } = useProgress()
+// Initialize Supabase progress composable
+const { markModuleStarted, getModuleProgress, updateModuleProgress, loadProgress } = useSupabaseProgress()
 
 const currentSection = computed(() => {
   return module.value?.sections[currentSectionIndex.value] || {}
@@ -127,11 +129,14 @@ const progressPercentage = computed(() => {
 const loadModule = async () => {
   loading.value = true
   try {
+    // Load progress first to ensure we have latest data
+    await loadProgress()
+    
     const response = await fetch(import.meta.env.BASE_URL + 'data/modules.json')
     const data = await response.json()
     module.value = data.modules.find(m => m.id === moduleId.value)
     
-    // Load saved progress from composable
+    // Load saved progress from Supabase composable
     const savedProgress = getModuleProgress(moduleId.value)
     if (savedProgress && savedProgress.section) {
       currentSectionIndex.value = savedProgress.section
@@ -166,11 +171,11 @@ watch(currentSectionIndex, (newIndex) => {
 useModuleKeyboard()
 
 // Mark module as started
-onMounted(() => {
-  loadModule()
+onMounted(async () => {
+  await loadModule()
   
-  // Use progress composable to mark module as started
-  markModuleStarted(moduleId.value)
+  // Use Supabase progress composable to mark module as started
+  await markModuleStarted(moduleId.value)
   
   // Listen for keyboard navigation events
   window.addEventListener('keyboard-next', nextSection)

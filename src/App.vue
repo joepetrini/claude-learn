@@ -24,6 +24,7 @@
       </button>
     </div>
 
+
     <router-view />
     
     <!-- Search Modal -->
@@ -38,6 +39,9 @@
       :is-open="helpOpen"
       @close="toggleHelp"
     />
+    
+    <!-- Global Notification Center -->
+    <NotificationCenter />
   </div>
 </template>
 
@@ -45,11 +49,16 @@
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import SearchModal from './components/SearchModal.vue'
 import HelpModal from './components/HelpModal.vue'
+import NotificationCenter from './components/NotificationCenter.vue'
 import { useKeyboardNavigation } from './composables/useKeyboardNavigation.js'
+import { useAuth } from './composables/useAuth.js'
 
 const searchOpen = ref(false)
 const helpOpen = ref(false)
 const modules = ref([])
+
+// Initialize authentication
+const { initAuth } = useAuth()
 
 const toggleSearch = () => {
   searchOpen.value = !searchOpen.value
@@ -62,8 +71,11 @@ const toggleHelp = () => {
 // Initialize keyboard navigation
 useKeyboardNavigation()
 
-// Load modules for search
+// Load modules for search and initialize auth
 onMounted(async () => {
+  // Initialize authentication state
+  await initAuth()
+  
   try {
     const response = await fetch(import.meta.env.BASE_URL + 'data/modules.json')
     const data = await response.json()
@@ -82,6 +94,7 @@ onUnmounted(() => {
   window.removeEventListener('toggle-search', toggleSearch)
   window.removeEventListener('show-help', toggleHelp)
 })
+
 </script>
 
 <style>
@@ -92,5 +105,16 @@ onUnmounted(() => {
 
 kbd {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>

@@ -152,7 +152,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuizKeyboard } from '../composables/useKeyboardNavigation.js'
-import { useProgress } from '../composables/useProgress.js'
+import { useSupabaseProgress } from '../composables/useSupabaseProgress.js'
 
 const route = useRoute()
 const moduleId = computed(() => route.params.id)
@@ -165,8 +165,8 @@ const showExplanation = ref(false)
 const userAnswers = ref([])
 const quizCompleted = ref(false)
 
-// Initialize progress composable
-const { saveQuizScore } = useProgress()
+// Initialize Supabase progress composable
+const { saveQuizScore } = useSupabaseProgress()
 
 const currentQuestion = computed(() => {
   return quiz.value?.questions[currentQuestionIndex.value] || {}
@@ -274,11 +274,16 @@ const previousQuestion = () => {
   }
 }
 
-const completeQuiz = () => {
+const completeQuiz = async () => {
   quizCompleted.value = true
   
-  // Save quiz completion using progress composable
-  saveQuizScore(moduleId.value, score.value, quiz.value.questions.length)
+  // Save quiz completion using Supabase progress composable
+  const answers = userAnswers.value.map((answer, index) => ({
+    selected: answer.answer,
+    correct: answer.correct
+  }))
+  
+  await saveQuizScore(moduleId.value, score.value, quiz.value.questions.length, answers)
   
   // Clear quiz progress
   localStorage.removeItem(`quiz_${moduleId.value}_progress`)
@@ -303,10 +308,10 @@ const handleQuizSelect = (event) => {
   }
 }
 
-const handleQuizContinue = () => {
+const handleQuizContinue = async () => {
   if (selectedAnswer.value !== null) {
     if (currentQuestionIndex.value === quiz.value.questions.length - 1) {
-      completeQuiz()
+      await completeQuiz()
     } else {
       nextQuestion()
     }

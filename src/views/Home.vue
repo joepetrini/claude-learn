@@ -1,5 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-50">
+    <Navigation />
     <div class="container mx-auto px-4 py-8">
       <header class="text-center mb-12">
         <h1 class="text-4xl font-bold text-gray-900 mb-4">
@@ -42,9 +43,7 @@
 
       <div class="max-w-6xl mx-auto">
         <h2 class="text-2xl font-semibold mb-6">Core Learning Path</h2>
-        <div v-if="loading" class="text-center py-12">
-          <p class="text-gray-500">Loading modules...</p>
-        </div>
+        <LoadingSkeletons v-if="loading || progress.isLoading" type="module-cards" :count="6" />
         <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <router-link
             v-for="module in coreModules"
@@ -158,10 +157,12 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { useProgress } from '../composables/useProgress.js'
+import { useSupabaseProgress } from '../composables/useSupabaseProgress.js'
 import { useUpdateDetection } from '../composables/useUpdateDetection.js'
 import UpdateBadge from '../components/UpdateBadge.vue'
 import WhatsNewModal from '../components/WhatsNewModal.vue'
+import Navigation from '../components/Navigation.vue'
+import LoadingSkeletons from '../components/LoadingSkeletons.vue'
 
 const modules = ref([])
 const loading = ref(true)
@@ -176,8 +177,8 @@ const updateModules = computed(() =>
   modules.value.filter(m => m.type === 'update')
 )
 
-// Use progress composable
-const { isModuleStarted, isModuleCompleted, overallProgress } = useProgress()
+// Use Supabase progress composable
+const { isModuleStarted, isModuleCompleted, overallProgress, loadProgress, progress, testDatabaseTables } = useSupabaseProgress()
 
 // Use update detection
 const { 
@@ -192,6 +193,12 @@ const {
 
 onMounted(async () => {
   try {
+    // Test database tables first
+    await testDatabaseTables()
+    
+    // Load progress data from Supabase
+    await loadProgress()
+    
     // Load modules
     const response = await fetch(import.meta.env.BASE_URL + 'data/modules.json')
     const data = await response.json()
