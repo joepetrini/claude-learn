@@ -152,6 +152,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuizKeyboard } from '../composables/useKeyboardNavigation.js'
+import { useProgress } from '../composables/useProgress.js'
 
 const route = useRoute()
 const moduleId = computed(() => route.params.id)
@@ -163,6 +164,9 @@ const selectedAnswer = ref(null)
 const showExplanation = ref(false)
 const userAnswers = ref([])
 const quizCompleted = ref(false)
+
+// Initialize progress composable
+const { saveQuizScore } = useProgress()
 
 const currentQuestion = computed(() => {
   return quiz.value?.questions[currentQuestionIndex.value] || {}
@@ -273,24 +277,8 @@ const previousQuestion = () => {
 const completeQuiz = () => {
   quizCompleted.value = true
   
-  // Save quiz completion
-  const progress = JSON.parse(localStorage.getItem('claudeLearnProgress') || '{}')
-  if (!progress.completedQuizzes) progress.completedQuizzes = {}
-  progress.completedQuizzes[moduleId.value] = {
-    score: score.value,
-    total: quiz.value.questions.length,
-    completedAt: new Date().toISOString()
-  }
-  
-  // Mark module as completed if score is 60% or higher
-  if ((score.value / quiz.value.questions.length) >= 0.6) {
-    if (!progress.completedModules) progress.completedModules = []
-    if (!progress.completedModules.includes(moduleId.value)) {
-      progress.completedModules.push(moduleId.value)
-    }
-  }
-  
-  localStorage.setItem('claudeLearnProgress', JSON.stringify(progress))
+  // Save quiz completion using progress composable
+  saveQuizScore(moduleId.value, score.value, quiz.value.questions.length)
   
   // Clear quiz progress
   localStorage.removeItem(`quiz_${moduleId.value}_progress`)
@@ -318,7 +306,7 @@ const handleQuizSelect = (event) => {
 const handleQuizContinue = () => {
   if (selectedAnswer.value !== null) {
     if (currentQuestionIndex.value === quiz.value.questions.length - 1) {
-      finishQuiz()
+      completeQuiz()
     } else {
       nextQuestion()
     }

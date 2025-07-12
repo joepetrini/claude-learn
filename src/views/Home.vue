@@ -9,6 +9,23 @@
           Master the powerful AI coding assistant with interactive modules designed for Python/Django developers
         </p>
         
+        <!-- Overall Progress -->
+        <div class="mt-6 max-w-md mx-auto">
+          <div class="bg-white rounded-lg p-4 shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-gray-700">Overall Progress</span>
+              <span class="text-sm text-gray-600">{{ overallProgress.completed }} / {{ overallProgress.total }} modules</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+              <div 
+                class="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-500"
+                :style="`width: ${overallProgress.percentage}%`"
+              ></div>
+            </div>
+            <p class="text-xs text-gray-500 mt-2 text-center">{{ overallProgress.percentage }}% Complete</p>
+          </div>
+        </div>
+        
         <!-- Quick Actions -->
         <div class="mt-6 flex gap-4 justify-center">
           <router-link
@@ -73,23 +90,15 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useProgress } from '../composables/useProgress.js'
 
 const modules = ref([])
 const loading = ref(true)
-const progress = ref({})
 
-const isModuleStarted = (moduleId) => {
-  return progress.value.startedModules?.includes(moduleId) || false
-}
-
-const isModuleCompleted = (moduleId) => {
-  return progress.value.completedModules?.includes(moduleId) || false
-}
+// Use progress composable
+const { isModuleStarted, isModuleCompleted, overallProgress } = useProgress()
 
 onMounted(async () => {
-  // Load progress from localStorage
-  progress.value = JSON.parse(localStorage.getItem('claudeLearnProgress') || '{}')
-  
   try {
     const response = await fetch(import.meta.env.BASE_URL + 'data/modules.json')
     const data = await response.json()

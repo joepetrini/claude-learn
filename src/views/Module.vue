@@ -103,6 +103,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useModuleKeyboard } from '../composables/useKeyboardNavigation.js'
+import { useProgress } from '../composables/useProgress.js'
 
 const route = useRoute()
 const moduleId = computed(() => route.params.id)
@@ -110,6 +111,9 @@ const moduleId = computed(() => route.params.id)
 const module = ref(null)
 const loading = ref(true)
 const currentSectionIndex = ref(0)
+
+// Initialize progress composable
+const { markModuleStarted, getModuleProgress, updateModuleProgress } = useProgress()
 
 const currentSection = computed(() => {
   return module.value?.sections[currentSectionIndex.value] || {}
@@ -127,10 +131,10 @@ const loadModule = async () => {
     const data = await response.json()
     module.value = data.modules.find(m => m.id === moduleId.value)
     
-    // Load saved progress
-    const savedProgress = localStorage.getItem(`module_${moduleId.value}_section`)
-    if (savedProgress) {
-      currentSectionIndex.value = parseInt(savedProgress)
+    // Load saved progress from composable
+    const savedProgress = getModuleProgress(moduleId.value)
+    if (savedProgress && savedProgress.section) {
+      currentSectionIndex.value = savedProgress.section
     }
   } catch (error) {
     console.error('Failed to load module:', error)
@@ -155,7 +159,7 @@ const previousSection = () => {
 
 // Save progress whenever section changes
 watch(currentSectionIndex, (newIndex) => {
-  localStorage.setItem(`module_${moduleId.value}_section`, newIndex.toString())
+  updateModuleProgress(moduleId.value, newIndex)
 })
 
 // Initialize module keyboard navigation
@@ -165,14 +169,8 @@ useModuleKeyboard()
 onMounted(() => {
   loadModule()
   
-  const progress = JSON.parse(localStorage.getItem('claudeLearnProgress') || '{}')
-  if (!progress.startedModules) progress.startedModules = []
-  if (!progress.startedModules.includes(moduleId.value)) {
-    progress.startedModules.push(moduleId.value)
-  }
-  progress.lastAccessed = new Date().toISOString()
-  progress.currentModule = moduleId.value
-  localStorage.setItem('claudeLearnProgress', JSON.stringify(progress))
+  // Use progress composable to mark module as started
+  markModuleStarted(moduleId.value)
   
   // Listen for keyboard navigation events
   window.addEventListener('keyboard-next', nextSection)
