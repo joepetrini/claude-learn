@@ -1,0 +1,20 @@
+{
+  "module": {
+    "slug": "module_7",
+    "title": "MCP Tools Integration",
+    "version": "1.0",
+    "lastUpdated": "2025-07-12",
+    "sections": [
+      {
+        "title": "What is MCP?",
+        "content": "<p>Model Context Protocol (MCP) allows Claude to connect to external data sources and tools. Think of it as plugins for Claude Code.</p><p class='mt-4'>Common MCP servers:</p><ul class='list-disc list-inside mt-2'><li>Database connections</li><li>API integrations</li><li>Documentation access</li><li>Monitoring tools</li></ul>",
+        "example": "# Install an MCP server\nnpm install -g @mcp/sqlite\n\n# Configure in settings.json\n{\n  \"mcp\": {\n    \"servers\": {\n      \"sqlite\": {\n        \"command\": \"mcp-sqlite\",\n        \"args\": [\"./db.sqlite3\"]\n      }\n    }\n  }\n}"
+      },
+      {
+        "title": "Django Database MCP",
+        "content": "<p>Connect Claude directly to your Django database for intelligent queries and debugging:</p>",
+        "example": "# PostgreSQL MCP configuration\n{\n  \"mcp\": {\n    \"servers\": {\n      \"postgres\": {\n        \"command\": \"mcp-postgres\",\n        \"env\": {\n          \"DATABASE_URL\": \"postgres://user:pass@localhost/mydb\"\n        }\n      }\n    }\n  }\n}\n\n# Now Claude can:\nclaude \"Show me users who signed up this week\"\nclaude \"Analyze the query performance for the dashboard\""
+      }
+    ]
+  }
+}

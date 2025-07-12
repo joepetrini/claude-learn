@@ -570,6 +570,13 @@ export function useSupabaseProgress() {
     }
   }
 
+  // Get course progress (placeholder for now)
+  async function getCourseProgress(courseSlug) {
+    // In a full implementation, this would aggregate module progress
+    // For now, return null to indicate no progress tracking yet
+    return null
+  }
+
   return {
     // State
     progress,
@@ -591,6 +598,9 @@ export function useSupabaseProgress() {
     // Quiz methods
     saveQuizScore,
     getQuizScore,
+    
+    // Course methods
+    getCourseProgress,
     
     // Admin methods
     getAllUsersProgress,

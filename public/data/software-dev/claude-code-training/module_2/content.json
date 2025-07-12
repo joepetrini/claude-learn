@@ -1,0 +1,25 @@
+{
+  "module": {
+    "slug": "module_2",
+    "title": "Core Workflows & Capabilities",
+    "version": "1.0",
+    "lastUpdated": "2025-07-12",
+    "sections": [
+      {
+        "title": "Building Features End-to-End",
+        "content": "<p>Claude Code can handle complete feature development from models to tests. It understands your project structure and follows your conventions.</p>",
+        "example": "claude \"Create a blog post feature with:\n- Post and Comment models\n- REST API endpoints\n- Admin interface\n- Basic tests\""
+      },
+      {
+        "title": "Code Review with /review",
+        "content": "<p>The /review command provides intelligent code analysis focusing on:</p><ul class='list-disc list-inside mt-2'><li>Security vulnerabilities</li><li>Performance issues</li><li>Django best practices</li><li>Code style consistency</li></ul>",
+        "example": "claude /review --scope=security views.py\nclaude /review --focus=performance models.py"
+      },
+      {
+        "title": "Extended Thinking Mode",
+        "content": "<p>For complex architectural decisions or performance optimization, use extended thinking mode. Claude will take more time to deeply analyze the problem.</p>",
+        "example": "# Activate extended thinking\nclaude --think \"Design a caching strategy for our high-traffic Django API\""
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "module": {
+    "slug": "module_5",
+    "title": "Memory System (CLAUDE.md)",
+    "version": "1.0",
+    "lastUpdated": "2025-07-12",
+    "sections": [
+      {
+        "title": "Three-Tier Memory System",
+        "content": "<p>Claude Code uses a hierarchical memory system:</p><ol class='list-decimal list-inside mt-2'><li><strong>Project Memory:</strong> CLAUDE.md in project root</li><li><strong>User Memory:</strong> ~/.claude/CLAUDE.md (global)</li><li><strong>Local Memory:</strong> CLAUDE.local.md (git-ignored)</li></ol><p class='mt-4'>Priority: Local > Project > User</p>",
+        "example": "# Initialize project memory\nclaude /init\n\n# This creates CLAUDE.md with:\n# - Build commands\n# - Test commands\n# - Project structure\n# - Coding conventions"
+      },
+      {
+        "title": "Team Conventions in CLAUDE.md",
+        "content": "<p>Share team standards and Django patterns through CLAUDE.md:</p>",
+        "example": "# CLAUDE.md\n\n## Project Standards\n- Use Class-Based Views (CBVs) for all views\n- Follow our custom User model pattern\n- All models must have created_at and updated_at\n- Use our BaseTestCase for all tests\n\n## Commands\n- Run tests: python manage.py test --parallel\n- Run specific app: python manage.py test apps.users\n- Deploy: ./deploy.sh production"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "claude-code-training",
+  "title": "Claude Code Training",
+  "description": "Master Claude Code for efficient development",
+  "icon": "🤖",
+  "metadata": {
+    "author": "Engineering Team",
+    "targetAudience": "developers",
+    "prerequisites": [],
+    "learningOutcomes": [
+      "Understand Claude Code capabilities",
+      "Write effective prompts",
+      "Debug and refactor with AI assistance",
+      "Integrate Claude Code into your workflow"
+    ],
+    "lastUpdated": "2025-01-12",
+    "version": "2.0"
+  },
+  "settings": {
+    "requiresSequentialCompletion": false,
+    "showPrerequisites": true,
+    "certificateEnabled": true,
+    "passingScore": 80
+  }
+}

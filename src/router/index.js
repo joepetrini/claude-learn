@@ -16,25 +16,31 @@ const routes = [
     meta: { requiresAuth: false }
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import('../views/Dashboard.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
     path: '/profile',
     name: 'profile',
     component: () => import('../views/Profile.vue'),
     meta: { requiresAuth: true }
   },
   {
-    path: '/module/:id',
+    path: '/category/:categorySlug',
+    name: 'category',
+    component: () => import('../views/Category.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/category/:categorySlug/course/:courseSlug',
+    name: 'course',
+    component: () => import('../views/Course.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/category/:categorySlug/course/:courseSlug/module/:moduleId',
     name: 'module',
     component: () => import('../views/Module.vue'),
     meta: { requiresAuth: true }
   },
   {
-    path: '/quiz/:id',
+    path: '/category/:categorySlug/course/:courseSlug/quiz/:quizId',
     name: 'quiz',
     component: () => import('../views/Quiz.vue'),
     meta: { requiresAuth: true }
@@ -67,6 +73,12 @@ const routes = [
     path: '/admin/users/:id',
     name: 'admin-user-progress',
     component: () => import('../views/admin/UserProgress.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true }
+  },
+  {
+    path: '/admin/content-sync',
+    name: 'admin-content-sync',
+    component: () => import('../views/admin/ContentSync.vue'),
     meta: { requiresAuth: true, requiresAdmin: true }
   },
   {

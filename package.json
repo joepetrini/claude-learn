@@ -8,7 +8,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "archive": "./scripts/archive-content.sh",
-    "restore": "./scripts/restore-content.sh"
+    "restore": "./scripts/restore-content.sh",
+    "migrate-content": "./scripts/migrate-to-categories.sh",
+    "cleanup-legacy": "./scripts/cleanup-legacy.sh",
+    "cleanup-nested": "./scripts/cleanup-nested-files.sh",
+    "reorganize": "./scripts/reorganize-to-courses.sh"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.50.5",

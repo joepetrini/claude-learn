@@ -38,7 +38,9 @@
       "WebFetch(domain:docs.github.com)",
       "Bash(gh project item-list:*)",
       "Bash(gh issue reopen:*)",
-      "mcp__puppeteer__puppeteer_fill"
+      "mcp__puppeteer__puppeteer_fill",
+      "Bash(grep:*)",
+      "Bash(find:*)"
     ],
     "deny": []
   }

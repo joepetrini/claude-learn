@@ -1,0 +1,20 @@
+{
+  "module": {
+    "slug": "updates-2025-01",
+    "title": "January 2025 Updates",
+    "version": "1.0",
+    "lastUpdated": "2025-07-12",
+    "sections": [
+      {
+        "title": "MCP Tool Integration",
+        "content": "<p>Claude Code now supports Model Context Protocol (MCP) tools, allowing integration with external services.</p><p>You can connect tools like Puppeteer for browser automation, Slack for team communication, and more.</p>",
+        "example": "claude --mcp puppeteer\n# Now you can use browser automation commands"
+      },
+      {
+        "title": "Enhanced Code Review",
+        "content": "<p>The /review command has been enhanced with new options for security and performance analysis.</p>",
+        "example": "claude /review --scope=security --files=\"**/*.py\""
+      }
+    ]
+  }
+}

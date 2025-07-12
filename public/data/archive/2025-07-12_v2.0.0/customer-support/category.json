@@ -1,0 +1,12 @@
+{
+  "slug": "customer-support",
+  "name": "Customer Support",
+  "description": "Customer service excellence training",
+  "icon": "🎧",
+  "color": "#F59E0B",
+  "metadata": {
+    "targetAudience": "support team",
+    "estimatedDuration": "3 hours",
+    "version": "1.0"
+  }
+}

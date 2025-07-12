@@ -1,0 +1,40 @@
+{
+  "categories": [
+    {
+      "slug": "claude-code",
+      "name": "Claude Code Training",
+      "description": "Master Claude Code for efficient development",
+      "icon": "🤖",
+      "color": "#3B82F6",
+      "sortOrder": 1,
+      "isActive": true
+    },
+    {
+      "slug": "hr-onboarding",
+      "name": "HR Onboarding",
+      "description": "New employee orientation and company culture",
+      "icon": "👥",
+      "color": "#10B981",
+      "sortOrder": 2,
+      "isActive": true
+    },
+    {
+      "slug": "software-dev",
+      "name": "Software Development",
+      "description": "Best practices and coding standards",
+      "icon": "💻",
+      "color": "#8B5CF6",
+      "sortOrder": 3,
+      "isActive": true
+    },
+    {
+      "slug": "customer-support",
+      "name": "Customer Support",
+      "description": "Customer service excellence training",
+      "icon": "🎧",
+      "color": "#F59E0B",
+      "sortOrder": 4,
+      "isActive": true
+    }
+  ]
+}
