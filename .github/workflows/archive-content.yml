@@ -1,0 +1,55 @@
+name: Archive Content
+
+on:
+  push:
+    paths:
+      - 'public/data/modules.json'
+      - 'public/data/quizzes.json'
+      - 'public/data/version.json'
+    branches:
+      - main
+  schedule:
+    # Run monthly on the 1st at 00:00 UTC
+    - cron: '0 0 1 * *'
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+      
+      - name: Check for version change
+        id: version_check
+        run: |
+          if git diff HEAD^ HEAD -- public/data/version.json | grep -q contentVersion; then
+            echo "version_changed=true" >> $GITHUB_OUTPUT
+            echo "Version change detected"
+          else
+            echo "version_changed=false" >> $GITHUB_OUTPUT
+            echo "No version change"
+          fi
+      
+      - name: Archive on version change
+        if: steps.version_check.outputs.version_changed == 'true'
+        run: |
+          ./scripts/archive-content.sh "Automated archive - version change detected"
+          
+      - name: Monthly archive
+        if: github.event_name == 'schedule'
+        run: |
+          ./scripts/archive-content.sh "Automated monthly backup"
+      
+      - name: Commit archives
+        if: steps.version_check.outputs.version_changed == 'true' || github.event_name == 'schedule'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add public/data/archive/
+          git diff --quiet && git diff --staged --quiet || git commit -m "Archive content [automated]"
+          git push

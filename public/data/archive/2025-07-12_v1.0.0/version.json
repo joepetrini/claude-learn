@@ -1,0 +1,13 @@
+{
+  "contentVersion": "1.0.0",
+  "claudeCodeVersion": "1.4.0",
+  "lastUpdated": "2025-01-12",
+  "moduleUpdates": {
+    "getting-started": {
+      "version": "1.0",
+      "lastUpdated": "2025-01-12",
+      "changes": ["Initial release"]
+    }
+  },
+  "monthlyUpdates": []
+}

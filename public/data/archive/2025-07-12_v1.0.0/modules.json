@@ -1,0 +1,219 @@
+{
+  "modules": [
+    {
+      "id": "module_1",
+      "title": "Introduction to Claude Code",
+      "description": "Learn what Claude Code is and how it differs from other AI coding tools",
+      "estimatedTime": "20 minutes",
+      "type": "core",
+      "icon": "🚀",
+      "sections": [
+        {
+          "title": "What is Claude Code?",
+          "content": "<p>Claude Code is Anthropic's official CLI tool for AI-assisted coding. Unlike web-based ChatGPT or IDE extensions like GitHub Copilot, Claude Code operates directly in your terminal with full file system access.</p><p class='mt-4'>Key differences:</p><ul class='list-disc list-inside mt-2'><li>CLI-based with direct file system access</li><li>Permission-based editing (always asks before changes)</li><li>Integrated development workflow</li><li>Built for professional developers</li></ul>",
+          "example": "# Install Claude Code\nbrew install claude\n\n# Start a session\nclaude\n\n# Or jump straight to a task\nclaude \"Help me refactor this Django view\""
+        },
+        {
+          "title": "Why Claude Code for Python/Django Teams?",
+          "content": "<p>Claude Code excels at Python and Django development with deep understanding of:</p><ul class='list-disc list-inside mt-2'><li>Django's MVT architecture</li><li>Python best practices and PEP standards</li><li>Common Django patterns (CBVs, serializers, migrations)</li><li>Testing with pytest and Django's test framework</li></ul>",
+          "example": "# Example Django workflow\nclaude \"Create a new Django app for user profiles with models, views, and tests\""
+        }
+      ]
+    },
+    {
+      "id": "module_2",
+      "title": "Core Workflows & Capabilities",
+      "description": "Master common development workflows and understand Claude's capabilities",
+      "estimatedTime": "30 minutes",
+      "type": "core",
+      "icon": "⚡",
+      "sections": [
+        {
+          "title": "Building Features End-to-End",
+          "content": "<p>Claude Code can handle complete feature development from models to tests. It understands your project structure and follows your conventions.</p>",
+          "example": "claude \"Create a blog post feature with:\n- Post and Comment models\n- REST API endpoints\n- Admin interface\n- Basic tests\""
+        },
+        {
+          "title": "Code Review with /review",
+          "content": "<p>The /review command provides intelligent code analysis focusing on:</p><ul class='list-disc list-inside mt-2'><li>Security vulnerabilities</li><li>Performance issues</li><li>Django best practices</li><li>Code style consistency</li></ul>",
+          "example": "claude /review --scope=security views.py\nclaude /review --focus=performance models.py"
+        },
+        {
+          "title": "Extended Thinking Mode",
+          "content": "<p>For complex architectural decisions or performance optimization, use extended thinking mode. Claude will take more time to deeply analyze the problem.</p>",
+          "example": "# Activate extended thinking\nclaude --think \"Design a caching strategy for our high-traffic Django API\""
+        }
+      ]
+    },
+    {
+      "id": "module_3",
+      "title": "Modes and Context Management",
+      "description": "Understand different operational modes and image analysis capabilities",
+      "estimatedTime": "25 minutes",
+      "type": "core",
+      "icon": "🎯",
+      "sections": [
+        {
+          "title": "Default vs Plan Mode",
+          "content": "<p>Claude Code operates in two main modes:</p><ul class='list-disc list-inside mt-2'><li><strong>Default Mode:</strong> Immediate action on requests</li><li><strong>Plan Mode:</strong> Creates a detailed plan before implementation</li></ul><p class='mt-4'>Use Plan Mode for complex features requiring multiple steps.</p>",
+          "example": "# Default mode\nclaude \"Fix the failing test in test_models.py\"\n\n# Plan mode (when Claude detects complexity)\nclaude \"Refactor our authentication system to use JWT\""
+        },
+        {
+          "title": "Image Analysis for UI Debugging",
+          "content": "<p>Claude can analyze screenshots to help debug UI issues. This is perfect for Django template problems or frontend integration.</p><p class='mt-4'><strong>macOS Screenshot:</strong> Ctrl+Shift+Cmd+4</p><p><strong>Paste in iTerm2:</strong> Ctrl+V (not Cmd+V!)</p>",
+          "example": "# Take screenshot of UI issue\n# Ctrl+Shift+Cmd+4, select area\n# In Claude session:\n# Ctrl+V to paste\nclaude \"This button isn't aligning properly in my Django template\""
+        }
+      ]
+    },
+    {
+      "id": "module_4",
+      "title": "History and Slash Commands",
+      "description": "Navigate conversations and master essential slash commands",
+      "estimatedTime": "20 minutes",
+      "type": "core",
+      "icon": "💬",
+      "sections": [
+        {
+          "title": "Managing Conversation History",
+          "content": "<p>Claude Code maintains conversation history with intelligent context management:</p><ul class='list-disc list-inside mt-2'><li><code>/clear</code> - Start fresh (clears context)</li><li><code>/compact</code> - Compress conversation (keeps context)</li><li>History persists between sessions</li></ul>",
+          "example": "# When context gets too large\nclaude /compact\n\n# Starting a new unrelated task\nclaude /clear\nclaude \"New task: Create a payment integration\""
+        },
+        {
+          "title": "Essential Slash Commands",
+          "content": "<p>Master these commands for efficient workflow:</p><ul class='list-disc list-inside mt-2'><li><code>/init</code> - Initialize CLAUDE.md for your project</li><li><code>/cost</code> - Check token usage and costs</li><li><code>/doctor</code> - Diagnose installation issues</li><li><code>/pr_comments</code> - View GitHub PR feedback</li></ul>",
+          "example": "# Set up project memory\nclaude /init\n\n# Check usage\nclaude /cost\n\n# View PR comments\nclaude /pr_comments https://github.com/org/repo/pull/123"
+        },
+        {
+          "title": "Custom Slash Commands",
+          "content": "<p>Create project-specific commands to automate repetitive tasks. Define them in your settings.json.</p>",
+          "example": "// In settings.json\n{\n  \"commands\": {\n    \"migrate\": \"python manage.py makemigrations && python manage.py migrate\",\n    \"test-quick\": \"python manage.py test --parallel --keepdb\"\n  }\n}\n\n// Usage\nclaude /migrate\nclaude /test-quick"
+        }
+      ]
+    },
+    {
+      "id": "module_5",
+      "title": "Memory System (CLAUDE.md)",
+      "description": "Configure project-specific instructions and team conventions",
+      "estimatedTime": "25 minutes",
+      "type": "core",
+      "icon": "🧠",
+      "sections": [
+        {
+          "title": "Three-Tier Memory System",
+          "content": "<p>Claude Code uses a hierarchical memory system:</p><ol class='list-decimal list-inside mt-2'><li><strong>Project Memory:</strong> CLAUDE.md in project root</li><li><strong>User Memory:</strong> ~/.claude/CLAUDE.md (global)</li><li><strong>Local Memory:</strong> CLAUDE.local.md (git-ignored)</li></ol><p class='mt-4'>Priority: Local > Project > User</p>",
+          "example": "# Initialize project memory\nclaude /init\n\n# This creates CLAUDE.md with:\n# - Build commands\n# - Test commands\n# - Project structure\n# - Coding conventions"
+        },
+        {
+          "title": "Team Conventions in CLAUDE.md",
+          "content": "<p>Share team standards and Django patterns through CLAUDE.md:</p>",
+          "example": "# CLAUDE.md\n\n## Project Standards\n- Use Class-Based Views (CBVs) for all views\n- Follow our custom User model pattern\n- All models must have created_at and updated_at\n- Use our BaseTestCase for all tests\n\n## Commands\n- Run tests: python manage.py test --parallel\n- Run specific app: python manage.py test apps.users\n- Deploy: ./deploy.sh production"
+        }
+      ]
+    },
+    {
+      "id": "module_6",
+      "title": "Claude Hooks",
+      "description": "Automate workflows with pre and post action hooks",
+      "estimatedTime": "20 minutes",
+      "type": "core",
+      "icon": "🔗",
+      "sections": [
+        {
+          "title": "Understanding Hooks",
+          "content": "<p>Hooks allow you to run commands before or after Claude performs actions. Perfect for enforcing standards or automating workflows.</p><p class='mt-4'>Hook types:</p><ul class='list-disc list-inside mt-2'><li>Pre-edit hooks (before file changes)</li><li>Post-edit hooks (after file changes)</li><li>Pre-commit hooks</li></ul>",
+          "example": "// In settings.json\n{\n  \"hooks\": {\n    \"post-edit\": \"python manage.py check\",\n    \"pre-commit\": \"black . && isort .\"\n  }\n}"
+        },
+        {
+          "title": "Django-Specific Hooks",
+          "content": "<p>Useful hooks for Django projects:</p>",
+          "example": "{\n  \"hooks\": {\n    // Check for migration conflicts\n    \"post-edit\": \"python manage.py makemigrations --check --dry-run\",\n    \n    // Format and lint before commits\n    \"pre-commit\": \"black . && flake8 && python manage.py test --failfast\",\n    \n    // Security check on model changes\n    \"post-edit-pattern\": {\n      \"**/models.py\": \"python manage.py check --deploy\"\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "id": "module_7",
+      "title": "MCP Tools Integration",
+      "description": "Extend Claude Code with Model Context Protocol servers",
+      "estimatedTime": "30 minutes",
+      "type": "core",
+      "icon": "🔌",
+      "sections": [
+        {
+          "title": "What is MCP?",
+          "content": "<p>Model Context Protocol (MCP) allows Claude to connect to external data sources and tools. Think of it as plugins for Claude Code.</p><p class='mt-4'>Common MCP servers:</p><ul class='list-disc list-inside mt-2'><li>Database connections</li><li>API integrations</li><li>Documentation access</li><li>Monitoring tools</li></ul>",
+          "example": "# Install an MCP server\nnpm install -g @mcp/sqlite\n\n# Configure in settings.json\n{\n  \"mcp\": {\n    \"servers\": {\n      \"sqlite\": {\n        \"command\": \"mcp-sqlite\",\n        \"args\": [\"./db.sqlite3\"]\n      }\n    }\n  }\n}"
+        },
+        {
+          "title": "Django Database MCP",
+          "content": "<p>Connect Claude directly to your Django database for intelligent queries and debugging:</p>",
+          "example": "# PostgreSQL MCP configuration\n{\n  \"mcp\": {\n    \"servers\": {\n      \"postgres\": {\n        \"command\": \"mcp-postgres\",\n        \"env\": {\n          \"DATABASE_URL\": \"postgres://user:pass@localhost/mydb\"\n        }\n      }\n    }\n  }\n}\n\n# Now Claude can:\nclaude \"Show me users who signed up this week\"\nclaude \"Analyze the query performance for the dashboard\""
+        }
+      ]
+    },
+    {
+      "id": "module_8",
+      "title": "Advanced Features & Tips",
+      "description": "Master advanced Claude Code features for maximum productivity",
+      "estimatedTime": "25 minutes",
+      "type": "core",
+      "icon": "🚀",
+      "sections": [
+        {
+          "title": "Parallel Development with Git Worktrees",
+          "content": "<p>Claude Code works seamlessly with Git worktrees for parallel development:</p>",
+          "example": "# Create worktree for feature\ngit worktree add ../feature-branch feature-branch\n\n# Work in parallel\ncd ../feature-branch\nclaude \"Implement the new authentication feature\"\n\n# Claude maintains separate context per worktree"
+        },
+        {
+          "title": "Performance Optimization",
+          "content": "<p>Tips for optimal Claude Code performance:</p><ul class='list-disc list-inside mt-2'><li>Use <code>/compact</code> regularly for long sessions</li><li>Be specific in requests to reduce token usage</li><li>Use <code>--no-cache</code> for fresh analysis</li><li>Batch related changes in single requests</li></ul>",
+          "example": "# Efficient request\nclaude \"Update all UserProfile model methods to use select_related for user field\"\n\n# Instead of multiple requests\n# claude \"Update get_full_name method\"\n# claude \"Update get_avatar_url method\"\n# etc."
+        },
+        {
+          "title": "Team Collaboration Patterns",
+          "content": "<p>Best practices for teams using Claude Code:</p>",
+          "example": "# Shared CLAUDE.md template\n## Team Conventions\n- PR descriptions must include Claude's impact summary\n- Use claude /review before pushing\n- Share useful prompts in team chat\n\n## Useful Prompts\n- \"Generate API tests following our patterns\"\n- \"Add logging using our custom logger\"\n- \"Create migration with rollback plan\""
+        }
+      ]
+    },
+    {
+      "id": "module_9",
+      "title": "Advanced Integrations",
+      "description": "Master VS Code integration, CI/CD pipelines, and team collaboration features",
+      "estimatedTime": "35 minutes",
+      "type": "advanced",
+      "icon": "🔧",
+      "sections": [
+        {
+          "title": "VS Code Integration Guide",
+          "content": "<p>While Claude Code is CLI-based, it integrates beautifully with VS Code for a hybrid workflow:</p><ul class='list-disc list-inside mt-2'><li>Use VS Code's integrated terminal for Claude sessions</li><li>Claude respects your VS Code settings and extensions</li><li>Real-time file updates appear in VS Code</li><li>Combine VS Code's debugging with Claude's intelligence</li></ul><p class='mt-4'>Pro tip: Use VS Code's split terminal to run Claude alongside your Django development server.</p>",
+          "example": "# In VS Code integrated terminal\n# Split terminal: Cmd+\\\n\n# Terminal 1: Django server\npython manage.py runserver\n\n# Terminal 2: Claude session\nclaude\n# Now changes appear instantly in VS Code"
+        },
+        {
+          "title": "CI/CD Pipeline Integration",
+          "content": "<p>Claude Code can generate and maintain CI/CD pipelines that follow your team's deployment patterns:</p><ul class='list-disc list-inside mt-2'><li>GitHub Actions workflows</li><li>GitLab CI/CD pipelines</li><li>Pre-commit hooks</li><li>Automated testing strategies</li></ul>",
+          "example": "claude \"Create a GitHub Actions workflow that:\n- Runs our Django tests with PostgreSQL\n- Checks code coverage (minimum 80%)\n- Runs linting with black and flake8\n- Deploys to staging on main branch\""
+        },
+        {
+          "title": "GitHub Actions Workflows",
+          "content": "<p>Claude can create sophisticated GitHub Actions workflows tailored to Django projects:</p>",
+          "example": "# .github/workflows/django.yml\nname: Django CI/CD\n\non:\n  push:\n    branches: [ main, develop ]\n  pull_request:\n    branches: [ main ]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    services:\n      postgres:\n        image: postgres:15\n        env:\n          POSTGRES_PASSWORD: postgres\n        options: >-\n          --health-cmd pg_isready\n          --health-interval 10s\n          --health-timeout 5s\n          --health-retries 5\n    \n    steps:\n    - uses: actions/checkout@v3\n    - name: Set up Python\n      uses: actions/setup-python@v4\n      with:\n        python-version: '3.11'\n    - name: Install dependencies\n      run: |\n        pip install -r requirements.txt\n    - name: Run tests\n      env:\n        DATABASE_URL: postgres://postgres:postgres@localhost/test_db\n      run: |\n        python manage.py test --parallel"
+        },
+        {
+          "title": "Team Collaboration Features",
+          "content": "<p>Advanced features for team productivity:</p><ul class='list-disc list-inside mt-2'><li><strong>Shared prompts library:</strong> Store common prompts in CLAUDE.md</li><li><strong>Code review automation:</strong> Integrate Claude into PR workflows</li><li><strong>Knowledge sharing:</strong> Export Claude conversations for team learning</li><li><strong>Onboarding acceleration:</strong> Use Claude to explain codebase to new developers</li></ul>",
+          "example": "# Team CLAUDE.md additions\n## Shared Prompts\n\n### API Endpoint Generator\n\"Create a DRF ViewSet for [Model] with:\n- Filtering by [fields]\n- Custom permissions for [roles]\n- Optimized queries with select_related\n- Comprehensive tests\"\n\n### Performance Analyzer\n\"Analyze this view for N+1 queries and suggest optimizations\"\n\n## PR Review Checklist\n- Run: claude /review --scope=security,performance\n- Check migrations: claude \"Review this migration for safety\"\n- Verify tests: claude \"Are these tests comprehensive?\""
+        },
+        {
+          "title": "Real Django Project Examples",
+          "content": "<p>Let's look at real-world Django patterns Claude excels at:</p>",
+          "example": "# E-commerce checkout flow\nclaude \"Create a checkout flow with:\n- Cart serialization with product variants\n- Payment processing with Stripe\n- Order status state machine\n- Email notifications with Celery\n- Inventory management with DB locks\"\n\n# Multi-tenant SaaS\nclaude \"Implement tenant isolation using:\n- Django-tenants for schema separation\n- Middleware for tenant routing\n- Shared vs tenant-specific models\n- Tenant-aware caching strategy\"\n\n# Real-time features\nclaude \"Add real-time notifications using:\n- Django Channels for WebSocket\n- Redis for message broker\n- Async consumers for chat\n- Frontend integration with reconnection\""
+        },
+        {
+          "title": "Advanced Deployment Patterns",
+          "content": "<p>Claude understands complex deployment scenarios and can help implement:</p><ul class='list-disc list-inside mt-2'><li>Blue-green deployments</li><li>Database migration strategies</li><li>Zero-downtime deployments</li><li>Rollback procedures</li></ul>",
+          "example": "claude \"Create a deployment script that:\n- Builds Docker image with build args\n- Runs migrations in separate container\n- Performs health checks before switching\n- Includes rollback strategy\n- Notifies Slack on success/failure\"\n\n# Generated deployment script handles:\n# - Environment-specific settings\n# - Secret management\n# - Database backup before migrations\n# - Graceful container switching\n# - Monitoring integration"
+        }
+      ]
+    }
+  ]
+}

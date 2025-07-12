@@ -1,0 +1,589 @@
+{
+  "quizzes": {
+    "module_1": {
+      "title": "Introduction to Claude Code",
+      "questions": [
+        {
+          "id": "m1_q1",
+          "question": "What makes Claude Code different from GitHub Copilot?",
+          "options": [
+            "It's a web-based tool only",
+            "It's a CLI tool with file system access",
+            "It only works with Python",
+            "It requires no setup"
+          ],
+          "correct": 1,
+          "explanation": "Claude Code is a CLI tool that can directly interact with your file system, unlike Copilot which is an IDE extension."
+        },
+        {
+          "id": "m1_q2",
+          "question": "Which command would you use to start a Claude Code session?",
+          "options": [
+            "claude-code start",
+            "claude init",
+            "claude",
+            "claude --begin"
+          ],
+          "correct": 2,
+          "explanation": "Simply typing 'claude' starts an interactive session. You can also jump straight to a task with claude \"your request\"."
+        },
+        {
+          "id": "m1_q3",
+          "question": "What happens before Claude Code makes changes to your files?",
+          "options": [
+            "Files are automatically backed up",
+            "It asks for permission",
+            "Changes are made immediately",
+            "A git commit is created"
+          ],
+          "correct": 1,
+          "explanation": "Claude Code follows a permission-based model and always asks before making changes to your files."
+        },
+        {
+          "id": "m1_q4",
+          "question": "Why is Claude Code particularly good for Django development?",
+          "options": [
+            "It only works with Django projects",
+            "It has deep understanding of Django patterns and architecture",
+            "It automatically generates Django projects",
+            "It replaces Django's manage.py"
+          ],
+          "correct": 1,
+          "explanation": "Claude Code has deep understanding of Django's MVT architecture, common patterns like CBVs, and Django-specific best practices."
+        },
+        {
+          "id": "m1_q5",
+          "question": "How would you ask Claude to help with a specific Django task?",
+          "options": [
+            "claude django --task \"create models\"",
+            "claude-django create models",
+            "claude \"Create a new Django app for user profiles\"",
+            "django-claude generate app"
+          ],
+          "correct": 2,
+          "explanation": "You can jump straight to a task by providing your request in quotes after the claude command."
+        }
+      ]
+    },
+    "module_2": {
+      "title": "Core Workflows & Capabilities",
+      "questions": [
+        {
+          "id": "m2_q1",
+          "question": "What command provides intelligent code analysis for security vulnerabilities?",
+          "options": [
+            "claude analyze --security",
+            "claude /review --scope=security",
+            "claude security-check",
+            "claude --scan-security"
+          ],
+          "correct": 1,
+          "explanation": "The /review command with --scope=security provides focused security analysis of your code."
+        },
+        {
+          "id": "m2_q2",
+          "question": "When should you use extended thinking mode?",
+          "options": [
+            "For every coding task",
+            "For complex architectural decisions or performance optimization",
+            "Only for bug fixes",
+            "When working with small files"
+          ],
+          "correct": 1,
+          "explanation": "Extended thinking mode is best for complex problems requiring deep analysis, like architectural decisions or performance optimization."
+        },
+        {
+          "id": "m2_q3",
+          "question": "What can Claude Code do when building features end-to-end?",
+          "options": [
+            "Only generate models",
+            "Only write views",
+            "Handle complete feature development from models to tests",
+            "Only fix existing code"
+          ],
+          "correct": 2,
+          "explanation": "Claude Code can handle complete feature development including models, views, APIs, admin interfaces, and tests."
+        },
+        {
+          "id": "m2_q4",
+          "question": "How do you activate extended thinking mode?",
+          "options": [
+            "claude --extended",
+            "claude /think",
+            "claude extended-mode on",
+            "claude --think \"your complex problem\""
+          ],
+          "correct": 3,
+          "explanation": "Use claude --think followed by your complex problem in quotes to activate extended thinking mode."
+        },
+        {
+          "id": "m2_q5",
+          "question": "What does the /review command focus on besides security?",
+          "options": [
+            "Code formatting only",
+            "Performance issues and best practices",
+            "File size",
+            "Line count"
+          ],
+          "correct": 1,
+          "explanation": "The /review command can analyze security vulnerabilities, performance issues, best practices, and code style consistency."
+        }
+      ]
+    },
+    "module_3": {
+      "title": "Modes and Context Management", 
+      "questions": [
+        {
+          "id": "m3_q1",
+          "question": "How do you paste a screenshot in iTerm2 for Claude to analyze?",
+          "options": [
+            "Cmd+V",
+            "Ctrl+V",
+            "Right-click and paste",
+            "Drag and drop only"
+          ],
+          "correct": 1,
+          "explanation": "iTerm2 requires Ctrl+V for pasting images, not the standard Cmd+V used for text."
+        },
+        {
+          "id": "m3_q2",
+          "question": "What's the macOS keyboard shortcut for taking a screenshot selection?",
+          "options": [
+            "Cmd+Shift+3",
+            "Ctrl+Shift+Cmd+4",
+            "Cmd+Shift+4",
+            "Ctrl+Cmd+S"
+          ],
+          "correct": 1,
+          "explanation": "Ctrl+Shift+Cmd+4 allows you to select a specific area to screenshot, perfect for capturing UI issues."
+        },
+        {
+          "id": "m3_q3",
+          "question": "When does Claude Code automatically switch to Plan Mode?",
+          "options": [
+            "Never, it must be manually activated",
+            "When it detects a complex task requiring multiple steps",
+            "For every request",
+            "Only for Django projects"
+          ],
+          "correct": 1,
+          "explanation": "Claude automatically switches to Plan Mode when it detects complexity that requires multiple implementation steps."
+        },
+        {
+          "id": "m3_q4",
+          "question": "What type of issues is image analysis particularly useful for?",
+          "options": [
+            "Database queries",
+            "API endpoints",
+            "Django template problems and UI debugging",
+            "Migration files"
+          ],
+          "correct": 2,
+          "explanation": "Image analysis is perfect for debugging Django template problems, CSS issues, and UI alignment problems."
+        },
+        {
+          "id": "m3_q5",
+          "question": "Can Claude Code create diagrams?",
+          "options": [
+            "Yes, it generates image files directly",
+            "No, but it can generate code for diagram tools like Mermaid",
+            "Yes, using built-in drawing tools",
+            "Only for database schemas"
+          ],
+          "correct": 1,
+          "explanation": "Claude can't create images directly but can generate code for diagram tools like Mermaid, PlantUML, or ASCII diagrams."
+        }
+      ]
+    },
+    "module_4": {
+      "title": "History and Slash Commands",
+      "questions": [
+        {
+          "id": "m4_q1",
+          "question": "What's the difference between /clear and /compact?",
+          "options": [
+            "They do the same thing",
+            "/clear starts fresh (clears context), /compact compresses but keeps context",
+            "/compact deletes files, /clear doesn't",
+            "/clear is faster than /compact"
+          ],
+          "correct": 1,
+          "explanation": "/clear completely clears the conversation context for a fresh start, while /compact compresses the conversation but maintains context."
+        },
+        {
+          "id": "m4_q2",
+          "question": "Which command initializes CLAUDE.md for your project?",
+          "options": [
+            "claude --init",
+            "claude /setup",
+            "claude /init",
+            "claude create-memory"
+          ],
+          "correct": 2,
+          "explanation": "The /init command analyzes your project and creates a CLAUDE.md file with project-specific information."
+        },
+        {
+          "id": "m4_q3",
+          "question": "How do you check your token usage and costs?",
+          "options": [
+            "claude --usage",
+            "claude /cost",
+            "claude /billing",
+            "claude check-tokens"
+          ],
+          "correct": 1,
+          "explanation": "The /cost command shows your current token usage and associated costs."
+        },
+        {
+          "id": "m4_q4",
+          "question": "Where do you define custom slash commands?",
+          "options": [
+            "In CLAUDE.md",
+            "In settings.json",
+            "In package.json",
+            "In .clauderc"
+          ],
+          "correct": 1,
+          "explanation": "Custom slash commands are defined in your settings.json file under the commands section."
+        },
+        {
+          "id": "m4_q5",
+          "question": "How do you view GitHub PR comments in Claude?",
+          "options": [
+            "claude /pr --comments",
+            "claude github-comments",
+            "claude /pr_comments https://github.com/org/repo/pull/123",
+            "It's not possible"
+          ],
+          "correct": 2,
+          "explanation": "Use /pr_comments followed by the PR URL to view and analyze GitHub pull request comments."
+        }
+      ]
+    },
+    "module_5": {
+      "title": "Memory System (CLAUDE.md)",
+      "questions": [
+        {
+          "id": "m5_q1",
+          "question": "What's the correct priority order for Claude's memory system?",
+          "options": [
+            "User > Project > Local",
+            "Project > Local > User",
+            "Local > Project > User",
+            "Local > User > Project"
+          ],
+          "correct": 2,
+          "explanation": "The priority is Local > Project > User, meaning CLAUDE.local.md overrides CLAUDE.md, which overrides ~/.claude/CLAUDE.md."
+        },
+        {
+          "id": "m5_q2",
+          "question": "Where should you store team-wide Django conventions?",
+          "options": [
+            "CLAUDE.local.md",
+            "CLAUDE.md in project root",
+            "~/.claude/CLAUDE.md",
+            "settings.json"
+          ],
+          "correct": 1,
+          "explanation": "Team conventions should go in CLAUDE.md in the project root so they're shared via version control."
+        },
+        {
+          "id": "m5_q3",
+          "question": "What file should contain sensitive or personal project preferences?",
+          "options": [
+            "CLAUDE.md",
+            "CLAUDE.global.md",
+            "CLAUDE.local.md",
+            "CLAUDE.private.md"
+          ],
+          "correct": 2,
+          "explanation": "CLAUDE.local.md is git-ignored by default, making it perfect for sensitive or personal preferences."
+        },
+        {
+          "id": "m5_q4",
+          "question": "Can you have multiple CLAUDE.md files in a project?",
+          "options": [
+            "No, only one in the root",
+            "Yes, in subdirectories for directory-specific instructions",
+            "Only in src folders",
+            "Maximum of 3 files"
+          ],
+          "correct": 1,
+          "explanation": "You can have CLAUDE.md files in subdirectories to provide directory-specific instructions and conventions."
+        },
+        {
+          "id": "m5_q5",
+          "question": "What command creates a project-specific CLAUDE.md file?",
+          "options": [
+            "claude create-docs",
+            "claude --generate-memory",
+            "claude /init",
+            "claude setup-project"
+          ],
+          "correct": 2,
+          "explanation": "The /init command analyzes your project structure and creates a CLAUDE.md file with relevant project information."
+        }
+      ]
+    },
+    "module_6": {
+      "title": "Claude Hooks",
+      "questions": [
+        {
+          "id": "m6_q1",
+          "question": "When do post-edit hooks run?",
+          "options": [
+            "Before Claude makes any changes",
+            "After Claude edits files",
+            "During file editing",
+            "Only on errors"
+          ],
+          "correct": 1,
+          "explanation": "Post-edit hooks run after Claude has made changes to files, useful for validation or formatting."
+        },
+        {
+          "id": "m6_q2",
+          "question": "What's a good use case for pre-commit hooks in Django projects?",
+          "options": [
+            "Deleting migrations",
+            "Running black formatter and tests",
+            "Clearing the database",
+            "Restarting the server"
+          ],
+          "correct": 1,
+          "explanation": "Pre-commit hooks are perfect for running formatters like black and running tests to ensure code quality."
+        },
+        {
+          "id": "m6_q3",
+          "question": "Where are hooks configured?",
+          "options": [
+            "CLAUDE.md",
+            ".git/hooks/",
+            "settings.json",
+            "package.json"
+          ],
+          "correct": 2,
+          "explanation": "Hooks are configured in your settings.json file under the hooks section."
+        },
+        {
+          "id": "m6_q4",
+          "question": "How can you run different hooks for different file patterns?",
+          "options": [
+            "It's not possible",
+            "Use post-edit-pattern with file patterns",
+            "Create multiple settings files",
+            "Use regex in hook names"
+          ],
+          "correct": 1,
+          "explanation": "You can use post-edit-pattern to run specific hooks only when certain file patterns are modified."
+        },
+        {
+          "id": "m6_q5",
+          "question": "What's a good hook for Django model changes?",
+          "options": [
+            "python manage.py runserver",
+            "python manage.py makemigrations --check --dry-run",
+            "python manage.py flush",
+            "git add models.py"
+          ],
+          "correct": 1,
+          "explanation": "Running makemigrations --check --dry-run helps detect if model changes require new migrations."
+        }
+      ]
+    },
+    "module_7": {
+      "title": "MCP Tools Integration",
+      "questions": [
+        {
+          "id": "m7_q1",
+          "question": "What does MCP stand for?",
+          "options": [
+            "Model Code Protocol",
+            "Model Context Protocol",
+            "Machine Code Processing",
+            "Multi-Core Processing"
+          ],
+          "correct": 1,
+          "explanation": "MCP stands for Model Context Protocol, which allows Claude to connect to external data sources and tools."
+        },
+        {
+          "id": "m7_q2",
+          "question": "Where do you configure MCP servers?",
+          "options": [
+            "CLAUDE.md",
+            "mcp.config.js",
+            "settings.json under 'mcp.servers'",
+            ".mcp/config.json"
+          ],
+          "correct": 2,
+          "explanation": "MCP servers are configured in settings.json under the mcp.servers section."
+        },
+        {
+          "id": "m7_q3",
+          "question": "What can a Django Database MCP connection help with?",
+          "options": [
+            "Only reading data",
+            "Intelligent queries and debugging",
+            "Automatic migrations",
+            "Database backups"
+          ],
+          "correct": 1,
+          "explanation": "Database MCP connections allow Claude to run intelligent queries and help debug database-related issues."
+        },
+        {
+          "id": "m7_q4",
+          "question": "Can MCP servers be shared across all projects?",
+          "options": [
+            "No, only project-specific",
+            "Yes, through global configuration",
+            "Only for database connections",
+            "Only in enterprise version"
+          ],
+          "correct": 1,
+          "explanation": "MCP servers can be configured globally to be available across all your projects."
+        },
+        {
+          "id": "m7_q5",
+          "question": "What's required to use an MCP server?",
+          "options": [
+            "Just configuration in settings.json",
+            "Install the MCP server package and configure it",
+            "Special Claude Code license",
+            "Direct database access only"
+          ],
+          "correct": 1,
+          "explanation": "You need to install the MCP server package (like @mcp/sqlite) and then configure it in settings.json."
+        }
+      ]
+    },
+    "module_8": {
+      "title": "Advanced Features & Tips",
+      "questions": [
+        {
+          "id": "m8_q1",
+          "question": "How do Git worktrees benefit Claude Code usage?",
+          "options": [
+            "They don't work with Claude",
+            "Claude maintains separate context per worktree",
+            "Claude can only work in the main branch",
+            "Worktrees slow down Claude"
+          ],
+          "correct": 1,
+          "explanation": "Claude maintains separate context per worktree, allowing parallel development on different features."
+        },
+        {
+          "id": "m8_q2",
+          "question": "What command helps manage long Claude sessions?",
+          "options": [
+            "/clear",
+            "/restart",
+            "/compact",
+            "/refresh"
+          ],
+          "correct": 2,
+          "explanation": "Use /compact regularly for long sessions to compress conversation history while maintaining context."
+        },
+        {
+          "id": "m8_q3",
+          "question": "What's the most efficient way to request multiple related changes?",
+          "options": [
+            "Make separate requests for each change",
+            "Batch related changes in a single request",
+            "Use multiple Claude instances",
+            "Changes must be done one at a time"
+          ],
+          "correct": 1,
+          "explanation": "Batching related changes in a single request is more efficient and reduces token usage."
+        },
+        {
+          "id": "m8_q4",
+          "question": "What should teams share in their CLAUDE.md file?",
+          "options": [
+            "Personal preferences",
+            "API keys and secrets",
+            "Useful prompts and team conventions",
+            "Database passwords"
+          ],
+          "correct": 2,
+          "explanation": "Teams should share useful prompts, conventions, and patterns in CLAUDE.md to maintain consistency."
+        },
+        {
+          "id": "m8_q5",
+          "question": "When should you use the --no-cache flag?",
+          "options": [
+            "Every time",
+            "When you need fresh analysis without cached context",
+            "Only for small files",
+            "Never, caching is always better"
+          ],
+          "correct": 1,
+          "explanation": "Use --no-cache when you need fresh analysis without any cached context, especially after significant code changes."
+        }
+      ]
+    },
+    "module_9": {
+      "title": "Module 9 Quiz: Advanced Integrations",
+      "questions": [
+        {
+          "id": "m9_q1",
+          "question": "What's the best way to use Claude Code with VS Code?",
+          "options": [
+            "You can't use them together",
+            "Use VS Code's integrated terminal to run Claude sessions",
+            "Install a Claude VS Code extension",
+            "Run Claude in a separate terminal window only"
+          ],
+          "correct": 1,
+          "explanation": "Claude Code works beautifully in VS Code's integrated terminal, allowing real-time file updates to appear in the editor while maintaining the full CLI experience."
+        },
+        {
+          "id": "m9_q2",
+          "question": "What CI/CD platforms can Claude generate workflows for?",
+          "options": [
+            "Only GitHub Actions",
+            "GitHub Actions and GitLab CI/CD",
+            "Jenkins only",
+            "Claude can't generate CI/CD workflows"
+          ],
+          "correct": 1,
+          "explanation": "Claude can generate sophisticated workflows for multiple CI/CD platforms including GitHub Actions and GitLab CI/CD, tailored to your project's needs."
+        },
+        {
+          "id": "m9_q3",
+          "question": "How should teams share useful Claude prompts?",
+          "options": [
+            "Email them to each other",
+            "Keep them private",
+            "Store them in the shared CLAUDE.md file",
+            "Create a separate prompts.txt file"
+          ],
+          "correct": 2,
+          "explanation": "Teams should store useful prompts in the shared CLAUDE.md file under a 'Shared Prompts' section for easy access and consistency."
+        },
+        {
+          "id": "m9_q4",
+          "question": "What's a key benefit of using Claude for code reviews in PRs?",
+          "options": [
+            "It replaces human reviewers completely",
+            "It can check for security vulnerabilities and performance issues consistently",
+            "It automatically merges good code",
+            "It only checks formatting"
+          ],
+          "correct": 1,
+          "explanation": "Claude can consistently check for security vulnerabilities, performance issues, and adherence to team standards, complementing human review."
+        },
+        {
+          "id": "m9_q5",
+          "question": "For a zero-downtime Django deployment, Claude can help with:",
+          "options": [
+            "Only writing deployment documentation",
+            "Blue-green deployments, migration strategies, and rollback procedures",
+            "Just database backups",
+            "Only Docker configuration"
+          ],
+          "correct": 1,
+          "explanation": "Claude understands complex deployment patterns and can help implement blue-green deployments, safe migration strategies, health checks, and rollback procedures for zero-downtime deployments."
+        }
+      ]
+    }
+  }
+}

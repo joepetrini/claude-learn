@@ -13,7 +13,16 @@ public/
 ├── data/
 │   ├── modules.json        # All module metadata & content
 │   ├── quizzes.json        # Quiz questions for all modules
-│   └── version.json        # Version tracking & changelog
+│   ├── version.json        # Version tracking & changelog
+│   └── archive/            # Historical versions of content
+│       ├── 2025-01-12_v2.1.0/
+│       │   ├── modules.json
+│       │   ├── quizzes.json
+│       │   └── version.json
+│       └── 2025-01-10_v2.0.0/
+│           ├── modules.json
+│           ├── quizzes.json
+│           └── version.json
 ```
 
 ### Module Types
@@ -310,6 +319,110 @@ The app tracks:
 4. Add to `version.json`
 5. Deploy at month's end
 
+## Archive Process
+
+### When to Archive
+Archive content whenever:
+- Content version changes (e.g., 2.0.0 → 2.1.0)
+- Major module updates occur
+- Before any significant content restructuring
+- Monthly, even if no changes (for backup)
+
+### Archive Script
+Create and use `scripts/archive-content.sh`:
+
+```bash
+#!/bin/bash
+# Archive current content before updates
+
+# Get current date and version
+DATE=$(date +%Y-%m-%d)
+VERSION=$(jq -r .contentVersion public/data/version.json)
+ARCHIVE_DIR="public/data/archive/${DATE}_v${VERSION}"
+
+# Create archive directory
+mkdir -p "$ARCHIVE_DIR"
+
+# Copy current files
+cp public/data/modules.json "$ARCHIVE_DIR/"
+cp public/data/quizzes.json "$ARCHIVE_DIR/"
+cp public/data/version.json "$ARCHIVE_DIR/"
+
+# Create archive manifest
+cat > "$ARCHIVE_DIR/manifest.json" << EOF
+{
+  "archivedDate": "$DATE",
+  "contentVersion": "$VERSION",
+  "reason": "$1",
+  "filesIncluded": ["modules.json", "quizzes.json", "version.json"]
+}
+EOF
+
+echo "✅ Archived version $VERSION to $ARCHIVE_DIR"
+```
+
+### Manual Archive Process
+```bash
+# Before making content updates
+npm run archive # or ./scripts/archive-content.sh "Monthly update"
+
+# Make your content changes
+# Edit modules.json, quizzes.json, etc.
+
+# Update version in version.json
+# Commit all changes including archive
+```
+
+### Automated Archive (GitHub Action)
+```yaml
+name: Archive Content
+on:
+  push:
+    paths:
+      - 'public/data/modules.json'
+      - 'public/data/quizzes.json'
+    branches:
+      - main
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Check for version change
+        id: version_check
+        run: |
+          git diff HEAD^ HEAD -- public/data/version.json | grep contentVersion || echo "no_change"
+      
+      - name: Archive if version changed
+        if: steps.version_check.outputs.result != 'no_change'
+        run: |
+          ./scripts/archive-content.sh "Automated archive on version change"
+          git add public/data/archive/
+          git commit -m "Archive content for version change"
+          git push
+```
+
+### Accessing Archives
+Archives can be used to:
+- View historical content
+- Restore previous versions
+- Track content evolution
+- Debug issues with specific versions
+
+Example restoration:
+```bash
+# Restore from specific archive
+cp public/data/archive/2025-01-10_v2.0.0/*.json public/data/
+```
+
+### Archive Retention
+- Keep all archives for at least 6 months
+- After 6 months, keep only major version archives
+- Always preserve v1.0, v2.0, etc.
+- Document any deletions in version.json
+
 ## Future Enhancements
 
 Planned improvements:
@@ -318,3 +431,4 @@ Planned improvements:
 - A/B testing for content effectiveness
 - Analytics for popular modules
 - Content contribution guidelines for team members
+- Automated archive cleanup policy
