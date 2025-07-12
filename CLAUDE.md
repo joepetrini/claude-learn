@@ -130,8 +130,59 @@ gh project item-list 6 --owner joepetrini
 # Create and add issue to project
 gh issue create --title "Title" --body "Description" --project 6
 
-# Move issue between columns (use GitHub web interface for positioning)
-gh issue edit ISSUE_NUMBER --add-project "Claude Learn Project"
+# Move issue between columns using GraphQL API
+# First, get the project and field IDs:
+gh api graphql -f query='
+{
+  user(login: "joepetrini") {
+    projectV2(number: 6) {
+      id
+      field(name: "Status") {
+        ... on ProjectV2SingleSelectField {
+          id
+          options {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}'
+
+# Find the issue's project item ID:
+gh project item-list 6 --owner joepetrini --format json | jq '.items[] | select(.content.number == ISSUE_NUMBER)'
+
+# Move issue to different status (example: move to Todo):
+gh api graphql -X POST -f query='
+mutation {
+  updateProjectV2ItemFieldValue(input: {
+    projectId: "PVT_kwHOAC8Mps4A9r7G"
+    itemId: "ITEM_ID_FROM_ABOVE"
+    fieldId: "PVTSSF_lAHOAC8Mps4A9r7GzgxULn8"
+    value: { singleSelectOptionId: "f75ad846" }  # Todo status
+  }) {
+    projectV2Item {
+      id
+    }
+  }
+}'
+
+# Status option IDs for this project:
+# - Todo: "f75ad846"
+# - In Progress: "47fc9ee4"
+# - Done: "98236657"
+
+# Move item to top of column:
+gh api graphql -X POST -f query='
+mutation {
+  updateProjectV2ItemPosition(input: {
+    projectId: "PVT_kwHOAC8Mps4A9r7G"
+    itemId: "ITEM_ID_FROM_ABOVE"
+  }) {
+    clientMutationId
+  }
+}'
 ```
 
 ## Module Content
