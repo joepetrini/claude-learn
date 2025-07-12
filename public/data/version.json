@@ -9,5 +9,12 @@
       "changes": ["Initial release"]
     }
   },
-  "monthlyUpdates": []
+  "monthlyUpdates": [
+    {
+      "id": "updates-2025-01",
+      "month": "January 2025",
+      "features": ["MCP Tools", "Enhanced /review command", "WebSearch", "Error handling"],
+      "claudeCodeVersion": "1.5.0"
+    }
+  ]
 }
