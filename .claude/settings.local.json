@@ -35,7 +35,10 @@
       "Bash(gh run list:*)",
       "Bash(gh api:*)",
       "WebFetch(domain:cli.github.com)",
-      "WebFetch(domain:docs.github.com)"
+      "WebFetch(domain:docs.github.com)",
+      "Bash(gh project item-list:*)",
+      "Bash(gh issue reopen:*)",
+      "mcp__puppeteer__puppeteer_fill"
     ],
     "deny": []
   }
