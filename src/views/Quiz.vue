@@ -68,10 +68,17 @@
                 </svg>
               </div>
               
-              <!-- X mark for incorrect selected answer -->
-              <div v-if="selectedAnswer === index && index !== currentQuestion.correct" class="absolute right-4 top-1/2 -translate-y-1/2">
-                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+              <!-- Large X overlay for incorrect selected answer -->
+              <div v-if="selectedAnswer === index && index !== currentQuestion.correct" class="absolute inset-0 pointer-events-none">
+                <svg class="w-full h-full text-red-600 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 15L85 85M85 15L15 85" />
+                </svg>
+              </div>
+              
+              <!-- Subtle diagonal line for unselected wrong answers -->
+              <div v-if="selectedAnswer !== null && index !== currentQuestion.correct && selectedAnswer !== index" class="absolute inset-0 pointer-events-none">
+                <svg class="w-full h-full text-gray-400 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 10L90 90" />
                 </svg>
               </div>
             </button>
