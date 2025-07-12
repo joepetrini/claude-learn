@@ -54,12 +54,26 @@
               @click="selectAnswer(index)"
               :disabled="selectedAnswer !== null"
               :class="getOptionClass(index)"
-              class="w-full text-left p-4 rounded-lg border-2 transition-all duration-200"
+              class="w-full text-left p-4 rounded-lg border-2 transition-all duration-200 relative"
             >
               <span class="flex items-center">
                 <span class="mr-3 font-semibold">{{ String.fromCharCode(65 + index) }}.</span>
                 {{ option }}
               </span>
+              
+              <!-- Check mark for correct answer -->
+              <div v-if="selectedAnswer !== null && index === currentQuestion.correct" class="absolute right-4 top-1/2 -translate-y-1/2">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              
+              <!-- X mark for incorrect selected answer -->
+              <div v-if="selectedAnswer === index && index !== currentQuestion.correct" class="absolute right-4 top-1/2 -translate-y-1/2">
+                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
             </button>
           </div>
           
@@ -125,8 +139,18 @@
                 :class="answer.correct ? 'bg-green-50' : 'bg-red-50'"
               >
                 <span>Question {{ index + 1 }}</span>
-                <span v-if="answer.correct" class="text-green-600">✓ Correct</span>
-                <span v-else class="text-red-600">✗ Incorrect</span>
+                <span v-if="answer.correct" class="flex items-center text-green-600">
+                  <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Correct
+                </span>
+                <span v-else class="flex items-center text-red-600">
+                  <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  Incorrect
+                </span>
               </div>
             </div>
           </div>
