@@ -87,6 +87,53 @@ This app is designed to be hosted on GitHub Pages. See `docs/github-pages-deploy
 - Include comprehensive error handling
 - Write tests for critical functionality
 
+## GitHub Project Management
+
+We use GitHub Projects (Project #6: Claude Learn Project) to track and manage development tasks. The project board has the following columns:
+
+### Status Columns
+
+1. **No Status** - Issues that haven't been triaged or categorized yet
+   - When: New issues are created
+   - Next: Move to Todo when ready to be worked on
+
+2. **Todo** - Issues that are ready to be worked on
+   - When: Issue is defined and ready for implementation
+   - Next: Move to In Progress when work begins
+   - **Important**: When moving an issue to Todo, position it at the top of the list
+
+3. **In Progress** - Issues currently being worked on
+   - When: Active development has started
+   - Next: Move to Done when completed and merged
+   - **Important**: When moving an issue to In Progress, position it at the top of the list
+
+4. **Done** - Completed issues
+   - When: Work is complete, PR is merged, and issue is closed
+   - Ordered by: Most recently completed at the top
+   - **Important**: When moving an issue to Done, position it at the top of the list
+
+### Workflow
+
+1. Create issue with clear title and description
+2. Add to project and set status to Todo (position at top)
+3. When starting work, move to In Progress (position at top)
+4. Create feature branch and implement solution
+5. Submit PR and merge
+6. Close issue and move to Done (position at top)
+
+### CLI Commands
+
+```bash
+# View project issues
+gh project item-list 6 --owner joepetrini
+
+# Create and add issue to project
+gh issue create --title "Title" --body "Description" --project 6
+
+# Move issue between columns (use GitHub web interface for positioning)
+gh issue edit ISSUE_NUMBER --add-project "Claude Learn Project"
+```
+
 ## Module Content
 
 When working on module content:
