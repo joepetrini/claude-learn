@@ -24,11 +24,7 @@
       </button>
     </div>
 
-    <router-view v-slot="{ Component }">
-      <PageTransition>
-        <component :is="Component" />
-      </PageTransition>
-    </router-view>
+    <router-view />
     
     <!-- Search Modal -->
     <SearchModal 
@@ -49,7 +45,6 @@
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import SearchModal from './components/SearchModal.vue'
 import HelpModal from './components/HelpModal.vue'
-import PageTransition from './components/PageTransition.vue'
 import { useKeyboardNavigation } from './composables/useKeyboardNavigation.js'
 
 const searchOpen = ref(false)
