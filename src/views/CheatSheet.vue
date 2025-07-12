@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Screen View Header -->
     <div class="print:hidden">
-      <nav class="bg-white shadow-sm border-b">
+      <nav class="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
           <router-link to="/" class="text-blue-600 hover:text-blue-800 font-medium">
             ← Back to Modules
@@ -24,21 +24,21 @@
     <div class="container mx-auto px-4 py-8 max-w-4xl print:max-w-none print:px-0">
       <!-- Title -->
       <div class="text-center mb-8 print:mb-4">
-        <h1 class="text-3xl font-bold text-gray-900 print:text-2xl">Claude Code Quick Reference</h1>
-        <p class="text-gray-600 mt-2 print:text-sm">Essential commands and workflows for Python/Django developers</p>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white print:text-2xl">Claude Code Quick Reference</h1>
+        <p class="text-gray-600 dark:text-gray-300 mt-2 print:text-sm">Essential commands and workflows for Python/Django developers</p>
       </div>
 
       <!-- Two Column Layout -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 print:grid-cols-2 print:gap-4">
         
         <!-- Essential Commands -->
-        <section class="bg-white rounded-lg shadow-md p-6 print:shadow-none print:border print:p-4">
-          <h2 class="text-xl font-bold mb-4 text-gray-900 print:text-lg">Essential Commands</h2>
+        <section class="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700/30 p-6 print:shadow-none print:border print:p-4">
+          <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white print:text-lg">Essential Commands</h2>
           
           <div class="space-y-3 print:space-y-2">
             <div>
-              <code class="text-sm bg-gray-100 px-2 py-1 rounded print:bg-gray-50">claude</code>
-              <p class="text-sm text-gray-600 mt-1">Start interactive session</p>
+              <code class="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded print:bg-gray-50">claude</code>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Start interactive session</p>
             </div>
             
             <div>

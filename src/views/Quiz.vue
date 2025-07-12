@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Navigation Bar -->
-    <nav class="bg-white shadow-sm border-b">
+    <nav class="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700">
       <div class="container mx-auto px-4 py-4">
         <router-link :to="`/module/${moduleId}`" class="text-blue-600 hover:text-blue-800 font-medium">
           ← Back to Module
@@ -11,23 +11,23 @@
 
     <div class="container mx-auto px-4 py-8">
       <div v-if="loading" class="text-center py-12">
-        <p class="text-gray-500">Loading quiz...</p>
+        <p class="text-gray-500 dark:text-gray-400">Loading quiz...</p>
       </div>
       
       <div v-else-if="quiz && !quizCompleted" class="max-w-3xl mx-auto">
         <!-- Quiz Header -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h1 class="text-2xl font-bold mb-2">{{ quiz.title }}</h1>
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700/30 p-6 mb-6">
+          <h1 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{{ quiz.title }}</h1>
           <div class="flex justify-between items-center text-sm text-gray-600">
-            <span>Question {{ currentQuestionIndex + 1 }} of {{ quiz.questions.length }}</span>
-            <span>Score: {{ score }} / {{ answeredQuestions }}</span>
+            <span class="text-gray-600 dark:text-gray-300">Question {{ currentQuestionIndex + 1 }} of {{ quiz.questions.length }}</span>
+            <span class="text-gray-600 dark:text-gray-300">Score: {{ score }} / {{ answeredQuestions }}</span>
           </div>
           
           <!-- Progress Bar -->
           <div class="mt-4">
-            <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
               <div 
-                class="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                class="bg-blue-600 dark:bg-blue-500 h-2 rounded-full transition-all duration-300"
                 :style="`width: ${progressPercentage}%`"
               ></div>
             </div>
@@ -35,8 +35,8 @@
         </div>
         
         <!-- Question Card -->
-        <div class="bg-white rounded-lg shadow-md p-8">
-          <h2 class="text-xl font-semibold mb-6">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700/30 p-8">
+          <h2 class="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
             {{ currentQuestion.question }}
           </h2>
           
@@ -57,8 +57,8 @@
           </div>
           
           <!-- Explanation -->
-          <div v-if="showExplanation" class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <p class="text-sm text-blue-900">
+          <div v-if="showExplanation" class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+            <p class="text-sm text-blue-900 dark:text-blue-200">
               <strong>Explanation:</strong> {{ currentQuestion.explanation }}
             </p>
           </div>
@@ -190,18 +190,18 @@ const scoreClass = computed(() => {
 
 const getOptionClass = (index) => {
   if (selectedAnswer.value === null) {
-    return 'hover:border-blue-400 hover:bg-blue-50 cursor-pointer'
+    return 'hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer'
   }
   
   if (index === currentQuestion.value.correct) {
-    return 'border-green-500 bg-green-50'
+    return 'border-green-500 bg-green-50 dark:bg-green-900/20'
   }
   
   if (index === selectedAnswer.value && index !== currentQuestion.value.correct) {
-    return 'border-red-500 bg-red-50'
+    return 'border-red-500 bg-red-50 dark:bg-red-900/20'
   }
   
-  return 'border-gray-300 opacity-50'
+  return 'border-gray-300 dark:border-gray-600 opacity-50'
 }
 
 const loadQuiz = async () => {
