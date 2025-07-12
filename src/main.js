@@ -7,3 +7,16 @@ const app = createApp(App)
 
 app.use(router)
 app.mount('#app')
+
+// Register service worker for offline capability
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/claude-learn/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registration successful')
+      })
+      .catch(error => {
+        console.log('ServiceWorker registration failed:', error)
+      })
+  })
+}

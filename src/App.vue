@@ -38,6 +38,12 @@
       :is-open="helpOpen"
       @close="toggleHelp"
     />
+    
+    <!-- Mobile Menu -->
+    <MobileMenu
+      @search="toggleSearch"
+      @help="toggleHelp"
+    />
   </div>
 </template>
 
@@ -45,6 +51,7 @@
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import SearchModal from './components/SearchModal.vue'
 import HelpModal from './components/HelpModal.vue'
+import MobileMenu from './components/MobileMenu.vue'
 import { useKeyboardNavigation } from './composables/useKeyboardNavigation.js'
 
 const searchOpen = ref(false)
@@ -88,6 +95,13 @@ onUnmounted(() => {
 #app {
   min-height: 100vh;
   background-color: #f3f4f6;
+  padding-bottom: 60px; /* Space for mobile menu */
+}
+
+@media (min-width: 768px) {
+  #app {
+    padding-bottom: 0;
+  }
 }
 
 kbd {
