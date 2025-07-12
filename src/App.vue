@@ -11,16 +11,17 @@
       </svg>
     </button>
 
-    <!-- Desktop Search Hint -->
-    <div class="hidden md:block fixed top-4 right-4 z-40">
+    <!-- Desktop Controls -->
+    <div class="hidden md:flex fixed top-4 right-4 z-40 gap-3">
+      <DarkModeToggle />
       <button
         @click="toggleSearch"
-        class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
+        class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow"
       >
-        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
-        <span class="text-sm text-gray-600">Search</span>
+        <span class="text-sm text-gray-600 dark:text-gray-300">Search</span>
       </button>
     </div>
 
@@ -45,7 +46,9 @@
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import SearchModal from './components/SearchModal.vue'
 import HelpModal from './components/HelpModal.vue'
+import DarkModeToggle from './components/DarkModeToggle.vue'
 import { useKeyboardNavigation } from './composables/useKeyboardNavigation.js'
+import { useDarkMode } from './composables/useDarkMode.js'
 
 const searchOpen = ref(false)
 const helpOpen = ref(false)
@@ -61,6 +64,10 @@ const toggleHelp = () => {
 
 // Initialize keyboard navigation
 useKeyboardNavigation()
+
+// Initialize dark mode
+const { initializeDarkMode } = useDarkMode()
+initializeDarkMode()
 
 // Load modules for search
 onMounted(async () => {
@@ -87,7 +94,7 @@ onUnmounted(() => {
 <style>
 #app {
   min-height: 100vh;
-  background-color: #f3f4f6;
+  @apply bg-gray-100 dark:bg-gray-900;
 }
 
 kbd {

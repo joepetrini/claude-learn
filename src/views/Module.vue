@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Navigation Bar -->
-    <nav class="bg-white shadow-sm border-b">
+    <nav class="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700">
       <div class="container mx-auto px-4 py-4">
         <router-link to="/" class="text-blue-600 hover:text-blue-800 font-medium">
           ← Back to Modules
@@ -11,21 +11,21 @@
 
     <div class="container mx-auto px-4 py-8">
       <div v-if="loading" class="text-center py-12">
-        <p class="text-gray-500">Loading module...</p>
+        <p class="text-gray-500 dark:text-gray-400">Loading module...</p>
       </div>
       
       <div v-else-if="module" class="max-w-4xl mx-auto">
         <!-- Module Header -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700/30 p-6 mb-6">
           <div class="flex items-start justify-between">
             <div>
-              <h1 class="text-3xl font-bold mb-2 flex items-center gap-3">
+              <h1 class="text-3xl font-bold mb-2 flex items-center gap-3 text-gray-900 dark:text-white">
                 <span class="text-4xl">{{ module.icon }}</span>
                 {{ module.title }}
               </h1>
-              <p class="text-gray-600">{{ module.description }}</p>
+              <p class="text-gray-600 dark:text-gray-300">{{ module.description }}</p>
             </div>
-            <div class="text-sm text-gray-500">
+            <div class="text-sm text-gray-500 dark:text-gray-400">
               {{ module.estimatedTime }}
             </div>
           </div>
@@ -33,12 +33,12 @@
           <!-- Progress Bar -->
           <div class="mt-6">
             <div class="flex justify-between text-sm text-gray-600 mb-2">
-              <span>Section {{ currentSectionIndex + 1 }} of {{ module.sections.length }}</span>
-              <span>{{ progressPercentage }}% complete</span>
+              <span class="text-gray-600 dark:text-gray-300">Section {{ currentSectionIndex + 1 }} of {{ module.sections.length }}</span>
+              <span class="text-gray-600 dark:text-gray-300">{{ progressPercentage }}% complete</span>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
               <div 
-                class="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                class="bg-blue-600 dark:bg-blue-500 h-2 rounded-full transition-all duration-300"
                 :style="`width: ${progressPercentage}%`"
               ></div>
             </div>
@@ -46,25 +46,25 @@
         </div>
         
         <!-- Module Content -->
-        <div class="bg-white rounded-lg shadow-md p-8">
-          <h2 class="text-2xl font-semibold mb-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700/30 p-8">
+          <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
             {{ currentSection.title }}
           </h2>
           
-          <div class="prose prose-lg max-w-none" v-html="currentSection.content"></div>
+          <div class="prose prose-lg dark:prose-invert max-w-none" v-html="currentSection.content"></div>
           
           <!-- Code Example -->
           <div v-if="currentSection.example" class="mt-6">
-            <h3 class="text-lg font-semibold mb-3 text-gray-800">Example:</h3>
-            <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code>{{ currentSection.example }}</code></pre>
+            <h3 class="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200">Example:</h3>
+            <pre class="bg-gray-900 dark:bg-gray-950 text-gray-100 p-4 rounded-lg overflow-x-auto"><code>{{ currentSection.example }}</code></pre>
           </div>
           
           <!-- Navigation Buttons -->
-          <div class="flex justify-between items-center mt-12 pt-6 border-t">
+          <div class="flex justify-between items-center mt-12 pt-6 border-t dark:border-gray-700">
             <button
               @click="previousSection"
               :disabled="currentSectionIndex === 0"
-              class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              class="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               ← Previous
             </button>
