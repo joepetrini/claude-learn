@@ -1,7 +1,9 @@
 # Content Management Guide
 
 ## Overview
-This guide explains how to manage, update, and maintain the Claude Code training content. All content is stored as JSON files, making updates simple and version-controlled.
+This guide explains how to manage, update, and maintain the Claude Code training content. The system handles two scenarios:
+1. **Updates to existing features** - Direct edits to original modules
+2. **Brand new features** - Monthly update modules that users can complete separately
 
 ## Content Structure
 
@@ -9,306 +11,310 @@ This guide explains how to manage, update, and maintain the Claude Code training
 ```
 public/
 ├── data/
-│   ├── modules.json         # Core module metadata & content
+│   ├── modules.json        # All module metadata & content
 │   ├── quizzes.json        # Quiz questions for all modules
-│   ├── version.json        # Version tracking file
-│   └── updates/            # Update module files
-│       ├── 2024-q1.json
-│       ├── 2024-q2.json
-│       └── ...
+│   └── version.json        # Version tracking & changelog
 ```
 
-## Managing Core Content
+### Module Types
 
-### 1. Editing Existing Modules
+#### Core Modules (Permanent)
+- IDs: `getting-started`, `core-workflows`, etc.
+- Foundational content that rarely changes fundamentally
+- Updated in-place when features change
 
-#### Update Module Content
-1. Open `/public/data/modules.json`
-2. Find the module to update (e.g., `module_1`)
-3. Edit the content sections
-4. Commit and push changes
+#### Update Modules (Periodic)
+- IDs: `updates-2025-01`, `updates-2025-02`, etc.
+- Monthly releases for new features
+- Shorter focused content (5-10 minutes)
+- Allows completed users to stay current
 
-Example structure:
+## JSON File Structures
+
+### modules.json
 ```json
 {
-  "module_1": {
-    "id": "module_1",
-    "title": "Introduction to Claude Code",
-    "description": "Learn what Claude Code is and how it differs from other AI tools",
-    "estimatedTime": "20 minutes",
-    "sections": [
-      {
-        "title": "What is Claude Code?",
-        "content": "<p>Claude Code is a CLI tool that...</p>",
-        "example": "claude --help"
-      }
-    ]
-  }
-}
-```
-
-#### Update Quiz Questions
-1. Open `/public/data/quizzes.json`
-2. Find the corresponding module quiz
-3. Add, edit, or remove questions
-4. Ensure answer indices are correct
-
-Example:
-```json
-{
-  "module_1": [
+  "modules": [
     {
-      "id": "m1_q1",
-      "question": "What makes Claude Code different from GitHub Copilot?",
-      "options": [
-        "It's a web-based tool only",
-        "It's a CLI tool with file system access",
-        "It only works with Python",
-        "It requires no setup"
+      "id": "getting-started",
+      "title": "Getting Started with Claude Code",
+      "icon": "🚀",
+      "description": "Learn the basics of Claude Code",
+      "estimatedTime": "20 minutes",
+      "lastUpdated": "2025-01-12",
+      "version": "1.2",
+      "sections": [
+        {
+          "title": "What is Claude Code?",
+          "content": "<p>Claude Code is a powerful AI coding assistant...</p>",
+          "example": "claude --help",
+          "lastUpdated": "2025-01-12"
+        }
+      ]
+    },
+    {
+      "id": "updates-2025-01",
+      "title": "January 2025 Updates",
+      "icon": "🆕",
+      "type": "update",
+      "releaseDate": "2025-01-15",
+      "description": "New features in Claude Code 1.5",
+      "estimatedTime": "10 minutes",
+      "features": [
+        "New MCP Tools",
+        "Enhanced /review command",
+        "Performance improvements"
       ],
-      "correct": 1,
-      "explanation": "Claude Code is a CLI tool that can directly interact with your file system."
+      "sections": [
+        {
+          "title": "MCP Tool Integration",
+          "content": "<p>Connect external tools...</p>",
+          "example": "claude --mcp puppeteer",
+          "relatedModule": "advanced-features"
+        }
+      ]
     }
   ]
 }
 ```
 
-### 2. Content Guidelines
+### quizzes.json
+```json
+{
+  "quizzes": {
+    "getting-started": {
+      "title": "Getting Started Quiz",
+      "questions": [
+        {
+          "question": "What is Claude Code?",
+          "options": [
+            "A web-based IDE",
+            "A CLI-based AI coding assistant",
+            "A code formatter",
+            "A testing framework"
+          ],
+          "correct": 1,
+          "explanation": "Claude Code is a CLI tool that provides AI assistance."
+        }
+      ]
+    },
+    "updates-2025-01": {
+      "title": "January 2025 Updates Quiz",
+      "questions": [
+        {
+          "question": "Which MCP tool allows browser automation?",
+          "options": ["puppeteer", "filesystem", "slack", "github"],
+          "correct": 0,
+          "explanation": "The puppeteer MCP tool enables browser automation."
+        }
+      ]
+    }
+  }
+}
+```
 
-#### Writing Style
+### version.json
+```json
+{
+  "contentVersion": "2.1.0",
+  "claudeCodeVersion": "1.5.0",
+  "lastUpdated": "2025-01-12",
+  "moduleUpdates": {
+    "getting-started": {
+      "version": "1.2",
+      "lastUpdated": "2025-01-12",
+      "changes": ["Updated installation steps for v1.5"]
+    },
+    "core-workflows": {
+      "version": "1.1",
+      "lastUpdated": "2025-01-10",
+      "changes": ["Added extended thinking mode section"]
+    }
+  },
+  "monthlyUpdates": [
+    {
+      "id": "updates-2025-01",
+      "month": "January 2025",
+      "features": ["MCP Tools", "Enhanced /review command"],
+      "claudeCodeVersion": "1.5.0"
+    }
+  ]
+}
+```
+
+## Content Update Workflows
+
+### Scenario 1: Updating Existing Content
+When Claude Code changes existing functionality (e.g., parameter changes, new options):
+
+1. **Edit the original module** in `modules.json`
+2. **Update the section's content**
+3. **Increment the module version** (e.g., 1.1 → 1.2)
+4. **Update `lastUpdated` timestamp**
+5. **Update version.json** with change description
+6. **Test locally** before deploying
+
+Example:
+```bash
+# Claude Code adds a new parameter to the `claude init` command
+# Edit modules.json → getting-started module → installation section
+# Update the example and explanation
+# Change version from "1.1" to "1.2"
+# Update lastUpdated to today's date
+```
+
+### Scenario 2: Adding New Features
+When Claude Code adds entirely new capabilities:
+
+1. **Check if it fits existing modules**
+   - Small feature → Add as new section to relevant module
+   - Large feature → Create monthly update module
+
+2. **For monthly update modules**:
+   ```json
+   {
+     "id": "updates-2025-02",
+     "title": "February 2025 Updates",
+     "icon": "🆕",
+     "type": "update",
+     "releaseDate": "2025-02-01",
+     "description": "WebSearch, new slash commands, and more",
+     "estimatedTime": "12 minutes",
+     "features": [
+       "WebSearch capability",
+       "/compact command",
+       "Improved error handling"
+     ],
+     "sections": [
+       {
+         "title": "WebSearch Integration",
+         "content": "<p>Claude can now search the web...</p>",
+         "example": "How do I implement OAuth in Django?",
+         "relatedModule": "core-workflows"
+       }
+     ]
+   }
+   ```
+
+3. **Update version.json**
+4. **Create quiz questions**
+5. **Deploy**
+
+## Content Guidelines
+
+### Writing Style
 - **Concise**: Keep sections under 300 words
 - **Practical**: Use Python/Django examples
 - **Clear**: Avoid jargon, explain technical terms
 - **Action-oriented**: Focus on what users can do
 
-#### HTML in Content
-Content supports basic HTML:
+### HTML Content Format
 ```html
 <p>Main paragraph text</p>
 <h4>Subheading</h4>
 <ul>
   <li>Bullet points</li>
+  <li>More points</li>
 </ul>
-<pre><code>claude init</code></pre>
-<strong>Important text</strong>
+<pre><code>claude /review --scope=security</code></pre>
+<strong>Important:</strong> Always review before committing
 ```
 
-#### Code Examples
-Always include practical examples:
-```json
-{
-  "content": "<p>Initialize a new project with memory files:</p>",
-  "example": "cd my-django-project\nclaude /init"
-}
-```
+### Code Examples
+- Always include practical, runnable examples
+- Use Python/Django contexts when possible
+- Show both command and expected output
+- Keep examples concise but complete
 
-## Adding Update Modules
+## Development Commands
 
-### 1. Create Update Module File
-
-Create `/public/data/updates/2024-q2.json`:
-```json
-{
-  "id": "update_2024_q2",
-  "title": "Q2 2024: New Collaboration Features",
-  "type": "update",
-  "releaseDate": "2024-06-15",
-  "estimatedTime": "10 minutes",
-  "features": [
-    "Team memory sharing",
-    "Enhanced /review command",
-    "New MCP integrations"
-  ],
-  "sections": [
-    {
-      "title": "Team Memory Sharing",
-      "content": "<p>Share your CLAUDE.md files with your team...</p>",
-      "example": "claude share-memory --team backend"
-    },
-    {
-      "title": "Enhanced Code Review",
-      "content": "<p>The /review command now supports...</p>",
-      "example": "claude /review --scope=security"
-    }
-  ],
-  "quiz": [
-    {
-      "id": "u2024q2_q1",
-      "question": "How do you share memory files with your team?",
-      "options": [
-        "Use the share-memory command",
-        "Copy files manually",
-        "Email the files",
-        "Use Git only"
-      ],
-      "correct": 0,
-      "explanation": "The share-memory command handles team synchronization."
-    }
-  ]
-}
-```
-
-### 2. Update Version Manifest
-
-Edit `/public/data/version.json`:
-```json
-{
-  "version": "2024.2",
-  "lastUpdated": "2024-06-15",
-  "totalModules": 12,
-  "coreModules": 8,
-  "updateModules": 4,
-  "latestModules": [
-    {
-      "id": "update_2024_q2",
-      "title": "Q2 2024: New Collaboration Features",
-      "releaseDate": "2024-06-15"
-    }
-  ]
-}
-```
-
-### 3. Update Module Registry
-
-Add reference in `/public/data/modules.json`:
-```json
-{
-  "core": {
-    // ... existing core modules
-  },
-  "updates": {
-    "update_2024_q2": {
-      "source": "/data/updates/2024-q2.json"
-    }
-  }
-}
-```
-
-## Deployment Process
-
-### 1. Local Testing
 ```bash
+# Install dependencies
+npm install
+
 # Start development server
 npm run dev
 
-# Test your changes:
-# - Navigate through updated modules
-# - Complete quizzes
-# - Verify examples render correctly
-# - Check responsive design
-```
-
-### 2. Build and Preview
-```bash
-# Build production version
+# Build for production
 npm run build
 
 # Preview production build
 npm run preview
+
+# Run linting
+npm run lint
+
+# Deploy to GitHub Pages
+npm run deploy
 ```
 
-### 3. Deploy to GitHub Pages
-```bash
-# Commit changes
-git add .
-git commit -m "Add Q2 2024 update module"
+## Testing Checklist
 
-# Push to main branch (triggers auto-deploy)
-git push origin main
-```
+Before deploying any content updates:
 
-## Content Update Checklist
+- [ ] All JSON files are valid (no syntax errors)
+- [ ] Module IDs are unique
+- [ ] Quiz answer indices are correct (0-based)
+- [ ] All HTML tags are properly closed
+- [ ] Examples are tested and working
+- [ ] Version numbers are incremented
+- [ ] Timestamps are updated
+- [ ] Content displays correctly on mobile
+- [ ] Navigation between sections works
+- [ ] Quiz scoring is accurate
 
-- [ ] Content is accurate and up-to-date
-- [ ] All code examples are tested
-- [ ] Quiz questions have correct answer indices
-- [ ] HTML is properly formatted (no unclosed tags)
-- [ ] Images (if any) are optimized and have alt text
-- [ ] Module metadata is complete (title, time, description)
-- [ ] Version.json is updated
-- [ ] Tested locally before deployment
+## Version Management
 
-## Quick Update Scenarios
+### Core Module Versioning
+- Format: `major.minor` (e.g., "1.0", "1.1", "2.0")
+- Minor: Content updates, clarifications
+- Major: Complete rewrites or structural changes
 
-### Scenario 1: Fix a Typo
-1. Edit the typo in `modules.json` or `quizzes.json`
-2. Commit with message: "Fix typo in module X"
-3. Push to deploy
+### Update Module Versioning
+- Use date-based IDs: `updates-YYYY-MM`
+- Track Claude Code version covered
+- List all features included
 
-### Scenario 2: Add New Claude Code Feature
-1. Create update module in `/public/data/updates/`
-2. Update `version.json`
-3. Add to module registry
-4. Test locally
-5. Deploy
+### Progress Tracking Integration
+The app tracks:
+- Module completion by version
+- When users last saw updates
+- Which update modules are "new" to each user
 
-### Scenario 3: Update Existing Module
+## Quick Reference
+
+### Add a typo fix
 1. Edit content in `modules.json`
-2. Update any affected quiz questions
-3. Increment version in module metadata
-4. Test and deploy
+2. Commit and push (no version change needed)
 
-## Content Versioning
+### Update existing feature
+1. Edit module section in `modules.json`
+2. Increment module version
+3. Update `lastUpdated`
+4. Update `version.json`
+5. Test and deploy
 
-### Module Version Schema
-```json
-{
-  "version": "1.0",    // Major.Minor
-  "lastUpdated": "2024-06-15",
-  "changelog": [
-    {
-      "version": "1.1",
-      "date": "2024-06-15",
-      "changes": ["Updated MCP section", "Added new examples"]
-    }
-  ]
-}
-```
+### Add new Claude Code feature
+1. Determine if it's an update or new content
+2. Either:
+   - Add section to existing module, OR
+   - Add to current month's update module
+3. Update version tracking
+4. Create quiz questions
+5. Test and deploy
 
-## Best Practices
-
-### 1. Always Test Content
-- Read through all content changes
-- Complete quizzes to verify correctness
-- Test on mobile and desktop
-
-### 2. Keep Updates Focused
-- One topic per update module
-- 5-15 minutes completion time
-- 3-5 quiz questions maximum
-
-### 3. Maintain Consistency
-- Use same terminology throughout
-- Follow established patterns
-- Match existing tone and style
-
-### 4. Version Control
-- Meaningful commit messages
-- Tag major releases
-- Document significant changes
-
-## Troubleshooting
-
-### Content Not Updating
-1. Clear browser cache
-2. Check GitHub Actions deployment status
-3. Verify JSON syntax is valid
-4. Ensure file paths are correct
-
-### Quiz Not Working
-1. Verify answer indices (0-based)
-2. Check question ID uniqueness
-3. Ensure quiz array exists for module
-
-### Images Not Loading
-1. Place images in `/public/images/`
-2. Use relative paths: `/images/screenshot.png`
-3. Verify image file names (case-sensitive)
+### Create monthly update
+1. Add new module with `type: "update"`
+2. Use ID format: `updates-YYYY-MM`
+3. List all new features
+4. Add to `version.json`
+5. Deploy at month's end
 
 ## Future Enhancements
 
-Consider implementing:
+Planned improvements:
 - Markdown support for easier editing
-- CMS integration for non-technical editors
+- Automated update detection from Claude Code releases
 - A/B testing for content effectiveness
 - Analytics for popular modules
+- Content contribution guidelines for team members

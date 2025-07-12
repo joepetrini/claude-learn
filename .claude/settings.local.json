@@ -33,7 +33,9 @@
       "Bash(gh issue view:*)",
       "Bash(cat:*)",
       "Bash(gh run list:*)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "WebFetch(domain:cli.github.com)",
+      "WebFetch(domain:docs.github.com)"
     ],
     "deny": []
   }
