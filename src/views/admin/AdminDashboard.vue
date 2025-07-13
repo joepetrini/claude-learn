@@ -125,7 +125,7 @@
                   <div>
                     <p class="font-medium text-gray-900">{{ user.full_name || user.email }}</p>
                     <p class="text-sm text-gray-500">
-                      {{ user.module_progress?.length || 0 }} modules started
+                      {{ user.module_progress_json?.length || 0 }} modules started
                     </p>
                   </div>
                 </div>

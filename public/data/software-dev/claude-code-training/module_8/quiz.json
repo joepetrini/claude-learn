@@ -1,0 +1,67 @@
+{
+  "quiz": {
+    "title": "Advanced Features & Tips",
+    "questions": [
+      {
+        "id": "m8_q1",
+        "question": "How do Git worktrees benefit Claude Code usage?",
+        "options": [
+          "They don't work with Claude",
+          "Claude maintains separate context per worktree",
+          "Claude can only work in the main branch",
+          "Worktrees slow down Claude"
+        ],
+        "correct": 1,
+        "explanation": "Claude maintains separate context per worktree, allowing parallel development on different features."
+      },
+      {
+        "id": "m8_q2",
+        "question": "What command helps manage long Claude sessions?",
+        "options": [
+          "/clear",
+          "/restart",
+          "/compact",
+          "/refresh"
+        ],
+        "correct": 2,
+        "explanation": "Use /compact regularly for long sessions to compress conversation history while maintaining context."
+      },
+      {
+        "id": "m8_q3",
+        "question": "What's the most efficient way to request multiple related changes?",
+        "options": [
+          "Make separate requests for each change",
+          "Batch related changes in a single request",
+          "Use multiple Claude instances",
+          "Changes must be done one at a time"
+        ],
+        "correct": 1,
+        "explanation": "Batching related changes in a single request is more efficient and reduces token usage."
+      },
+      {
+        "id": "m8_q4",
+        "question": "What should teams share in their CLAUDE.md file?",
+        "options": [
+          "Personal preferences",
+          "API keys and secrets",
+          "Useful prompts and team conventions",
+          "Database passwords"
+        ],
+        "correct": 2,
+        "explanation": "Teams should share useful prompts, conventions, and patterns in CLAUDE.md to maintain consistency."
+      },
+      {
+        "id": "m8_q5",
+        "question": "When should you use the --no-cache flag?",
+        "options": [
+          "Every time",
+          "When you need fresh analysis without cached context",
+          "Only for small files",
+          "Never, caching is always better"
+        ],
+        "correct": 1,
+        "explanation": "Use --no-cache when you need fresh analysis without any cached context, especially after significant code changes."
+      }
+    ]
+  }
+}

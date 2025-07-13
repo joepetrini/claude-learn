@@ -1,0 +1,67 @@
+{
+  "quiz": {
+    "title": "Claude Hooks",
+    "questions": [
+      {
+        "id": "m6_q1",
+        "question": "When do post-edit hooks run?",
+        "options": [
+          "Before Claude makes any changes",
+          "After Claude edits files",
+          "During file editing",
+          "Only on errors"
+        ],
+        "correct": 1,
+        "explanation": "Post-edit hooks run after Claude has made changes to files, useful for validation or formatting."
+      },
+      {
+        "id": "m6_q2",
+        "question": "What's a good use case for pre-commit hooks in Django projects?",
+        "options": [
+          "Deleting migrations",
+          "Running black formatter and tests",
+          "Clearing the database",
+          "Restarting the server"
+        ],
+        "correct": 1,
+        "explanation": "Pre-commit hooks are perfect for running formatters like black and running tests to ensure code quality."
+      },
+      {
+        "id": "m6_q3",
+        "question": "Where are hooks configured?",
+        "options": [
+          "CLAUDE.md",
+          ".git/hooks/",
+          "settings.json",
+          "package.json"
+        ],
+        "correct": 2,
+        "explanation": "Hooks are configured in your settings.json file under the hooks section."
+      },
+      {
+        "id": "m6_q4",
+        "question": "How can you run different hooks for different file patterns?",
+        "options": [
+          "It's not possible",
+          "Use post-edit-pattern with file patterns",
+          "Create multiple settings files",
+          "Use regex in hook names"
+        ],
+        "correct": 1,
+        "explanation": "You can use post-edit-pattern to run specific hooks only when certain file patterns are modified."
+      },
+      {
+        "id": "m6_q5",
+        "question": "What's a good hook for Django model changes?",
+        "options": [
+          "python manage.py runserver",
+          "python manage.py makemigrations --check --dry-run",
+          "python manage.py flush",
+          "git add models.py"
+        ],
+        "correct": 1,
+        "explanation": "Running makemigrations --check --dry-run helps detect if model changes require new migrations."
+      }
+    ]
+  }
+}

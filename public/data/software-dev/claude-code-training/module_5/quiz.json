@@ -1,0 +1,67 @@
+{
+  "quiz": {
+    "title": "Memory System (CLAUDE.md)",
+    "questions": [
+      {
+        "id": "m5_q1",
+        "question": "What's the correct priority order for Claude's memory system?",
+        "options": [
+          "User > Project > Local",
+          "Project > Local > User",
+          "Local > Project > User",
+          "Local > User > Project"
+        ],
+        "correct": 2,
+        "explanation": "The priority is Local > Project > User, meaning CLAUDE.local.md overrides CLAUDE.md, which overrides ~/.claude/CLAUDE.md."
+      },
+      {
+        "id": "m5_q2",
+        "question": "Where should you store team-wide Django conventions?",
+        "options": [
+          "CLAUDE.local.md",
+          "CLAUDE.md in project root",
+          "~/.claude/CLAUDE.md",
+          "settings.json"
+        ],
+        "correct": 1,
+        "explanation": "Team conventions should go in CLAUDE.md in the project root so they're shared via version control."
+      },
+      {
+        "id": "m5_q3",
+        "question": "What file should contain sensitive or personal project preferences?",
+        "options": [
+          "CLAUDE.md",
+          "CLAUDE.global.md",
+          "CLAUDE.local.md",
+          "CLAUDE.private.md"
+        ],
+        "correct": 2,
+        "explanation": "CLAUDE.local.md is git-ignored by default, making it perfect for sensitive or personal preferences."
+      },
+      {
+        "id": "m5_q4",
+        "question": "Can you have multiple CLAUDE.md files in a project?",
+        "options": [
+          "No, only one in the root",
+          "Yes, in subdirectories for directory-specific instructions",
+          "Only in src folders",
+          "Maximum of 3 files"
+        ],
+        "correct": 1,
+        "explanation": "You can have CLAUDE.md files in subdirectories to provide directory-specific instructions and conventions."
+      },
+      {
+        "id": "m5_q5",
+        "question": "What command creates a project-specific CLAUDE.md file?",
+        "options": [
+          "claude create-docs",
+          "claude --generate-memory",
+          "claude /init",
+          "claude setup-project"
+        ],
+        "correct": 2,
+        "explanation": "The /init command analyzes your project structure and creates a CLAUDE.md file with relevant project information."
+      }
+    ]
+  }
+}

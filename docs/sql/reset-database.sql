@@ -81,6 +81,12 @@ DO $$
 DECLARE
     tbl RECORD;
 BEGIN
+    -- First, drop tables with foreign key dependencies in correct order
+    EXECUTE 'DROP TABLE IF EXISTS public.user_resource_views CASCADE';
+    EXECUTE 'DROP TABLE IF EXISTS public.user_favorite_resources CASCADE';
+    EXECUTE 'DROP TABLE IF EXISTS public.course_resources CASCADE';
+    
+    -- Then drop all remaining tables
     FOR tbl IN 
         SELECT table_name 
         FROM information_schema.tables 

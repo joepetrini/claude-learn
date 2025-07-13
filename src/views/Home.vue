@@ -9,25 +9,6 @@
         <p class="text-xl text-gray-600 max-w-2xl mx-auto">
           Access training resources across all departments
         </p>
-        
-        <!-- Overall Progress -->
-        <div class="mt-6 max-w-md mx-auto">
-          <div class="bg-white rounded-lg p-4 shadow-sm">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm font-medium text-gray-700">Overall Progress</span>
-              <span class="text-sm text-gray-600">{{ overallProgress.completed }} / {{ overallProgress.total }} modules</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-              <div 
-                class="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-1000 ease-out relative overflow-hidden"
-                :style="`width: ${overallProgress.percentage}%`"
-              >
-                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-              </div>
-            </div>
-            <p class="text-xs text-gray-500 mt-2 text-center">{{ overallProgress.percentage }}% Complete</p>
-          </div>
-        </div>
       </header>
 
       <div class="max-w-6xl mx-auto">
@@ -98,7 +79,6 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { useSupabaseProgress } from '../composables/useSupabaseProgress.js'
 import { useCategories } from '../composables/useCategories.js'
 import { globalErrorHandler } from '../composables/useErrorHandler.js'
 import Navigation from '../components/Navigation.vue'
@@ -106,7 +86,6 @@ import LoadingSkeletons from '../components/LoadingSkeletons.vue'
 import CategoryCard from '../components/CategoryCard.vue'
 
 // Use composables
-const { overallProgress, loadProgress } = useSupabaseProgress()
 const { 
   sortedCategories, 
   favoriteCategories,
@@ -154,11 +133,8 @@ function dismissNewContentNotification() {
 }
 
 onMounted(async () => {
-  // Load progress and categories in parallel
-  await Promise.all([
-    loadProgress(),
-    loadCategories()
-  ])
+  // Load categories
+  await loadCategories()
   
   // Check for new content after loading
   checkForNewContent()

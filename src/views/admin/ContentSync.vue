@@ -247,11 +247,18 @@ async function scanCoursesForCategory(categorySlug) {
     
     const coursesData = await coursesResponse.json()
     
-    // Load courses from database
+    // First get the category UUID from slug
+    const { data: category } = await supabase
+      .from('categories')
+      .select('id')
+      .eq('slug', categorySlug)
+      .single()
+    
+    // Load courses from database using the category UUID
     const { data: dbCourses } = await supabase
       .from('courses')
       .select('*')
-      .eq('category_id', categorySlug) // Using slug as ID for now
+      .eq('category_id', category?.id)
     
     const dbCourseMap = new Map(dbCourses?.map(course => [course.slug, course]) || [])
     
@@ -359,10 +366,20 @@ async function createContent(change) {
     
     if (error) throw error
   } else if (change.contentType === 'course') {
+    // First get the category UUID from the slug
+    const { data: category, error: catError } = await supabase
+      .from('categories')
+      .select('id')
+      .eq('slug', change.data.category_id)
+      .single()
+    
+    if (catError) throw catError
+    if (!category) throw new Error(`Category not found: ${change.data.category_id}`)
+    
     const { error } = await supabase
       .from('courses')
       .insert({
-        category_id: change.data.category_id,
+        category_id: category.id, // Use UUID from database
         slug: change.data.slug,
         title: change.data.title,
         description: change.data.description,
@@ -397,6 +414,16 @@ async function updateContent(change) {
     
     if (error) throw error
   } else if (change.contentType === 'course') {
+    // First get the category UUID from the slug
+    const { data: category, error: catError } = await supabase
+      .from('categories')
+      .select('id')
+      .eq('slug', change.data.category_id)
+      .single()
+    
+    if (catError) throw catError
+    if (!category) throw new Error(`Category not found: ${change.data.category_id}`)
+    
     const { error } = await supabase
       .from('courses')
       .update({
@@ -412,7 +439,7 @@ async function updateContent(change) {
         tags: change.data.tags || []
       })
       .eq('slug', change.data.slug)
-      .eq('category_id', change.data.category_id)
+      .eq('category_id', category.id) // Use UUID from database
     
     if (error) throw error
   }
@@ -481,5 +508,8 @@ onMounted(async () => {
     // Table might not exist yet
     console.log('No sync log found')
   }
+  
+  // Automatically scan for changes on page load
+  await scanForChanges()
 })
 </script>

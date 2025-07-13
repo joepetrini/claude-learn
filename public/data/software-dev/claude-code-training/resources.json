@@ -1,0 +1,32 @@
+{
+  "resources": [
+    {
+      "id": "quick-reference",
+      "type": "cheat-sheet",
+      "title": "Claude Code Quick Reference",
+      "description": "Essential commands and workflows for Python/Django developers",
+      "path": "resources/cheat-sheet.json",
+      "icon": "📋",
+      "tags": ["commands", "shortcuts", "reference", "django", "python"],
+      "featured": true
+    },
+    {
+      "id": "official-docs",
+      "type": "links",
+      "title": "Documentation & Resources",
+      "description": "Official documentation and community resources",
+      "path": "resources/links.json",
+      "icon": "🔗",
+      "tags": ["documentation", "external", "resources"]
+    },
+    {
+      "id": "terminology",
+      "type": "glossary",
+      "title": "Claude Code Glossary",
+      "description": "Key terms and concepts explained",
+      "path": "resources/glossary.json",
+      "icon": "📚",
+      "tags": ["glossary", "terms", "definitions"]
+    }
+  ]
+}

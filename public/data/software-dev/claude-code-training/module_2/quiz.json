@@ -1,0 +1,67 @@
+{
+  "quiz": {
+    "title": "Core Workflows & Capabilities",
+    "questions": [
+      {
+        "id": "m2_q1",
+        "question": "What command provides intelligent code analysis for security vulnerabilities?",
+        "options": [
+          "claude analyze --security",
+          "claude /review --scope=security",
+          "claude security-check",
+          "claude --scan-security"
+        ],
+        "correct": 1,
+        "explanation": "The /review command with --scope=security provides focused security analysis of your code."
+      },
+      {
+        "id": "m2_q2",
+        "question": "When should you use extended thinking mode?",
+        "options": [
+          "For every coding task",
+          "For complex architectural decisions or performance optimization",
+          "Only for bug fixes",
+          "When working with small files"
+        ],
+        "correct": 1,
+        "explanation": "Extended thinking mode is best for complex problems requiring deep analysis, like architectural decisions or performance optimization."
+      },
+      {
+        "id": "m2_q3",
+        "question": "What can Claude Code do when building features end-to-end?",
+        "options": [
+          "Only generate models",
+          "Only write views",
+          "Handle complete feature development from models to tests",
+          "Only fix existing code"
+        ],
+        "correct": 2,
+        "explanation": "Claude Code can handle complete feature development including models, views, APIs, admin interfaces, and tests."
+      },
+      {
+        "id": "m2_q4",
+        "question": "How do you activate extended thinking mode?",
+        "options": [
+          "claude --extended",
+          "claude /think",
+          "claude extended-mode on",
+          "claude --think \"your complex problem\""
+        ],
+        "correct": 3,
+        "explanation": "Use claude --think followed by your complex problem in quotes to activate extended thinking mode."
+      },
+      {
+        "id": "m2_q5",
+        "question": "What does the /review command focus on besides security?",
+        "options": [
+          "Code formatting only",
+          "Performance issues and best practices",
+          "File size",
+          "Line count"
+        ],
+        "correct": 1,
+        "explanation": "The /review command can analyze security vulnerabilities, performance issues, best practices, and code style consistency."
+      }
+    ]
+  }
+}

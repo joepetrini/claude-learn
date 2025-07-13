@@ -1,0 +1,67 @@
+{
+  "quiz": {
+    "title": "Introduction to Claude Code",
+    "questions": [
+      {
+        "id": "m1_q1",
+        "question": "What makes Claude Code different from GitHub Copilot?",
+        "options": [
+          "It's a web-based tool only",
+          "It's a CLI tool with file system access",
+          "It only works with Python",
+          "It requires no setup"
+        ],
+        "correct": 1,
+        "explanation": "Claude Code is a CLI tool that can directly interact with your file system, unlike Copilot which is an IDE extension."
+      },
+      {
+        "id": "m1_q2",
+        "question": "Which command would you use to start a Claude Code session?",
+        "options": [
+          "claude-code start",
+          "claude init",
+          "claude",
+          "claude --begin"
+        ],
+        "correct": 2,
+        "explanation": "Simply typing 'claude' starts an interactive session. You can also jump straight to a task with claude \"your request\"."
+      },
+      {
+        "id": "m1_q3",
+        "question": "What happens before Claude Code makes changes to your files?",
+        "options": [
+          "Files are automatically backed up",
+          "It asks for permission",
+          "Changes are made immediately",
+          "A git commit is created"
+        ],
+        "correct": 1,
+        "explanation": "Claude Code follows a permission-based model and always asks before making changes to your files."
+      },
+      {
+        "id": "m1_q4",
+        "question": "Why is Claude Code particularly good for Django development?",
+        "options": [
+          "It only works with Django projects",
+          "It has deep understanding of Django patterns and architecture",
+          "It automatically generates Django projects",
+          "It replaces Django's manage.py"
+        ],
+        "correct": 1,
+        "explanation": "Claude Code has deep understanding of Django's MVT architecture, common patterns like CBVs, and Django-specific best practices."
+      },
+      {
+        "id": "m1_q5",
+        "question": "How would you ask Claude to help with a specific Django task?",
+        "options": [
+          "claude django --task \"create models\"",
+          "claude-django create models",
+          "claude \"Create a new Django app for user profiles\"",
+          "django-claude generate app"
+        ],
+        "correct": 2,
+        "explanation": "You can jump straight to a task by providing your request in quotes after the claude command."
+      }
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "quiz": {
+    "title": "Module 9 Quiz: Advanced Integrations",
+    "questions": [
+      {
+        "id": "m9_q1",
+        "question": "What's the best way to use Claude Code with VS Code?",
+        "options": [
+          "You can't use them together",
+          "Use VS Code's integrated terminal to run Claude sessions",
+          "Install a Claude VS Code extension",
+          "Run Claude in a separate terminal window only"
+        ],
+        "correct": 1,
+        "explanation": "Claude Code works beautifully in VS Code's integrated terminal, allowing real-time file updates to appear in the editor while maintaining the full CLI experience."
+      },
+      {
+        "id": "m9_q2",
+        "question": "What CI/CD platforms can Claude generate workflows for?",
+        "options": [
+          "Only GitHub Actions",
+          "GitHub Actions and GitLab CI/CD",
+          "Jenkins only",
+          "Claude can't generate CI/CD workflows"
+        ],
+        "correct": 1,
+        "explanation": "Claude can generate sophisticated workflows for multiple CI/CD platforms including GitHub Actions and GitLab CI/CD, tailored to your project's needs."
+      },
+      {
+        "id": "m9_q3",
+        "question": "How should teams share useful Claude prompts?",
+        "options": [
+          "Email them to each other",
+          "Keep them private",
+          "Store them in the shared CLAUDE.md file",
+          "Create a separate prompts.txt file"
+        ],
+        "correct": 2,
+        "explanation": "Teams should store useful prompts in the shared CLAUDE.md file under a 'Shared Prompts' section for easy access and consistency."
+      },
+      {
+        "id": "m9_q4",
+        "question": "What's a key benefit of using Claude for code reviews in PRs?",
+        "options": [
+          "It replaces human reviewers completely",
+          "It can check for security vulnerabilities and performance issues consistently",
+          "It automatically merges good code",
+          "It only checks formatting"
+        ],
+        "correct": 1,
+        "explanation": "Claude can consistently check for security vulnerabilities, performance issues, and adherence to team standards, complementing human review."
+      },
+      {
+        "id": "m9_q5",
+        "question": "For a zero-downtime Django deployment, Claude can help with:",
+        "options": [
+          "Only writing deployment documentation",
+          "Blue-green deployments, migration strategies, and rollback procedures",
+          "Just database backups",
+          "Only Docker configuration"
+        ],
+        "correct": 1,
+        "explanation": "Claude understands complex deployment patterns and can help implement blue-green deployments, safe migration strategies, health checks, and rollback procedures for zero-downtime deployments."
+      }
+    ]
+  }
+}
