@@ -1,0 +1,33 @@
+{
+  "title": "🚀 Getting Started with Claude Code",
+  "description": "Install Claude Code, set up authentication, and run your first commands",
+  "slug": "module_0",
+  "estimatedDuration": "15 minutes",
+  "difficultyLevel": "beginner",
+  "sortOrder": 0,
+  "prerequisites": [],
+  "learningObjectives": [
+    "Install Claude Code on your system",
+    "Set up authentication with your Anthropic account",
+    "Run your first Claude Code commands",
+    "Understand basic command structure and help system"
+  ],
+  "sections": [
+    {
+      "title": "What is Claude Code?",
+      "content": "<h2>What is Claude Code?</h2><p>Claude Code is a command-line interface (CLI) tool that brings Claude's AI capabilities directly to your development environment. Unlike IDE extensions that work within specific editors, Claude Code operates at the system level with full file system access.</p><h3>Key Benefits:</h3><ul><li><strong>Direct file system access</strong> - Read, write, and modify files across your entire project</li><li><strong>Language agnostic</strong> - Works with any programming language or framework</li><li><strong>Terminal integration</strong> - Fits naturally into existing development workflows</li><li><strong>Context awareness</strong> - Understands your project structure and coding patterns</li><li><strong>Extensible</strong> - Connect external tools via Model Context Protocol (MCP)</li></ul><p>Whether you're building web applications, mobile apps, data pipelines, or any other software project, Claude Code adapts to your technology stack and development style.</p>"
+    },
+    {
+      "title": "Installation",
+      "content": "<h2>Installation</h2><p>Claude Code supports all major operating systems and can be installed through multiple methods.</p><h3>Prerequisites</h3><ul><li><strong>Node.js 18+</strong> - Required for running Claude Code</li><li><strong>Git</strong> - For version control integration</li><li><strong>Terminal/Command Prompt</strong> - Your preferred command-line interface</li></ul><h3>Installation Methods</h3><h4>Option 1: npm (Recommended)</h4><pre><code class=\"language-bash\"># Install globally\nnpm install -g @anthropic/claude-code\n\n# Verify installation\nclaude --version</code></pre><h4>Option 2: Direct Download</h4><p>Download the appropriate installer for your operating system from the <a href=\"https://docs.anthropic.com/en/docs/claude-code/quickstart\" target=\"_blank\">official documentation</a>.</p><h4>Platform-Specific Notes</h4><p><strong>Windows:</strong> Use PowerShell or Windows Terminal for the best experience.</p><p><strong>macOS:</strong> You may need to allow the application in System Preferences → Security & Privacy.</p><p><strong>Linux:</strong> Ensure Node.js is installed via your package manager or from nodejs.org.</p>"
+    },
+    {
+      "title": "Authentication Setup",
+      "content": "<h2>Authentication Setup</h2><p>Claude Code requires authentication with your Anthropic account to access Claude's capabilities.</p><h3>Step 1: Get Your API Key</h3><ol><li>Visit <a href=\"https://console.anthropic.com\" target=\"_blank\">console.anthropic.com</a></li><li>Sign in or create an account</li><li>Navigate to \"API Keys\" in your dashboard</li><li>Create a new API key and copy it securely</li></ol><h3>Step 2: Configure Authentication</h3><p>You can authenticate in several ways:</p><h4>Method 1: Interactive Login (Recommended)</h4><pre><code class=\"language-bash\"># Start interactive authentication\nclaude auth login\n\n# Follow the prompts to enter your API key</code></pre><h4>Method 2: Environment Variable</h4><pre><code class=\"language-bash\"># Set environment variable (replace with your actual key)\nexport ANTHROPIC_API_KEY=\"your-api-key-here\"\n\n# Add to your shell profile for persistence\necho 'export ANTHROPIC_API_KEY=\"your-api-key-here\"' >> ~/.bashrc</code></pre><h4>Method 3: Configuration File</h4><pre><code class=\"language-bash\"># Create config directory\nmkdir -p ~/.claude\n\n# Create config file\necho 'ANTHROPIC_API_KEY=your-api-key-here' > ~/.claude/config</code></pre><h3>Verify Authentication</h3><pre><code class=\"language-bash\"># Test your setup\nclaude \"Hello, Claude! Can you help me today?\"\n\n# You should see a response from Claude</code></pre>"
+    },
+    {
+      "title": "Your First Commands",
+      "content": "<h2>Your First Commands</h2><p>Now that Claude Code is installed and authenticated, let's explore the basic command structure.</p><h3>Basic Command Structure</h3><pre><code class=\"language-bash\"># Interactive mode - start a conversation\nclaude\n\n# Direct task execution\nclaude \"your request here\"\n\n# With additional flags\nclaude --think \"complex request requiring deeper analysis\"</code></pre><h3>Essential Commands to Try</h3><h4>1. Get Help</h4><pre><code class=\"language-bash\"># Show available commands and options\nclaude --help\n\n# Get information about specific commands\nclaude help</code></pre><h4>2. Check System Status</h4><pre><code class=\"language-bash\"># Check your current configuration\nclaude /doctor\n\n# View usage and costs\nclaude /cost</code></pre><h4>3. Simple Tasks</h4><pre><code class=\"language-bash\"># Ask Claude to explain something\nclaude \"Explain how REST APIs work\"\n\n# Get help with a file\nclaude \"Review this Python script for potential improvements\" script.py\n\n# Generate code\nclaude \"Create a simple HTTP server in Python\"</code></pre><h3>Interactive Mode</h3><p>Interactive mode provides a conversational interface where you can have back-and-forth discussions with Claude:</p><pre><code class=\"language-bash\"># Start interactive session\nclaude\n\n# Now you can type commands like:\n# > Explain the difference between GET and POST requests\n# > Can you help me debug this error message?\n# > /clear  (to clear conversation context)\n# > /exit   (to quit interactive mode)</code></pre><h3>Next Steps</h3><p>Congratulations! You now have Claude Code set up and ready to use. In the next modules, you'll learn about:</p><ul><li>Core workflows for different types of development tasks</li><li>Advanced features like extended thinking mode</li><li>Managing conversation context and history</li><li>Integrating Claude Code into your existing development workflow</li></ul>"
+    }
+  ]
+}

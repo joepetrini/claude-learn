@@ -1,7 +1,7 @@
 {
   "type": "cheat-sheet",
   "title": "Claude Code Quick Reference",
-  "description": "Essential commands and workflows for Python/Django developers",
+  "description": "Essential commands and workflows for developers",
   "lastUpdated": "2025-01-12",
   "version": "1.0",
   "sections": [
@@ -17,7 +17,7 @@
           "command": "claude \"task description\"",
           "description": "Execute specific task",
           "category": "basics",
-          "example": "claude \"Create a Django model for blog posts\""
+          "example": "claude \"Create a user model with authentication\""
         },
         {
           "command": "claude --think \"complex task\"",
@@ -26,10 +26,10 @@
           "example": "claude --think \"Design a scalable authentication system\""
         },
         {
-          "command": "claude /review file.py",
+          "command": "claude /review [file]",
           "description": "Code review with security & performance analysis",
           "category": "review",
-          "example": "claude /review views.py"
+          "example": "claude /review auth.js"
         }
       ]
     },
@@ -70,28 +70,35 @@
       ]
     },
     {
-      "title": "Django Workflows",
+      "title": "Common Development Workflows",
       "items": [
         {
           "workflow": "Create Feature",
-          "command": "claude \"Create blog app with Post model, views, and tests\"",
-          "description": "Generate complete Django app with models, views, and tests",
+          "command": "claude \"Create a blog system with posts, comments, and user management\"",
+          "description": "Generate complete feature with models, business logic, and tests",
           "category": "development",
           "color": "blue"
         },
         {
           "workflow": "API Development",
-          "command": "claude \"Create DRF ViewSet for User model with pagination\"",
-          "description": "Build Django REST Framework APIs",
+          "command": "claude \"Create REST API endpoints for user management with authentication\"",
+          "description": "Build secure API endpoints with proper validation",
           "category": "api",
           "color": "green"
         },
         {
           "workflow": "Testing",
-          "command": "claude \"Write tests for OrderService using pytest\"",
-          "description": "Generate comprehensive test suites",
+          "command": "claude \"Write comprehensive tests for the payment processing service\"",
+          "description": "Generate test suites covering edge cases and error scenarios",
           "category": "testing",
           "color": "purple"
+        },
+        {
+          "workflow": "Refactoring",
+          "command": "claude \"Refactor this component to improve performance and readability\"",
+          "description": "Improve code quality while maintaining functionality",
+          "category": "refactoring",
+          "color": "orange"
         }
       ]
     },
@@ -128,12 +135,12 @@
           "items": [
             {
               "action": "Capture screenshot",
-              "shortcut": "Ctrl+Shift+Cmd+4",
+              "shortcut": "Cmd+Shift+4",
               "platform": "macos"
             },
             {
               "action": "Paste in terminal",
-              "shortcut": "Ctrl+V",
+              "shortcut": "Cmd+V",
               "platform": "macos"
             }
           ]
@@ -141,28 +148,38 @@
       ]
     },
     {
-      "title": "Common Django Patterns",
+      "title": "Common Development Patterns",
       "columns": 2,
       "items": [
         {
-          "pattern": "Migrations",
-          "command": "claude \"Create migration to add indexes to User.email and User.username\"",
+          "pattern": "Database Optimization",
+          "command": "claude \"Add database indexes to improve query performance\"",
           "category": "database"
         },
         {
-          "pattern": "Optimization",
-          "command": "claude \"Optimize this view for N+1 queries using select_related\"",
+          "pattern": "Performance Review",
+          "command": "claude \"Analyze this code for performance bottlenecks and suggest improvements\"",
           "category": "performance"
         },
         {
           "pattern": "Security Review",
-          "command": "claude /review --scope=security views.py",
+          "command": "claude /review --scope=security auth.js",
           "category": "security"
         },
         {
-          "pattern": "Refactoring",
-          "command": "claude \"Refactor this view to use Django CBVs\"",
+          "pattern": "Code Refactoring",
+          "command": "claude \"Refactor this function to follow clean code principles\"",
           "category": "refactoring"
+        },
+        {
+          "pattern": "Error Handling",
+          "command": "claude \"Add comprehensive error handling to this API endpoint\"",
+          "category": "reliability"
+        },
+        {
+          "pattern": "Documentation",
+          "command": "claude \"Generate documentation for this module with examples\"",
+          "category": "documentation"
         }
       ]
     },

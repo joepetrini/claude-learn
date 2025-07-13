@@ -40,8 +40,17 @@
       "Bash(gh issue reopen:*)",
       "mcp__puppeteer__puppeteer_fill",
       "Bash(grep:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "mcp__browser-tools__getConsoleLogs",
+      "mcp__puppeteer__puppeteer_navigate",
+      "mcp__browser-tools__getConsoleErrors",
+      "mcp__browser-tools__takeScreenshot",
+      "mcp__puppeteer__puppeteer_evaluate",
+      "mcp__browsermcp__browser_navigate",
+      "mcp__browsermcp__browser_click",
+      "mcp__browsermcp__browser_get_console_logs"
     ],
     "deny": []
-  }
+  },
+  "enableAllProjectMcpServers": false
 }

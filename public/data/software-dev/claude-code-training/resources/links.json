@@ -111,16 +111,16 @@
       "icon": "📚",
       "links": [
         {
-          "title": "Django + Claude Code Tutorial",
-          "url": "https://example.com/django-claude-tutorial",
-          "description": "Building a Django app with Claude Code assistance",
-          "tags": ["tutorial", "django", "python"]
+          "title": "Claude Code Quickstart Guide",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/quickstart",
+          "description": "Get started with Claude Code in minutes",
+          "tags": ["tutorial", "quickstart", "getting-started"]
         },
         {
-          "title": "Video Tutorials",
-          "url": "https://youtube.com/anthropic-claude-code",
-          "description": "Video walkthroughs and demonstrations",
-          "tags": ["video", "tutorial", "youtube"]
+          "title": "Common Workflows Guide",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/common-workflows",
+          "description": "Learn essential Claude Code workflows for any project",
+          "tags": ["workflows", "tutorial", "examples"]
         }
       ]
     }

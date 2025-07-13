@@ -23,8 +23,8 @@
           "Cmd+Shift+4",
           "Ctrl+Cmd+S"
         ],
-        "correct": 1,
-        "explanation": "Ctrl+Shift+Cmd+4 allows you to select a specific area to screenshot, perfect for capturing UI issues."
+        "correct": 2,
+        "explanation": "Cmd+Shift+4 allows you to select a specific area to screenshot, perfect for capturing UI issues or specific parts of your screen."
       },
       {
         "id": "m3_q3",

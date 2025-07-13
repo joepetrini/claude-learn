@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "question": "What makes Claude Code different from IDE extensions like GitHub Copilot?",
+      "options": [
+        "It only works with specific programming languages",
+        "It operates at the system level with full file system access",
+        "It requires a web browser to function",
+        "It can only be used within VS Code"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code is a CLI tool that operates at the system level with full file system access, unlike IDE extensions that are limited to specific editors. This allows it to work with any programming language and integrate into existing terminal workflows."
+    },
+    {
+      "question": "Which command would you use to verify that Claude Code is properly installed and authenticated?",
+      "options": [
+        "claude --status",
+        "claude auth check",
+        "claude \"Hello, Claude! Can you help me today?\"",
+        "claude --test"
+      ],
+      "correct": 2,
+      "explanation": "Running a simple greeting like 'claude \"Hello, Claude! Can you help me today?\"' is the best way to verify both installation and authentication, as it will either respond successfully or show authentication errors."
+    },
+    {
+      "question": "What is the recommended method for authenticating Claude Code?",
+      "options": [
+        "Hardcoding the API key in your scripts",
+        "Using the interactive login command: claude auth login",
+        "Storing the key in a public repository",
+        "Sharing API keys between team members"
+      ],
+      "correct": 1,
+      "explanation": "The interactive login method (claude auth login) is recommended because it securely prompts for your API key and stores it properly. Never hardcode keys in scripts or store them in public repositories."
+    },
+    {
+      "question": "Which command starts an interactive conversation session with Claude?",
+      "options": [
+        "claude --interactive",
+        "claude start",
+        "claude",
+        "claude chat"
+      ],
+      "correct": 2,
+      "explanation": "Simply typing 'claude' without any arguments starts an interactive session where you can have a back-and-forth conversation with Claude."
+    },
+    {
+      "question": "What prerequisite software is required before installing Claude Code?",
+      "options": [
+        "Python 3.8+",
+        "Docker Desktop",
+        "Node.js 18+",
+        "Java Runtime Environment"
+      ],
+      "correct": 2,
+      "explanation": "Claude Code requires Node.js 18 or higher to run. While other tools like Git are helpful for development workflows, Node.js is the core requirement for running Claude Code itself."
+    }
+  ]
+}

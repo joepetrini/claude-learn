@@ -1,20 +1,29 @@
 {
-  "module": {
-    "slug": "module_1",
-    "title": "Introduction to Claude Code",
-    "version": "1.0",
-    "lastUpdated": "2025-07-12",
-    "sections": [
-      {
-        "title": "What is Claude Code?",
-        "content": "<p>Claude Code is Anthropic's official CLI tool for AI-assisted coding. Unlike web-based ChatGPT or IDE extensions like GitHub Copilot, Claude Code operates directly in your terminal with full file system access.</p><p class='mt-4'>Key differences:</p><ul class='list-disc list-inside mt-2'><li>CLI-based with direct file system access</li><li>Permission-based editing (always asks before changes)</li><li>Integrated development workflow</li><li>Built for professional developers</li></ul>",
-        "example": "# Install Claude Code\nbrew install claude\n\n# Start a session\nclaude\n\n# Or jump straight to a task\nclaude \"Help me refactor this Django view\""
-      },
-      {
-        "title": "Why Claude Code for Python/Django Teams?",
-        "content": "<p>Claude Code excels at Python and Django development with deep understanding of:</p><ul class='list-disc list-inside mt-2'><li>Django's MVT architecture</li><li>Python best practices and PEP standards</li><li>Common Django patterns (CBVs, serializers, migrations)</li><li>Testing with pytest and Django's test framework</li></ul>",
-        "example": "# Example Django workflow\nclaude \"Create a new Django app for user profiles with models, views, and tests\""
-      }
-    ]
-  }
+  "title": "🚀 Introduction to Claude Code",
+  "description": "Learn what Claude Code is and how it transforms your development workflow",
+  "slug": "module_1",
+  "estimatedDuration": "20 minutes",
+  "difficultyLevel": "beginner",
+  "sortOrder": 1,
+  "prerequisites": ["module_0"],
+  "learningObjectives": [
+    "Understand what makes Claude Code unique among AI coding tools",
+    "Learn the core principles of Claude Code's design",
+    "Recognize when to use Claude Code in your development workflow",
+    "Understand the permission-based editing model"
+  ],
+  "sections": [
+    {
+      "title": "What is Claude Code?",
+      "content": "<h2>What is Claude Code?</h2><p>Claude Code is Anthropic's official CLI tool that brings Claude's AI capabilities directly to your development environment. Unlike web-based AI assistants or IDE extensions, Claude Code operates at the system level with full access to your files and development tools.</p><h3>Key Characteristics:</h3><ul><li><strong>Command-line interface</strong> - Integrates seamlessly with your existing terminal workflow</li><li><strong>File system access</strong> - Can read, write, and modify files across your entire project</li><li><strong>Permission-based editing</strong> - Always asks before making changes to ensure you stay in control</li><li><strong>Language agnostic</strong> - Works with any programming language, framework, or technology stack</li><li><strong>Context aware</strong> - Understands your project structure and maintains conversation context</li></ul><h3>How It's Different:</h3><table class=\"w-full mt-4 border-collapse\"><tr class=\"border-b\"><th class=\"text-left p-2\">Tool</th><th class=\"text-left p-2\">Interface</th><th class=\"text-left p-2\">File Access</th><th class=\"text-left p-2\">Language Support</th></tr><tr class=\"border-b\"><td class=\"p-2\">Claude Code</td><td class=\"p-2\">CLI</td><td class=\"p-2\">Full system access</td><td class=\"p-2\">Any language</td></tr><tr class=\"border-b\"><td class=\"p-2\">GitHub Copilot</td><td class=\"p-2\">IDE extension</td><td class=\"p-2\">Current file only</td><td class=\"p-2\">IDE dependent</td></tr><tr class=\"border-b\"><td class=\"p-2\">ChatGPT</td><td class=\"p-2\">Web interface</td><td class=\"p-2\">Copy/paste only</td><td class=\"p-2\">Any (manual)</td></tr></table>"
+    },
+    {
+      "title": "Universal Development Support",
+      "content": "<h2>Works with Any Technology Stack</h2><p>Claude Code is designed to work with any programming language, framework, or development environment. Whether you're building web applications, mobile apps, data pipelines, or embedded systems, Claude Code adapts to your needs.</p><h3>Example Workflows Across Technologies:</h3><h4>Web Development</h4><pre><code class=\"language-bash\"># React/Next.js\nclaude \"Create a responsive navbar component with TypeScript\"\n\n# Django/Python\nclaude \"Build a REST API endpoint for user authentication\"\n\n# Rails/Ruby\nclaude \"Generate a migration to add full-text search\"\n\n# Laravel/PHP\nclaude \"Create a service class for payment processing\"</code></pre><h4>Mobile Development</h4><pre><code class=\"language-bash\"># React Native\nclaude \"Implement push notifications for iOS and Android\"\n\n# Flutter/Dart\nclaude \"Create a custom widget for data visualization\"\n\n# Swift/iOS\nclaude \"Add Core Data support to this view controller\"</code></pre><h4>Backend & Infrastructure</h4><pre><code class=\"language-bash\"># Node.js/Express\nclaude \"Add rate limiting middleware to API routes\"\n\n# Go microservices\nclaude \"Implement health check endpoints with Prometheus metrics\"\n\n# Rust\nclaude \"Optimize this async function for better performance\"</code></pre><h4>Data & Machine Learning</h4><pre><code class=\"language-bash\"># Python/Data Science\nclaude \"Clean this dataset and create visualizations\"\n\n# R/Statistics\nclaude \"Perform regression analysis on this time series data\"\n\n# SQL/Database\nclaude \"Optimize these queries for better performance\"</code></pre>"
+    },
+    {
+      "title": "Permission-Based Development",
+      "content": "<h2>Safe, Controlled AI Assistance</h2><p>Claude Code follows a permission-based model that keeps you in control of all changes to your codebase. This approach ensures safety while maximizing productivity.</p><h3>How Permission-Based Editing Works:</h3><ol><li><strong>Claude analyzes your request</strong> - Understands what you want to accomplish</li><li><strong>Shows you the plan</strong> - Explains what files will be modified and how</li><li><strong>Asks for permission</strong> - Waits for your approval before making any changes</li><li><strong>Executes safely</strong> - Makes only the changes you've approved</li><li><strong>Provides feedback</strong> - Shows you exactly what was changed</li></ol><h3>Example Permission Flow:</h3><pre><code class=\"language-bash\"># Your request\nclaude \"Add error handling to the user registration function\"\n\n# Claude's response\n\"I'll add error handling to your user registration function.\nI need to modify:\n- src/auth/register.js (add try/catch blocks)\n- src/utils/errors.js (create error handling utilities)\n\nProceed with these changes? (y/n)\"</code></pre><h3>Benefits of This Approach:</h3><ul><li><strong>No accidental changes</strong> - Claude never modifies files without explicit permission</li><li><strong>Clear understanding</strong> - You always know what will be changed before it happens</li><li><strong>Selective approval</strong> - You can approve some changes and reject others</li><li><strong>Learning opportunity</strong> - Each change is explained, helping you understand the reasoning</li><li><strong>Easy rollback</strong> - Since changes are explicit, they're easy to undo if needed</li></ul>"
+    }
+  ]
 }

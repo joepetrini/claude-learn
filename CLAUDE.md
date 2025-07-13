@@ -109,6 +109,7 @@ This app is designed to be hosted on GitHub Pages. See `docs/github-pages-deploy
 - Database serves runtime queries, not content storage
 - Include comprehensive error handling
 - Maintain backward compatibility during migrations
+- **Always create a feature branch when starting work on a new issue**
 
 ## GitHub Project Management
 

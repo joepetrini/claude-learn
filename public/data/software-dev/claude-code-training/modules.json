@@ -1,17 +1,30 @@
 {
   "modules": [
     {
-      "slug": "module_1",
-      "title": "Introduction to Claude Code",
-      "description": "Learn what Claude Code is and how it differs from other AI coding tools",
+      "slug": "module_0",
+      "title": "Getting Started with Claude Code",
+      "description": "Install Claude Code, set up authentication, and run your first commands",
       "icon": "🚀",
-      "estimatedTime": "20 minutes",
+      "estimatedTime": "15 minutes",
       "difficultyLevel": "beginner",
       "sortOrder": 0,
       "isActive": true,
-      "isNew": false,
+      "isNew": true,
       "prerequisites": [],
-      "tags": []
+      "tags": ["setup", "installation", "getting-started"]
+    },
+    {
+      "slug": "module_1",
+      "title": "Introduction to Claude Code",
+      "description": "Learn what Claude Code is and how it transforms your development workflow",
+      "icon": "💡",
+      "estimatedTime": "20 minutes",
+      "difficultyLevel": "beginner",
+      "sortOrder": 1,
+      "isActive": true,
+      "isNew": false,
+      "prerequisites": ["module_0"],
+      "tags": ["concepts", "fundamentals"]
     },
     {
       "slug": "module_2",
@@ -20,11 +33,11 @@
       "icon": "⚡",
       "estimatedTime": "30 minutes",
       "difficultyLevel": "beginner",
-      "sortOrder": 0,
+      "sortOrder": 2,
       "isActive": true,
       "isNew": false,
-      "prerequisites": [],
-      "tags": []
+      "prerequisites": ["module_1"],
+      "tags": ["workflows", "basics"]
     },
     {
       "slug": "module_3",
@@ -32,12 +45,12 @@
       "description": "Understand different operational modes and image analysis capabilities",
       "icon": "🎯",
       "estimatedTime": "25 minutes",
-      "difficultyLevel": "beginner",
-      "sortOrder": 0,
+      "difficultyLevel": "intermediate",
+      "sortOrder": 3,
       "isActive": true,
       "isNew": false,
-      "prerequisites": [],
-      "tags": []
+      "prerequisites": ["module_2"],
+      "tags": ["modes", "context", "images"]
     },
     {
       "slug": "module_4",
@@ -46,11 +59,11 @@
       "icon": "💬",
       "estimatedTime": "20 minutes",
       "difficultyLevel": "beginner",
-      "sortOrder": 0,
+      "sortOrder": 4,
       "isActive": true,
       "isNew": false,
-      "prerequisites": [],
-      "tags": []
+      "prerequisites": ["module_2"],
+      "tags": ["commands", "navigation"]
     },
     {
       "slug": "module_5",
@@ -58,12 +71,12 @@
       "description": "Configure project-specific instructions and team conventions",
       "icon": "🧠",
       "estimatedTime": "25 minutes",
-      "difficultyLevel": "beginner",
-      "sortOrder": 0,
+      "difficultyLevel": "intermediate",
+      "sortOrder": 5,
       "isActive": true,
       "isNew": false,
-      "prerequisites": [],
-      "tags": []
+      "prerequisites": ["module_4"],
+      "tags": ["memory", "configuration", "team"]
     },
     {
       "slug": "module_6",
@@ -71,12 +84,12 @@
       "description": "Automate workflows with pre and post action hooks",
       "icon": "🔗",
       "estimatedTime": "20 minutes",
-      "difficultyLevel": "beginner",
-      "sortOrder": 0,
+      "difficultyLevel": "advanced",
+      "sortOrder": 6,
       "isActive": true,
       "isNew": false,
-      "prerequisites": [],
-      "tags": []
+      "prerequisites": ["module_5"],
+      "tags": ["automation", "hooks", "advanced"]
     },
     {
       "slug": "module_7",
@@ -84,25 +97,25 @@
       "description": "Extend Claude Code with Model Context Protocol servers",
       "icon": "🔌",
       "estimatedTime": "30 minutes",
-      "difficultyLevel": "beginner",
-      "sortOrder": 0,
+      "difficultyLevel": "advanced",
+      "sortOrder": 7,
       "isActive": true,
       "isNew": false,
-      "prerequisites": [],
-      "tags": []
+      "prerequisites": ["module_5"],
+      "tags": ["mcp", "integrations", "advanced"]
     },
     {
       "slug": "module_8",
       "title": "Advanced Features & Tips",
       "description": "Master advanced Claude Code features for maximum productivity",
-      "icon": "🚀",
+      "icon": "💪",
       "estimatedTime": "25 minutes",
-      "difficultyLevel": "beginner",
-      "sortOrder": 0,
+      "difficultyLevel": "advanced",
+      "sortOrder": 8,
       "isActive": true,
       "isNew": false,
-      "prerequisites": [],
-      "tags": []
+      "prerequisites": ["module_6", "module_7"],
+      "tags": ["advanced", "productivity", "tips"]
     },
     {
       "slug": "module_9",
@@ -110,12 +123,12 @@
       "description": "Master VS Code integration, CI/CD pipelines, and team collaboration features",
       "icon": "🔧",
       "estimatedTime": "35 minutes",
-      "difficultyLevel": "beginner",
-      "sortOrder": 0,
+      "difficultyLevel": "advanced",
+      "sortOrder": 9,
       "isActive": true,
       "isNew": false,
-      "prerequisites": [],
-      "tags": []
+      "prerequisites": ["module_8"],
+      "tags": ["integrations", "cicd", "collaboration"]
     },
     {
       "slug": "updates-2025-01",
@@ -123,12 +136,12 @@
       "description": "Learn about the latest Claude Code features",
       "icon": "🆕",
       "estimatedTime": "10 minutes",
-      "difficultyLevel": "beginner",
-      "sortOrder": 0,
+      "difficultyLevel": "intermediate",
+      "sortOrder": 10,
       "isActive": true,
       "isNew": false,
-      "prerequisites": [],
-      "tags": []
+      "prerequisites": ["module_5"],
+      "tags": ["updates", "new-features"]
     }
   ]
 }
