@@ -25,6 +25,42 @@
         ],
         "correct": 2,
         "explanation": "The --scope=security option was added to focus code reviews on security concerns."
+      },
+      {
+        "id": "updates_q3",
+        "question": "What is the primary benefit of the new hooks system in Claude Code?",
+        "options": [
+          "Faster code execution",
+          "Automatic code deployment",
+          "Custom workflow automation with pre/post action triggers",
+          "Better syntax highlighting"
+        ],
+        "correct": 2,
+        "explanation": "The hooks system allows developers to automate custom workflows by triggering scripts before and after Claude Code actions, such as running tests or formatting code."
+      },
+      {
+        "id": "updates_q4",
+        "question": "Which new collaboration feature helps teams share Claude Code configurations?",
+        "options": [
+          "Shared API keys",
+          "Team workspaces",
+          "Project-level CLAUDE.md files",
+          "Real-time code editing"
+        ],
+        "correct": 2,
+        "explanation": "Project-level CLAUDE.md files allow teams to share consistent instructions and conventions across team members, improving collaboration and code quality."
+      },
+      {
+        "id": "updates_q5",
+        "question": "What improvement was made to performance monitoring in January 2025?",
+        "options": [
+          "Automatic performance optimization",
+          "Real-time token usage tracking and cost estimation",
+          "Built-in profiling tools",
+          "Memory usage optimization"
+        ],
+        "correct": 1,
+        "explanation": "The January 2025 update introduced real-time token usage tracking and cost estimation, helping developers monitor their Claude Code usage and manage costs effectively."
       }
     ]
   }
