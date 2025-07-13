@@ -1,0 +1,191 @@
+{
+  "type": "cheat-sheet",
+  "title": "Claude Code Quick Reference",
+  "description": "Essential commands and workflows for Python/Django developers",
+  "lastUpdated": "2025-01-12",
+  "version": "1.0",
+  "sections": [
+    {
+      "title": "Essential Commands",
+      "items": [
+        {
+          "command": "claude",
+          "description": "Start interactive session",
+          "category": "basics"
+        },
+        {
+          "command": "claude \"task description\"",
+          "description": "Execute specific task",
+          "category": "basics",
+          "example": "claude \"Create a Django model for blog posts\""
+        },
+        {
+          "command": "claude --think \"complex task\"",
+          "description": "Extended thinking mode for complex problems",
+          "category": "advanced",
+          "example": "claude --think \"Design a scalable authentication system\""
+        },
+        {
+          "command": "claude /review file.py",
+          "description": "Code review with security & performance analysis",
+          "category": "review",
+          "example": "claude /review views.py"
+        }
+      ]
+    },
+    {
+      "title": "Slash Commands",
+      "columns": 2,
+      "items": [
+        {
+          "command": "/init",
+          "description": "Create CLAUDE.md file",
+          "category": "project"
+        },
+        {
+          "command": "/clear",
+          "description": "Clear context",
+          "category": "session"
+        },
+        {
+          "command": "/compact",
+          "description": "Compress context",
+          "category": "session"
+        },
+        {
+          "command": "/cost",
+          "description": "Check usage",
+          "category": "utilities"
+        },
+        {
+          "command": "/resume",
+          "description": "Continue session",
+          "category": "session"
+        },
+        {
+          "command": "/doctor",
+          "description": "Diagnose issues",
+          "category": "utilities"
+        }
+      ]
+    },
+    {
+      "title": "Django Workflows",
+      "items": [
+        {
+          "workflow": "Create Feature",
+          "command": "claude \"Create blog app with Post model, views, and tests\"",
+          "description": "Generate complete Django app with models, views, and tests",
+          "category": "development",
+          "color": "blue"
+        },
+        {
+          "workflow": "API Development",
+          "command": "claude \"Create DRF ViewSet for User model with pagination\"",
+          "description": "Build Django REST Framework APIs",
+          "category": "api",
+          "color": "green"
+        },
+        {
+          "workflow": "Testing",
+          "command": "claude \"Write tests for OrderService using pytest\"",
+          "description": "Generate comprehensive test suites",
+          "category": "testing",
+          "color": "purple"
+        }
+      ]
+    },
+    {
+      "title": "Keyboard Shortcuts",
+      "subsections": [
+        {
+          "title": "Terminal",
+          "items": [
+            {
+              "action": "Copy code",
+              "shortcut": "Ctrl+C",
+              "platform": "all"
+            },
+            {
+              "action": "Paste image",
+              "shortcut": "Ctrl+V",
+              "platform": "all"
+            },
+            {
+              "action": "Interrupt",
+              "shortcut": "Ctrl+C",
+              "platform": "all"
+            },
+            {
+              "action": "Exit",
+              "shortcut": "Ctrl+D",
+              "platform": "all"
+            }
+          ]
+        },
+        {
+          "title": "macOS Screenshot → Claude",
+          "items": [
+            {
+              "action": "Capture screenshot",
+              "shortcut": "Ctrl+Shift+Cmd+4",
+              "platform": "macos"
+            },
+            {
+              "action": "Paste in terminal",
+              "shortcut": "Ctrl+V",
+              "platform": "macos"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Common Django Patterns",
+      "columns": 2,
+      "items": [
+        {
+          "pattern": "Migrations",
+          "command": "claude \"Create migration to add indexes to User.email and User.username\"",
+          "category": "database"
+        },
+        {
+          "pattern": "Optimization",
+          "command": "claude \"Optimize this view for N+1 queries using select_related\"",
+          "category": "performance"
+        },
+        {
+          "pattern": "Security Review",
+          "command": "claude /review --scope=security views.py",
+          "category": "security"
+        },
+        {
+          "pattern": "Refactoring",
+          "command": "claude \"Refactor this view to use Django CBVs\"",
+          "category": "refactoring"
+        }
+      ]
+    },
+    {
+      "title": "Pro Tips",
+      "subsections": [
+        {
+          "title": "Performance",
+          "tips": [
+            "Use /compact for long sessions",
+            "Be specific in requests to reduce tokens",
+            "Batch related changes together"
+          ]
+        },
+        {
+          "title": "Best Practices",
+          "tips": [
+            "Review changes before committing",
+            "Use Plan Mode for complex features",
+            "Keep CLAUDE.md updated with conventions"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -31,8 +31,8 @@ export function useModules() {
     }
   }
 
-  // Load a single module by ID within a course
-  async function loadModule(coursePath, moduleId) {
+  // Load a single module by slug within a course
+  async function loadModule(coursePath, moduleSlug) {
     isLoading.value = true
     error.value = null
     currentModule.value = null
@@ -43,14 +43,30 @@ export function useModules() {
         await loadModules(coursePath)
       }
 
-      // Find the module by ID
-      const module = modules.value.find(m => m.id === parseInt(moduleId))
+      // Find the module by slug
+      const module = modules.value.find(m => m.slug === moduleSlug)
       if (!module) {
         throw new Error('Module not found')
       }
 
-      currentModule.value = module
-      return module
+      // Load the module content
+      const contentResponse = await fetch(
+        import.meta.env.BASE_URL + `data/${coursePath}/${moduleSlug}/content.json`
+      )
+      if (!contentResponse.ok) {
+        throw new Error('Failed to load module content')
+      }
+      const contentData = await contentResponse.json()
+      
+      // Merge module metadata with content
+      const fullModule = {
+        ...module,
+        ...contentData.module,
+        sections: contentData.module.sections || []
+      }
+
+      currentModule.value = fullModule
+      return fullModule
     } catch (err) {
       console.error('Failed to load module:', err)
       error.value = 'Failed to load module'
@@ -60,9 +76,9 @@ export function useModules() {
     }
   }
 
-  // Get module by ID from loaded modules
-  function getModuleById(moduleId) {
-    return modules.value.find(m => m.id === parseInt(moduleId))
+  // Get module by slug from loaded modules
+  function getModuleBySlug(moduleSlug) {
+    return modules.value.find(m => m.slug === moduleSlug)
   }
 
   // Reset state
@@ -82,7 +98,7 @@ export function useModules() {
     // Methods
     loadModules,
     loadModule,
-    getModuleById,
+    getModuleBySlug,
     resetModules
   }
 }

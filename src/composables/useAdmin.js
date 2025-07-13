@@ -67,18 +67,18 @@ export function useAdmin() {
           avatar_url,
           is_admin,
           created_at,
-          module_progress (
-            module_id,
+          module_progress_json (
+            module_slug,
             status,
             started_at,
             completed_at
           ),
-          quiz_attempts (
-            module_id,
+          quiz_attempts_json (
+            module_slug,
             score,
             total_questions,
             passed,
-            completed_at
+            created_at
           )
         `)
         .order('created_at', { ascending: false })
@@ -177,7 +177,7 @@ export function useAdmin() {
 
     const users = adminData.value.users
     const totalUsers = users.length
-    const activeUsers = users.filter(u => u.module_progress?.length > 0).length
+    const activeUsers = users.filter(u => u.module_progress_json?.length > 0).length
     
     let totalModulesCompleted = 0
     let totalModulesStarted = 0
@@ -185,14 +185,14 @@ export function useAdmin() {
     let passedQuizzes = 0
 
     users.forEach(user => {
-      if (user.module_progress) {
-        totalModulesStarted += user.module_progress.length
-        totalModulesCompleted += user.module_progress.filter(m => m.status === 'completed').length
+      if (user.module_progress_json) {
+        totalModulesStarted += user.module_progress_json.length
+        totalModulesCompleted += user.module_progress_json.filter(m => m.status === 'completed').length
       }
       
-      if (user.quiz_attempts) {
-        totalQuizzes += user.quiz_attempts.length
-        passedQuizzes += user.quiz_attempts.filter(q => q.passed).length
+      if (user.quiz_attempts_json) {
+        totalQuizzes += user.quiz_attempts_json.length
+        passedQuizzes += user.quiz_attempts_json.filter(q => q.passed).length
       }
     })
 

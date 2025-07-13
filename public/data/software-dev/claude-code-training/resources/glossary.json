@@ -1,0 +1,163 @@
+{
+  "type": "glossary",
+  "title": "Claude Code Glossary",
+  "description": "Key terms and concepts for Claude Code development",
+  "lastUpdated": "2025-01-12",
+  "version": "1.0",
+  "terms": [
+    {
+      "term": "Claude Code",
+      "definition": "Anthropic's official CLI tool that provides AI-powered assistance for software development tasks directly in your terminal",
+      "category": "core",
+      "relatedTerms": ["CLI", "AI Assistant"]
+    },
+    {
+      "term": "CLAUDE.md",
+      "definition": "A markdown file that provides project-specific context and instructions to Claude. Can be placed at project root or in ~/.claude/ for global settings",
+      "category": "configuration",
+      "example": "claude /init",
+      "relatedTerms": ["Context", "Memory Management"]
+    },
+    {
+      "term": "Interactive Mode",
+      "definition": "The default mode when running 'claude' without arguments, allowing back-and-forth conversation with Claude",
+      "category": "usage",
+      "relatedTerms": ["CLI", "Session"]
+    },
+    {
+      "term": "Extended Thinking Mode",
+      "definition": "A mode activated with --think flag that gives Claude more time to process complex problems before responding",
+      "category": "advanced",
+      "example": "claude --think \"Design a scalable microservices architecture\"",
+      "relatedTerms": ["Complex Tasks", "Problem Solving"]
+    },
+    {
+      "term": "Slash Commands",
+      "definition": "Special commands starting with '/' that perform specific actions like clearing context or checking costs",
+      "category": "commands",
+      "example": "/compact, /clear, /cost",
+      "relatedTerms": ["Commands", "Interactive Mode"]
+    },
+    {
+      "term": "Context Window",
+      "definition": "The amount of conversation history and code that Claude can consider at once. Can be managed with /compact and /clear",
+      "category": "technical",
+      "relatedTerms": ["Memory", "Token Limit", "/compact"]
+    },
+    {
+      "term": "Token",
+      "definition": "The basic unit of text that language models process. Roughly 1 token ≈ 4 characters in English",
+      "category": "technical",
+      "relatedTerms": ["Context Window", "Cost", "/cost"]
+    },
+    {
+      "term": "MCP (Model Context Protocol)",
+      "definition": "A protocol that allows Claude to connect to external tools and services for enhanced capabilities",
+      "category": "advanced",
+      "relatedTerms": ["Integrations", "Tools", "Extensions"]
+    },
+    {
+      "term": "Plan Mode",
+      "definition": "A mode where Claude outlines a plan before executing complex tasks, helping ensure thorough implementation",
+      "category": "usage",
+      "relatedTerms": ["Complex Tasks", "Workflow"]
+    },
+    {
+      "term": "Code Review Mode",
+      "definition": "Using /review command to analyze code for security vulnerabilities, performance issues, and best practices",
+      "category": "commands",
+      "example": "claude /review views.py",
+      "relatedTerms": ["Security", "Performance", "Best Practices"]
+    },
+    {
+      "term": "DRF",
+      "definition": "Django REST Framework - a powerful toolkit for building Web APIs in Django",
+      "category": "django",
+      "relatedTerms": ["Django", "API", "ViewSet"]
+    },
+    {
+      "term": "ViewSet",
+      "definition": "A Django REST Framework class that groups related views for a model into a single class",
+      "category": "django",
+      "example": "class UserViewSet(viewsets.ModelViewSet)",
+      "relatedTerms": ["DRF", "API", "Django"]
+    },
+    {
+      "term": "N+1 Query Problem",
+      "definition": "A performance issue where code executes N additional queries for N items instead of using efficient joins",
+      "category": "performance",
+      "relatedTerms": ["select_related", "prefetch_related", "Optimization"]
+    },
+    {
+      "term": "select_related",
+      "definition": "Django ORM method that follows foreign-key relationships in a single query using SQL joins",
+      "category": "django",
+      "example": "Post.objects.select_related('author')",
+      "relatedTerms": ["Performance", "ORM", "N+1 Query Problem"]
+    },
+    {
+      "term": "prefetch_related",
+      "definition": "Django ORM method that fetches related objects in separate queries and joins them in Python",
+      "category": "django",
+      "example": "Author.objects.prefetch_related('posts')",
+      "relatedTerms": ["Performance", "ORM", "N+1 Query Problem"]
+    },
+    {
+      "term": "Migration",
+      "definition": "Django's way of propagating changes to models into the database schema",
+      "category": "django",
+      "example": "python manage.py makemigrations",
+      "relatedTerms": ["Database", "Schema", "Models"]
+    },
+    {
+      "term": "CBV (Class-Based Views)",
+      "definition": "Django views implemented as Python classes instead of functions, providing reusable functionality",
+      "category": "django",
+      "example": "class PostListView(ListView)",
+      "relatedTerms": ["Views", "Django", "FBV"]
+    },
+    {
+      "term": "FBV (Function-Based Views)",
+      "definition": "Django views implemented as Python functions, simpler but less reusable than CBVs",
+      "category": "django",
+      "example": "def post_list(request):",
+      "relatedTerms": ["Views", "Django", "CBV"]
+    },
+    {
+      "term": "pytest",
+      "definition": "A Python testing framework that makes it easy to write simple and scalable tests",
+      "category": "testing",
+      "relatedTerms": ["Testing", "TDD", "Unit Tests"]
+    },
+    {
+      "term": "Session",
+      "definition": "An interactive conversation with Claude that maintains context between messages",
+      "category": "usage",
+      "relatedTerms": ["Interactive Mode", "Context", "/resume"]
+    },
+    {
+      "term": "/compact",
+      "definition": "Slash command that compresses the current context to save tokens while preserving important information",
+      "category": "commands",
+      "relatedTerms": ["Context Window", "Memory Management", "Tokens"]
+    },
+    {
+      "term": "/resume",
+      "definition": "Slash command that continues a previous Claude session, maintaining context from where you left off",
+      "category": "commands",
+      "relatedTerms": ["Session", "Context", "Continuity"]
+    },
+    {
+      "term": "API Token",
+      "definition": "Authentication credential needed to use Claude Code, obtained from the Anthropic Console",
+      "category": "setup",
+      "relatedTerms": ["Authentication", "Setup", "Security"]
+    },
+    {
+      "term": "Hooks",
+      "definition": "Shell commands configured in settings that execute in response to Claude Code events",
+      "category": "configuration",
+      "relatedTerms": ["Settings", "Automation", "Configuration"]
+    }
+  ]
+}

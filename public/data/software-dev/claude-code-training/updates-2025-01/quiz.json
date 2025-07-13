@@ -1,0 +1,31 @@
+{
+  "quiz": {
+    "title": "January 2025 Updates Quiz",
+    "questions": [
+      {
+        "id": "updates_q1",
+        "question": "What protocol does Claude Code use for external tool integration?",
+        "options": [
+          "REST API",
+          "Model Context Protocol (MCP)",
+          "GraphQL",
+          "WebSockets"
+        ],
+        "correct": 1,
+        "explanation": "Claude Code uses Model Context Protocol (MCP) for integrating external tools like Puppeteer and Slack."
+      },
+      {
+        "id": "updates_q2",
+        "question": "Which scope option was added to the enhanced /review command?",
+        "options": [
+          "--scope=frontend",
+          "--scope=backend",
+          "--scope=security",
+          "--scope=database"
+        ],
+        "correct": 2,
+        "explanation": "The --scope=security option was added to focus code reviews on security concerns."
+      }
+    ]
+  }
+}

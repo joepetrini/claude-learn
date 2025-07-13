@@ -71,24 +71,80 @@
         </div>
       </div>
 
-      <!-- Modules Grid -->
-      <div v-if="!isLoading && modules.length > 0">
-        <h2 class="text-2xl font-semibold mb-6">Course Modules</h2>
+      <!-- Tabs -->
+      <div class="mb-8">
+        <div class="border-b border-gray-200">
+          <nav class="-mb-px flex space-x-8">
+            <button
+              @click="activeTab = 'modules'"
+              :class="{
+                'border-blue-500 text-blue-600': activeTab === 'modules',
+                'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'modules'
+              }"
+              class="whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm"
+            >
+              Modules ({{ modules.length }})
+            </button>
+            <button
+              @click="activeTab = 'resources'"
+              :class="{
+                'border-blue-500 text-blue-600': activeTab === 'resources',
+                'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'resources'
+              }"
+              class="whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm"
+            >
+              Resources ({{ resources.length }})
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Modules Tab -->
+      <div v-if="activeTab === 'modules' && !isLoading && modules.length > 0">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <ModuleCard
             v-for="(module, index) in modules"
-            :key="module.id"
+            :key="module.slug"
             :module="module"
             :index="index"
-            :progress="progress[module.id]"
+            :progress="getModuleProgress(module.slug)"
+            :quiz-score="getQuizScore(module.slug)"
+            :is-started="isModuleStarted(module.slug)"
             :category-slug="categorySlug"
             :course-slug="courseSlug"
           />
         </div>
       </div>
 
-      <!-- Empty State -->
-      <div v-else-if="!isLoading && modules.length === 0" class="text-center py-12">
+      <!-- Resources Tab -->
+      <div v-if="activeTab === 'resources'">
+        <div v-if="!resourcesLoading && resources.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ResourceCard
+            v-for="resource in resources"
+            :key="resource.id"
+            :resource="resource"
+            @view-resource="openResourceModal"
+            @toggle-favorite="handleToggleFavorite"
+          />
+        </div>
+        
+        <!-- Resources Empty State -->
+        <div v-else-if="!resourcesLoading && resources.length === 0" class="text-center py-12">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
+            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">No Resources Available</h3>
+          <p class="text-gray-600">This course doesn't have any resources yet.</p>
+        </div>
+        
+        <!-- Resources Loading -->
+        <LoadingSkeletons v-if="resourcesLoading" type="module-cards" :count="3" />
+      </div>
+
+      <!-- Modules Empty State -->
+      <div v-else-if="activeTab === 'modules' && !isLoading && modules.length === 0" class="text-center py-12">
         <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
           <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -100,6 +156,15 @@
 
       <!-- Loading State -->
       <LoadingSkeletons v-if="isLoading" type="module-cards" :count="6" />
+
+    <!-- Resource Modal -->
+    <ResourceModal
+      :is-open="showResourceModal"
+      :resource="selectedResource"
+      :course-id="courseSlug"
+      @close="showResourceModal = false"
+      @toggle-favorite="handleToggleFavorite"
+    />
     </div>
   </div>
 </template>
@@ -108,25 +173,53 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useModules } from '../composables/useModules.js'
-import { useSupabaseProgress } from '../composables/useSupabaseProgress.js'
+import { useJsonModuleProgress } from '../composables/useJsonModuleProgress.js'
 import { useCategories } from '../composables/useCategories.js'
+import { useResources } from '../composables/useResources.js'
 import Navigation from '../components/Navigation.vue'
 import ModuleCard from '../components/ModuleCard.vue'
 import LoadingSkeletons from '../components/LoadingSkeletons.vue'
+import ResourceCard from '../components/ResourceCard.vue'
+import ResourceModal from '../components/ResourceModal.vue'
 
 const route = useRoute()
 const { modules, loadModules } = useModules()
-const { progress, overallProgress, loadProgress } = useSupabaseProgress()
+const { progress, totalCompleted, loadProgress, getModuleProgress: getProgressData, isModuleCompleted, isModuleStarted, getQuizScore } = useJsonModuleProgress()
 const { getCategoryBySlug, loadCategoryCourses } = useCategories()
 
 // Route params
 const categorySlug = computed(() => route.params.categorySlug)
 const courseSlug = computed(() => route.params.courseSlug)
 
+// Computed progress
+const overallProgress = computed(() => {
+  if (!modules.value.length) return null
+  
+  const completedCount = progress.value.completedModules.length
+  const total = modules.value.length
+  
+  return {
+    completed: completedCount,
+    total: total,
+    percentage: total > 0 ? Math.round((completedCount / total) * 100) : 0
+  }
+})
+
+// Resources
+const {
+  resources,
+  loading: resourcesLoading,
+  toggleFavorite,
+  loadResourceContent
+} = useResources(courseSlug.value)
+
 // Local state
 const category = ref(null)
 const course = ref(null)
 const isLoading = ref(true)
+const activeTab = ref('modules')
+const selectedResource = ref(null)
+const showResourceModal = ref(false)
 
 // Load course and modules
 onMounted(async () => {
@@ -144,9 +237,30 @@ onMounted(async () => {
   // Load modules and progress with new path structure
   await Promise.all([
     loadModules(`${categorySlug.value}/${courseSlug.value}`),
-    loadProgress()
+    loadProgress(categorySlug.value, courseSlug.value)
   ])
   
   isLoading.value = false
 })
+
+// Get module progress with correct structure for ModuleCard
+const getModuleProgress = (moduleSlug) => {
+  const progressData = getProgressData(moduleSlug)
+  const completed = isModuleCompleted(moduleSlug)
+  
+  return {
+    current_section: progressData.section || 0,
+    completed: completed
+  }
+}
+
+// Resource handlers
+const openResourceModal = (resource) => {
+  selectedResource.value = resource
+  showResourceModal.value = true
+}
+
+const handleToggleFavorite = async (resource) => {
+  await toggleFavorite(resource.id)
+}
 </script>

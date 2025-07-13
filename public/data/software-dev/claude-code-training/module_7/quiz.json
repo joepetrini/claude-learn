@@ -1,0 +1,67 @@
+{
+  "quiz": {
+    "title": "MCP Tools Integration",
+    "questions": [
+      {
+        "id": "m7_q1",
+        "question": "What does MCP stand for?",
+        "options": [
+          "Model Code Protocol",
+          "Model Context Protocol",
+          "Machine Code Processing",
+          "Multi-Core Processing"
+        ],
+        "correct": 1,
+        "explanation": "MCP stands for Model Context Protocol, which allows Claude to connect to external data sources and tools."
+      },
+      {
+        "id": "m7_q2",
+        "question": "Where do you configure MCP servers?",
+        "options": [
+          "CLAUDE.md",
+          "mcp.config.js",
+          "settings.json under 'mcp.servers'",
+          ".mcp/config.json"
+        ],
+        "correct": 2,
+        "explanation": "MCP servers are configured in settings.json under the mcp.servers section."
+      },
+      {
+        "id": "m7_q3",
+        "question": "What can a Django Database MCP connection help with?",
+        "options": [
+          "Only reading data",
+          "Intelligent queries and debugging",
+          "Automatic migrations",
+          "Database backups"
+        ],
+        "correct": 1,
+        "explanation": "Database MCP connections allow Claude to run intelligent queries and help debug database-related issues."
+      },
+      {
+        "id": "m7_q4",
+        "question": "Can MCP servers be shared across all projects?",
+        "options": [
+          "No, only project-specific",
+          "Yes, through global configuration",
+          "Only for database connections",
+          "Only in enterprise version"
+        ],
+        "correct": 1,
+        "explanation": "MCP servers can be configured globally to be available across all your projects."
+      },
+      {
+        "id": "m7_q5",
+        "question": "What's required to use an MCP server?",
+        "options": [
+          "Just configuration in settings.json",
+          "Install the MCP server package and configure it",
+          "Special Claude Code license",
+          "Direct database access only"
+        ],
+        "correct": 1,
+        "explanation": "You need to install the MCP server package (like @mcp/sqlite) and then configure it in settings.json."
+      }
+    ]
+  }
+}

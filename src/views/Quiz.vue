@@ -3,7 +3,7 @@
     <!-- Navigation Bar -->
     <nav class="bg-white shadow-sm border-b">
       <div class="container mx-auto px-4 py-4">
-        <router-link :to="`/module/${moduleId}`" class="text-blue-600 hover:text-blue-800 font-medium">
+        <router-link :to="`/category/${categorySlug}/course/${courseSlug}/module/${moduleId}`" class="text-blue-600 hover:text-blue-800 font-medium">
           ← Back to Module
         </router-link>
       </div>
@@ -126,13 +126,13 @@
           
           <div class="flex gap-4 justify-center">
             <router-link
-              :to="`/module/${moduleId}`"
+              :to="`/category/${categorySlug}/course/${courseSlug}/module/${moduleId}`"
               class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
             >
               Review Module
             </router-link>
             <router-link
-              to="/"
+              :to="`/category/${categorySlug}/course/${courseSlug}`"
               class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               Back to Modules
@@ -152,10 +152,12 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuizKeyboard } from '../composables/useKeyboardNavigation.js'
-import { useSupabaseProgress } from '../composables/useSupabaseProgress.js'
+import { useJsonModuleProgress } from '../composables/useJsonModuleProgress.js'
 
 const route = useRoute()
-const moduleId = computed(() => route.params.id)
+const categorySlug = computed(() => route.params.categorySlug)
+const courseSlug = computed(() => route.params.courseSlug)
+const moduleId = computed(() => route.params.quizId)
 
 const quiz = ref(null)
 const loading = ref(true)
@@ -165,8 +167,8 @@ const showExplanation = ref(false)
 const userAnswers = ref([])
 const quizCompleted = ref(false)
 
-// Initialize Supabase progress composable
-const { saveQuizScore } = useSupabaseProgress()
+// Initialize JSON module progress composable
+const { saveQuizScore } = useJsonModuleProgress()
 
 const currentQuestion = computed(() => {
   return quiz.value?.questions[currentQuestionIndex.value] || {}
@@ -211,9 +213,16 @@ const getOptionClass = (index) => {
 const loadQuiz = async () => {
   loading.value = true
   try {
-    const response = await fetch(import.meta.env.BASE_URL + 'data/quizzes.json')
+    // Build path to quiz file in module directory
+    const quizPath = `${categorySlug.value}/${courseSlug.value}/${moduleId.value}/quiz.json`
+    const response = await fetch(import.meta.env.BASE_URL + `data/${quizPath}`)
+    
+    if (!response.ok) {
+      throw new Error(`Quiz not found: ${response.status}`)
+    }
+    
     const data = await response.json()
-    quiz.value = data.quizzes[moduleId.value]
+    quiz.value = data.quiz
     
     // Load any saved progress
     const savedProgress = localStorage.getItem(`quiz_${moduleId.value}_progress`)
@@ -277,13 +286,14 @@ const previousQuestion = () => {
 const completeQuiz = async () => {
   quizCompleted.value = true
   
-  // Save quiz completion using Supabase progress composable
-  const answers = userAnswers.value.map((answer, index) => ({
-    selected: answer.answer,
-    correct: answer.correct
-  }))
-  
-  await saveQuizScore(moduleId.value, score.value, quiz.value.questions.length, answers)
+  // Save quiz completion using JSON module progress composable
+  await saveQuizScore(
+    categorySlug.value, 
+    courseSlug.value, 
+    moduleId.value, 
+    score.value, 
+    quiz.value.questions.length
+  )
   
   // Clear quiz progress
   localStorage.removeItem(`quiz_${moduleId.value}_progress`)

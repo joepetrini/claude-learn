@@ -1,0 +1,128 @@
+{
+  "type": "links",
+  "title": "Documentation & Resources",
+  "description": "Official documentation and community resources for Claude Code",
+  "lastUpdated": "2025-01-12",
+  "categories": [
+    {
+      "name": "Official Documentation",
+      "icon": "📖",
+      "links": [
+        {
+          "title": "Claude Code Documentation",
+          "url": "https://docs.anthropic.com/en/docs/claude-code",
+          "description": "Official Claude Code documentation with setup and usage guides",
+          "tags": ["official", "docs", "getting-started"]
+        },
+        {
+          "title": "CLI Reference",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/cli-reference",
+          "description": "Complete command-line interface reference",
+          "tags": ["cli", "commands", "reference"]
+        },
+        {
+          "title": "Interactive Mode Guide",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/interactive-mode",
+          "description": "Keyboard shortcuts and interactive features",
+          "tags": ["interactive", "shortcuts"]
+        },
+        {
+          "title": "Settings & Configuration",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/settings",
+          "description": "Configure Claude Code with settings.json and environment variables",
+          "tags": ["settings", "configuration"]
+        }
+      ]
+    },
+    {
+      "name": "Advanced Features",
+      "icon": "🚀",
+      "links": [
+        {
+          "title": "MCP (Model Context Protocol)",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/mcp",
+          "description": "Connect external tools and services to Claude",
+          "tags": ["mcp", "integrations", "tools"]
+        },
+        {
+          "title": "Extended Thinking Mode",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/common-workflows#extended-thinking",
+          "description": "Using --think flag for complex problems",
+          "tags": ["thinking", "advanced"]
+        },
+        {
+          "title": "Memory Management",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/memory",
+          "description": "CLAUDE.md files and project context",
+          "tags": ["memory", "context", "claude-md"]
+        }
+      ]
+    },
+    {
+      "name": "Integration Guides",
+      "icon": "🔧",
+      "links": [
+        {
+          "title": "IDE Integrations",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/ide-integrations",
+          "description": "Using Claude Code with VS Code, JetBrains, and other IDEs",
+          "tags": ["ide", "vscode", "integration"]
+        },
+        {
+          "title": "GitHub Actions",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/github-actions",
+          "description": "Automate workflows with Claude Code in CI/CD",
+          "tags": ["github", "ci-cd", "automation"]
+        },
+        {
+          "title": "Corporate Proxy Setup",
+          "url": "https://docs.anthropic.com/en/docs/claude-code/corporate-proxy",
+          "description": "Configure Claude Code behind corporate firewalls",
+          "tags": ["proxy", "enterprise", "setup"]
+        }
+      ]
+    },
+    {
+      "name": "Community Resources",
+      "icon": "👥",
+      "links": [
+        {
+          "title": "GitHub Repository",
+          "url": "https://github.com/anthropics/claude-code",
+          "description": "Source code and issue tracking",
+          "tags": ["github", "source", "issues"]
+        },
+        {
+          "title": "Discord Community",
+          "url": "https://discord.gg/anthropic",
+          "description": "Join the Claude Code community for help and discussions",
+          "tags": ["community", "discord", "help"]
+        },
+        {
+          "title": "Stack Overflow",
+          "url": "https://stackoverflow.com/questions/tagged/claude-code",
+          "description": "Q&A for Claude Code developers",
+          "tags": ["stackoverflow", "qa", "help"]
+        }
+      ]
+    },
+    {
+      "name": "Tutorials & Examples",
+      "icon": "📚",
+      "links": [
+        {
+          "title": "Django + Claude Code Tutorial",
+          "url": "https://example.com/django-claude-tutorial",
+          "description": "Building a Django app with Claude Code assistance",
+          "tags": ["tutorial", "django", "python"]
+        },
+        {
+          "title": "Video Tutorials",
+          "url": "https://youtube.com/anthropic-claude-code",
+          "description": "Video walkthroughs and demonstrations",
+          "tags": ["video", "tutorial", "youtube"]
+        }
+      ]
+    }
+  ]
+}

@@ -100,12 +100,20 @@
             </button>
             
             <router-link
-              v-else
+              v-else-if="hasQuiz"
               :to="`/category/${categorySlug}/course/${courseSlug}/quiz/${moduleId}`"
               class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors inline-block"
             >
               Take Quiz →
             </router-link>
+            
+            <button
+              v-else
+              @click="completeModule"
+              class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+              Complete Module →
+            </button>
           </div>
         </div>
       </div>
@@ -121,7 +129,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useModuleKeyboard } from '../composables/useKeyboardNavigation.js'
-import { useSupabaseProgress } from '../composables/useSupabaseProgress.js'
+import { useJsonModuleProgress } from '../composables/useJsonModuleProgress.js'
 import { useModules } from '../composables/useModules.js'
 import { useCategories } from '../composables/useCategories.js'
 import Navigation from '../components/Navigation.vue'
@@ -139,7 +147,7 @@ const categoryName = ref('')
 const courseName = ref('')
 
 // Initialize composables
-const { markModuleStarted, getModuleProgress, updateModuleProgress, loadProgress } = useSupabaseProgress()
+const { markModuleStarted, markModuleCompleted, getModuleProgress, updateModuleProgress, loadProgress } = useJsonModuleProgress()
 const { loadModule } = useModules()
 const { getCategoryBySlug, loadCategoryCourses } = useCategories()
 
@@ -152,12 +160,11 @@ const progressPercentage = computed(() => {
   return Math.round(((currentSectionIndex.value + 1) / module.value.sections.length) * 100)
 })
 
+const hasQuiz = ref(false)
+
 const loadModuleData = async () => {
   loading.value = true
   try {
-    // Load progress first to ensure we have latest data
-    await loadProgress()
-    
     // Get category and course info
     const category = getCategoryBySlug(categorySlug.value)
     if (category) {
@@ -169,6 +176,9 @@ const loadModuleData = async () => {
       }
     }
     
+    // Load progress for this course
+    await loadProgress(categorySlug.value, courseSlug.value)
+    
     // Load module with new path structure
     const coursePath = `${categorySlug.value}/${courseSlug.value}`
     const moduleData = await loadModule(coursePath, moduleId.value)
@@ -178,6 +188,15 @@ const loadModuleData = async () => {
     const savedProgress = getModuleProgress(moduleId.value)
     if (savedProgress && savedProgress.section) {
       currentSectionIndex.value = savedProgress.section
+    }
+    
+    // Check if quiz exists for this module
+    try {
+      const quizPath = `${categorySlug.value}/${courseSlug.value}/${moduleId.value}/quiz.json`
+      const quizResponse = await fetch(import.meta.env.BASE_URL + `data/${quizPath}`)
+      hasQuiz.value = quizResponse.ok
+    } catch {
+      hasQuiz.value = false
     }
   } catch (error) {
     console.error('Failed to load module:', error)
@@ -200,9 +219,19 @@ const previousSection = () => {
   }
 }
 
+const completeModule = async () => {
+  // Mark module as completed
+  await markModuleCompleted(categorySlug.value, courseSlug.value, moduleId.value)
+  
+  // Navigate back to course page
+  window.location.href = `#/category/${categorySlug.value}/course/${courseSlug.value}`
+}
+
 // Save progress whenever section changes
 watch(currentSectionIndex, (newIndex) => {
-  updateModuleProgress(moduleId.value, newIndex)
+  if (module.value) {
+    updateModuleProgress(categorySlug.value, courseSlug.value, moduleId.value, newIndex)
+  }
 })
 
 // Initialize module keyboard navigation
@@ -212,8 +241,10 @@ useModuleKeyboard()
 onMounted(async () => {
   await loadModuleData()
   
-  // Use Supabase progress composable to mark module as started
-  await markModuleStarted(moduleId.value)
+  // Use JSON module progress composable to mark module as started
+  if (module.value) {
+    await markModuleStarted(categorySlug.value, courseSlug.value, moduleId.value)
+  }
   
   // Listen for keyboard navigation events
   window.addEventListener('keyboard-next', nextSection)

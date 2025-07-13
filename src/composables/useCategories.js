@@ -60,15 +60,17 @@ export function useCategories() {
 
     try {
       const { data, error: favError } = await supabase
-        .from('user_favorite_categories')
-        .select('category_id, created_at')
+        .from('user_favorite_categories_simple')
+        .select('category_slug, created_at')
         .eq('user_id', user.value.id)
 
       if (favError) throw favError
 
-      // For now, store the category IDs
-      // In a real app, we'd join with the categories table
-      favoriteCategories.value = data || []
+      // Map to expected format for compatibility
+      favoriteCategories.value = (data || []).map(item => ({
+        category_id: item.category_slug,
+        created_at: item.created_at
+      }))
     } catch (err) {
       console.error('Failed to load favorite categories:', err)
     }
@@ -87,10 +89,10 @@ export function useCategories() {
       if (isFavorited) {
         // Remove favorite
         const { error: deleteError } = await supabase
-          .from('user_favorite_categories')
+          .from('user_favorite_categories_simple')
           .delete()
           .eq('user_id', user.value.id)
-          .eq('category_id', categorySlug) // Using slug for now
+          .eq('category_slug', categorySlug)
 
         if (deleteError) throw deleteError
 
@@ -100,10 +102,10 @@ export function useCategories() {
       } else {
         // Add favorite
         const { data, error: insertError } = await supabase
-          .from('user_favorite_categories')
+          .from('user_favorite_categories_simple')
           .insert({
             user_id: user.value.id,
-            category_id: categorySlug // Using slug for now
+            category_slug: categorySlug
           })
           .select()
 

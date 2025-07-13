@@ -1,0 +1,67 @@
+{
+  "quiz": {
+    "title": "History and Slash Commands",
+    "questions": [
+      {
+        "id": "m4_q1",
+        "question": "What's the difference between /clear and /compact?",
+        "options": [
+          "They do the same thing",
+          "/clear starts fresh (clears context), /compact compresses but keeps context",
+          "/compact deletes files, /clear doesn't",
+          "/clear is faster than /compact"
+        ],
+        "correct": 1,
+        "explanation": "/clear completely clears the conversation context for a fresh start, while /compact compresses the conversation but maintains context."
+      },
+      {
+        "id": "m4_q2",
+        "question": "Which command initializes CLAUDE.md for your project?",
+        "options": [
+          "claude --init",
+          "claude /setup",
+          "claude /init",
+          "claude create-memory"
+        ],
+        "correct": 2,
+        "explanation": "The /init command analyzes your project and creates a CLAUDE.md file with project-specific information."
+      },
+      {
+        "id": "m4_q3",
+        "question": "How do you check your token usage and costs?",
+        "options": [
+          "claude --usage",
+          "claude /cost",
+          "claude /billing",
+          "claude check-tokens"
+        ],
+        "correct": 1,
+        "explanation": "The /cost command shows your current token usage and associated costs."
+      },
+      {
+        "id": "m4_q4",
+        "question": "Where do you define custom slash commands?",
+        "options": [
+          "In CLAUDE.md",
+          "In settings.json",
+          "In package.json",
+          "In .clauderc"
+        ],
+        "correct": 1,
+        "explanation": "Custom slash commands are defined in your settings.json file under the commands section."
+      },
+      {
+        "id": "m4_q5",
+        "question": "How do you view GitHub PR comments in Claude?",
+        "options": [
+          "claude /pr --comments",
+          "claude github-comments",
+          "claude /pr_comments https://github.com/org/repo/pull/123",
+          "It's not possible"
+        ],
+        "correct": 2,
+        "explanation": "Use /pr_comments followed by the PR URL to view and analyze GitHub pull request comments."
+      }
+    ]
+  }
+}

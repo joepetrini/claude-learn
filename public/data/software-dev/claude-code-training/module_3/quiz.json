@@ -1,0 +1,67 @@
+{
+  "quiz": {
+    "title": "Modes and Context Management",
+    "questions": [
+      {
+        "id": "m3_q1",
+        "question": "How do you paste a screenshot in iTerm2 for Claude to analyze?",
+        "options": [
+          "Cmd+V",
+          "Ctrl+V",
+          "Right-click and paste",
+          "Drag and drop only"
+        ],
+        "correct": 1,
+        "explanation": "iTerm2 requires Ctrl+V for pasting images, not the standard Cmd+V used for text."
+      },
+      {
+        "id": "m3_q2",
+        "question": "What's the macOS keyboard shortcut for taking a screenshot selection?",
+        "options": [
+          "Cmd+Shift+3",
+          "Ctrl+Shift+Cmd+4",
+          "Cmd+Shift+4",
+          "Ctrl+Cmd+S"
+        ],
+        "correct": 1,
+        "explanation": "Ctrl+Shift+Cmd+4 allows you to select a specific area to screenshot, perfect for capturing UI issues."
+      },
+      {
+        "id": "m3_q3",
+        "question": "When does Claude Code automatically switch to Plan Mode?",
+        "options": [
+          "Never, it must be manually activated",
+          "When it detects a complex task requiring multiple steps",
+          "For every request",
+          "Only for Django projects"
+        ],
+        "correct": 1,
+        "explanation": "Claude automatically switches to Plan Mode when it detects complexity that requires multiple implementation steps."
+      },
+      {
+        "id": "m3_q4",
+        "question": "What type of issues is image analysis particularly useful for?",
+        "options": [
+          "Database queries",
+          "API endpoints",
+          "Django template problems and UI debugging",
+          "Migration files"
+        ],
+        "correct": 2,
+        "explanation": "Image analysis is perfect for debugging Django template problems, CSS issues, and UI alignment problems."
+      },
+      {
+        "id": "m3_q5",
+        "question": "Can Claude Code create diagrams?",
+        "options": [
+          "Yes, it generates image files directly",
+          "No, but it can generate code for diagram tools like Mermaid",
+          "Yes, using built-in drawing tools",
+          "Only for database schemas"
+        ],
+        "correct": 1,
+        "explanation": "Claude can't create images directly but can generate code for diagram tools like Mermaid, PlantUML, or ASCII diagrams."
+      }
+    ]
+  }
+}
